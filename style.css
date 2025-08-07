@@ -1111,3 +1111,12 @@
         color: #000;
         font-weight: bold;
     }
+  
+    .digital-driver-assistance-img{
+          background-size: cover;
+                        background-position: center;
+                        border: none;
+                        box-shadow: none;
+                        margin: 0;
+                        padding: 0;
+    }
