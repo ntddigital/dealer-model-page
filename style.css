@@ -8,7 +8,147 @@
     a {
         text-decoration: none !important;
     }
+    .container-max-xl {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
 
+    .vehicle-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .vehicle-image {
+        text-align: center;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        order: 1;
+    }
+
+    .vehicle-image img {
+        height: 100%;
+        width: 100%;
+        /* border-radius: 8px; */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+    }
+
+    .vehicle-info {
+        order: 2;
+    }
+
+    .vehicle-info h2 {
+        font-family: "DDC Heading Font Face"
+            , Arial, sans-serif;
+        font-size: 1.75rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
+
+    .vehicle-info p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .vehicle-highlights {
+        list-style: none;
+        margin: 1.5rem 0;
+    }
+
+    .vehicle-highlights li {
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        color: var(--text-color);
+        border-bottom: 1px solid var(--color-neutral-200);
+    }
+
+    .vehicle-highlights li:last-child {
+        border-bottom: none;
+    }
+
+    .cta-section {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        /* border-radius: 6px; */
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .btn-primary {
+        background: #333333;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #ffffff;
+        color: #333333;
+        border: 2px solid #333333;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: #333333;
+        border: 2px solid #333333;
+    }
+
+    .btn-secondary:hover {
+        background: #333333;
+        color: white;
+    }
+
+    .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .vehicle-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .vehicle-image {
+            height: 400px;
+            order: 0;
+        }
+
+        .vehicle-info {
+            order: 0;
+        }
+
+        .vehicle-info h2 {
+            font-size: 2rem;
+        }
+
+        .vehicle-highlights li {
+            font-size: 1.125rem;
+        }
+
+        .cta-section {
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+        }
+    }
     .digital-container {
         max-width: 1440px;
         margin: 0 auto;
