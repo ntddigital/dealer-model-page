@@ -118,7 +118,7 @@
         padding-right: 1rem;
     }
 
-    /* 平板和桌面樣式 */
+
     @media (min-width: 768px) {
         .digital-vehicle-grid {
             grid-template-columns: 1fr 1fr;
@@ -318,7 +318,7 @@
             order: 1;
         }
 
-        /* 確保所有內容區段在手機上都是 title -> 圖片 -> 文字 的順序 */
+        
         .digital-content-grid .digital-content-image {
             order: 1 !important;
         }
@@ -335,7 +335,7 @@
             font-size: 2rem;
         }
 
-        /* 全域手機字體設定 */
+   
         p {
             font-size: 18px !important;
         }
@@ -364,23 +364,24 @@
             font-size: 18px !important;
         }
 
-        /* 響應式內容區段 */
+
         .digital-content-image img {
             height: 250px !important;
         }
 
-        /* 調整內容區段的間距 */
+
         .digital-section {
             padding: 2rem 0;
         }
 
-        /* 調整按鈕組合的排列 */
+
         .digital-cta-button,
         .digital-cta-button-outline {
             display: block;
             margin: 0.5rem auto !important;
             width: 90%;
             text-align: center;
+            font-size: 16px !important;
         }
     }
 
