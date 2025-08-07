@@ -8,19 +8,19 @@
     a {
         text-decoration: none !important;
     }
-    .container-max-xl {
+    .digital-container-max-xl {
         max-width: 1440px;
         margin: 0 auto;
     }
 
-    .vehicle-grid {
+    .digital-vehicle-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 2rem;
         align-items: center;
     }
 
-    .vehicle-image {
+    .digital-vehicle-image {
         text-align: center;
         height: 300px;
         display: flex;
@@ -29,7 +29,7 @@
         order: 1;
     }
 
-    .vehicle-image img {
+    .digital-vehicle-image img {
         height: 100%;
         width: 100%;
         /* border-radius: 8px; */
@@ -37,11 +37,11 @@
         object-fit: cover;
     }
 
-    .vehicle-info {
+    .digital-vehicle-info {
         order: 2;
     }
 
-    .vehicle-info h2 {
+    .digital-vehicle-info h2 {
         font-family: "DDC Heading Font Face"
             , Arial, sans-serif;
         font-size: 1.75rem;
@@ -50,37 +50,37 @@
         color: var(--text-color);
     }
 
-    .vehicle-info p {
+    .digital-vehicle-info p {
         font-size: 1rem;
         line-height: 1.6;
         color: var(--text-color);
         margin-bottom: 1.5rem;
     }
 
-    .vehicle-highlights {
+    .digital-vehicle-highlights {
         list-style: none;
         margin: 1.5rem 0;
     }
 
-    .vehicle-highlights li {
+    .digital-vehicle-highlights li {
         padding: 0.5rem 0;
         font-size: 1rem;
         color: var(--text-color);
         border-bottom: 1px solid var(--color-neutral-200);
     }
 
-    .vehicle-highlights li:last-child {
+    .digital-vehicle-highlights li:last-child {
         border-bottom: none;
     }
 
-    .cta-section {
+    .digital-cta-section {
         margin-top: 2rem;
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
     }
 
-    .btn {
+    .digital-btn {
         display: inline-block;
         padding: 0.75rem 1.5rem;
         text-align: center;
@@ -90,62 +90,63 @@
         transition: all 0.2s;
     }
 
-    .btn-primary {
+    .digital-btn-primary {
         background: #333333;
         color: white;
     }
 
-    .btn-primary:hover {
+    .digital-btn-primary:hover {
         background: #ffffff;
         color: #333333;
         border: 2px solid #333333;
     }
 
-    .btn-secondary {
+    .digital-btn-secondary {
         background: transparent;
         color: #333333;
         border: 2px solid #333333;
     }
 
-    .btn-secondary:hover {
+    .digital-btn-secondary:hover {
         background: #333333;
         color: white;
     }
 
-    .px-4 {
+    .digital-px-4 {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
+    /* 平板和桌面樣式 */
     @media (min-width: 768px) {
-        .vehicle-grid {
+        .digital-vehicle-grid {
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
         }
 
-        .vehicle-image {
+        .digital-vehicle-image {
             height: 400px;
             order: 0;
         }
 
-        .vehicle-info {
+        .digital-vehicle-info {
             order: 0;
         }
 
-        .vehicle-info h2 {
+        .digital-vehicle-info h2 {
             font-size: 2rem;
         }
 
-        .vehicle-highlights li {
+        .digital-vehicle-highlights li {
             font-size: 1.125rem;
         }
 
-        .cta-section {
+        .digital-cta-section {
             flex-direction: row;
             gap: 1rem;
         }
 
-        .btn {
+        .digital-btn {
             flex: 1;
         }
     }
