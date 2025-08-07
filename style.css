@@ -105,6 +105,7 @@
         background: transparent;
         color: #333333;
         border: 2px solid #333333;
+        border-left-width: 2px!important;
     }
 
     .digital-btn-secondary:hover {
