@@ -1,4 +1,4 @@
- // Carousel functionality
+// Carousel functionality
     let currentSlideIndex = 0;
     const slides = document.querySelectorAll('.digital-carousel-slide');
     const dots = document.querySelectorAll('.digital-carousel-dot');
@@ -304,13 +304,51 @@
         }
     }
 
+    // Safety features navigation function
+    function scrollSafety(direction) {
+        const safetyContainer = document.querySelector('.digital-safety-features-container');
+        const cardWidth = 570; // Width of each safety feature card plus gap
+        const scrollAmount = cardWidth * direction;
+        
+        safetyContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+        
+        // Update button states
+        setTimeout(() => {
+            updateSafetyNavButtons();
+        }, 100);
+    }
+
+    // Update safety navigation button states based on scroll position
+    function updateSafetyNavButtons() {
+        const safetyContainer = document.querySelector('.digital-safety-features-container');
+        const prevBtn = document.getElementById('safetyPrevBtn');
+        const nextBtn = document.getElementById('safetyNextBtn');
+        
+        if (safetyContainer && prevBtn && nextBtn) {
+            const isAtStart = safetyContainer.scrollLeft <= 10;
+            const isAtEnd = safetyContainer.scrollLeft >= (safetyContainer.scrollWidth - safetyContainer.clientWidth - 10);
+            
+            prevBtn.disabled = isAtStart;
+            nextBtn.disabled = isAtEnd;
+        }
+    }
+
     // Initialize button states when page loads
     document.addEventListener('DOMContentLoaded', function() {
         updateTrimsNavButtons();
+        updateSafetyNavButtons();
         
         // Update button states when scrolling
         const trimsContainer = document.querySelector('.digital-trims-container');
         if (trimsContainer) {
             trimsContainer.addEventListener('scroll', updateTrimsNavButtons);
+        }
+        
+        const safetyContainer = document.querySelector('.digital-safety-features-container');
+        if (safetyContainer) {
+            safetyContainer.addEventListener('scroll', updateSafetyNavButtons);
         }
     });
