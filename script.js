@@ -1,6 +1,4 @@
-
-
-    // Carousel functionality
+ // Carousel functionality
     let currentSlideIndex = 0;
     const slides = document.querySelectorAll('.digital-carousel-slide');
     const dots = document.querySelectorAll('.digital-carousel-dot');
@@ -188,7 +186,7 @@
     const trimsContainer = document.querySelector('.digital-trims-container');
     const trimsGrid = document.getElementById('trimsGrid');
 
-    let isTrimsD​ragging = false;
+    let isTrimsD窶脚agging = false;
     let trimsStartX = 0;
     let trimsScrollLeft = 0;
 
@@ -202,49 +200,49 @@
 
         // Mouse drag scrolling
         trimsContainer.addEventListener('mousedown', (e) => {
-                isTrimsD​ragging = true;
+            isTrimsD窶脚agging = true;
             trimsStartX = e.pageX - trimsContainer.offsetLeft;
             trimsScrollLeft = trimsContainer.scrollLeft;
             trimsContainer.classList.add('grabbing');
         });
 
         trimsContainer.addEventListener('mouseleave', () => {
-                isTrimsD​ragging = false;
+            isTrimsD窶脚agging = false;
             trimsContainer.classList.remove('grabbing');
         });
 
         trimsContainer.addEventListener('mouseup', () => {
-                isTrimsD​ragging = false;
+            isTrimsD窶脚agging = false;
             trimsContainer.classList.remove('grabbing');
         });
 
         trimsContainer.addEventListener('mousemove', (e) => {
-            if (!isTrimsD​ragging) return;
-        e.preventDefault();
-        const x = e.pageX - trimsContainer.offsetLeft;
-        const walk = (x - trimsStartX) * 2;
-        trimsContainer.scrollLeft = trimsScrollLeft - walk;
-    });
+            if (!isTrimsD窶脚agging) return;
+            e.preventDefault();
+            const x = e.pageX - trimsContainer.offsetLeft;
+            const walk = (x - trimsStartX) * 2;
+            trimsContainer.scrollLeft = trimsScrollLeft - walk;
+        });
 
-    // Touch support for mobile
-    trimsContainer.addEventListener('touchstart', (e) => {
-                isTrimsD​ragging = true;
-        trimsStartX = e.touches[0].pageX - trimsContainer.offsetLeft;
-        trimsScrollLeft = trimsContainer.scrollLeft;
-    });
+        // Touch support for mobile
+        trimsContainer.addEventListener('touchstart', (e) => {
+            isTrimsD窶脚agging = true;
+            trimsStartX = e.touches[0].pageX - trimsContainer.offsetLeft;
+            trimsScrollLeft = trimsContainer.scrollLeft;
+        });
 
-    trimsContainer.addEventListener('touchmove', (e) => {
-        if (!isTrimsD​ragging) return;
-    e.preventDefault();
-    const x = e.touches[0].pageX - trimsContainer.offsetLeft;
-    const walk = (x - trimsStartX) * 2;
-    trimsContainer.scrollLeft = trimsScrollLeft - walk;
-            });
+        trimsContainer.addEventListener('touchmove', (e) => {
+            if (!isTrimsD窶脚agging) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - trimsContainer.offsetLeft;
+            const walk = (x - trimsStartX) * 2;
+            trimsContainer.scrollLeft = trimsScrollLeft - walk;
+        });
 
-    trimsContainer.addEventListener('touchend', () => {
-                isTrimsD​ragging = false;
-    });
-        }
+        trimsContainer.addEventListener('touchend', () => {
+            isTrimsD窶脚agging = false;
+        });
+    }
 
     function goToSafetySlide(index) {
         if (index >= 0 && index < totalSafetySlides) {
@@ -274,3 +272,45 @@
         touchStartX = 0;
     });
 
+    // Trims navigation function
+    function scrollTrims(direction) {
+        const trimsContainer = document.querySelector('.digital-trims-container');
+        const cardWidth = 340; // Width of each trim card plus gap
+        const scrollAmount = cardWidth * direction;
+        
+        trimsContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+        
+        // Update button states
+        setTimeout(() => {
+            updateTrimsNavButtons();
+        }, 100);
+    }
+
+    // Update navigation button states based on scroll position
+    function updateTrimsNavButtons() {
+        const trimsContainer = document.querySelector('.digital-trims-container');
+        const prevBtn = document.getElementById('trimsPrevBtn');
+        const nextBtn = document.getElementById('trimsNextBtn');
+        
+        if (trimsContainer && prevBtn && nextBtn) {
+            const isAtStart = trimsContainer.scrollLeft <= 10;
+            const isAtEnd = trimsContainer.scrollLeft >= (trimsContainer.scrollWidth - trimsContainer.clientWidth - 10);
+            
+            prevBtn.disabled = isAtStart;
+            nextBtn.disabled = isAtEnd;
+        }
+    }
+
+    // Initialize button states when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        updateTrimsNavButtons();
+        
+        // Update button states when scrolling
+        const trimsContainer = document.querySelector('.digital-trims-container');
+        if (trimsContainer) {
+            trimsContainer.addEventListener('scroll', updateTrimsNavButtons);
+        }
+    });
