@@ -1,0 +1,324 @@
+ #ntd-digital-widget .container {
+        width: 100%;
+    }
+
+    @media (min-width: 640px) {
+        #ntd-digital-widget .container {
+            max-width: 640px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        #ntd-digital-widget .container {
+            max-width: 768px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #ntd-digital-widget .container {
+            max-width: 1024px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        #ntd-digital-widget .container {
+            max-width: 1280px;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        #ntd-digital-widget .container {
+            max-width: 1536px;
+        }
+    }
+
+    #ntd-digital-widget .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #ntd-digital-widget .my-8 {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #ntd-digital-widget .mb-14 {
+        margin-bottom: 3.5rem;
+    }
+
+    #ntd-digital-widget .mt-14 {
+        margin-top: 3.5rem;
+    }
+
+    #ntd-digital-widget .mt-28 {
+        margin-top: 7rem;
+    }
+
+    #ntd-digital-widget .mt-4 {
+        margin-top: 1rem;
+    }
+
+    #ntd-digital-widget .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    #ntd-digital-widget .mb-6 {
+        margin-bottom: 1.5rem;
+    }
+
+    #ntd-digital-widget .flex {
+        display: flex;
+    }
+
+    #ntd-digital-widget .inline-flex {
+        display: inline-flex;
+    }
+
+    #ntd-digital-widget .aspect-auto {
+        aspect-ratio: auto;
+    }
+
+    #ntd-digital-widget .h-full {
+        height: 100%;
+    }
+
+    #ntd-digital-widget .h-auto {
+        height: auto;
+    }
+
+    #ntd-digital-widget .w-full {
+        width: 100%;
+    }
+
+    #ntd-digital-widget .w-auto {
+        width: auto;
+    }
+
+    #ntd-digital-widget .flex-col {
+        flex-direction: column;
+    }
+
+    #ntd-digital-widget .items-center {
+        align-items: center;
+    }
+
+    #ntd-digital-widget .items-stretch {
+        align-items: stretch;
+    }
+
+    #ntd-digital-widget .justify-center {
+        justify-content: center;
+    }
+
+    #ntd-digital-widget .gap-8 {
+        gap: 2rem;
+    }
+
+    #ntd-digital-widget .gap-16 {
+        gap: 4rem;
+    }
+
+    #ntd-digital-widget .bg-\[\#257aa7\] {
+        --tw-bg-opacity: 1;
+        background-color: rgb(37 122 167 / var(--tw-bg-opacity));
+    }
+
+    #ntd-digital-widget .bg-black {
+        --tw-bg-opacity: 1;
+        background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+    }
+
+    #ntd-digital-widget .bg-\[\#00095B\] {
+        --tw-bg-opacity: 1;
+        background-color: rgb(0 9 91 / var(--tw-bg-opacity));
+    }
+
+    #ntd-digital-widget .object-cover {
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    #ntd-digital-widget .object-fill {
+        -o-object-fit: fill;
+        object-fit: fill;
+    }
+
+    #ntd-digital-widget .object-center {
+        -o-object-position: center;
+        object-position: center;
+    }
+
+    #ntd-digital-widget .p-4 {
+        padding: 1rem;
+    }
+
+    #ntd-digital-widget .px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    #ntd-digital-widget .px-16 {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    #ntd-digital-widget .px-20 {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    #ntd-digital-widget .py-4 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    #ntd-digital-widget .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #ntd-digital-widget .py-12 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    #ntd-digital-widget .px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    #ntd-digital-widget .py-20 {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    #ntd-digital-widget .py-40 {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+
+    #ntd-digital-widget .py-32 {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+
+    #ntd-digital-widget .py-8 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    #ntd-digital-widget .text-lg {
+        font-size: 20px;
+        line-height: 180%;
+    }
+
+    #ntd-digital-widget .text-xl {
+        font-size: 26px;
+        line-height: 200%;
+    }
+
+    #ntd-digital-widget .text-2xl {
+        font-size: 30;
+        line-height: 120%;
+    }
+
+    #ntd-digital-widget .font-bold {
+        font-weight: 700;
+    }
+
+    #ntd-digital-widget .font-semibold {
+        font-weight: 600;
+    }
+
+    #ntd-digital-widget .leading-relaxed {
+        line-height: 1.625;
+    }
+
+    #ntd-digital-widget .text-white {
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+
+    #ntd-digital-widget .no-underline {
+        text-decoration-line: none;
+    }
+
+    @media (min-width: 640px) {
+        #ntd-digital-widget .sm\: aspect-\[5\/2\] {
+            aspect-ratio: 5/2;
+        }
+
+        #ntd-digital-widget .sm\:w-4\/5 {
+            width: 80%;
+        }
+
+        #ntd-digital-widget .sm\:flex-row {
+            flex-direction: row;
+        }
+
+        #ntd-digital-widget .sm\:px-16 {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+    }
+
+    #ntd-digital-widget .desc-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    #ntd-digital-widget .desc-list li {
+        background-color: #f8f8f8;
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        white-space: nowrap;
+        /* ??????????? */
+    }
+
+    #ntd-digital-widget .desc-list li:hover {
+        background-color: #e0e0e0;
+    }
+
+    #ntd-digital-widget .my-8 {
+        margin: 2rem 0;
+    }
+
+    #ntd-digital-widget .text-left {
+        text-align: left;
+    }
+
+    @media (min-width: 768px) {
+        #ntd-digital-widget .sm\: h-full {
+            height: 100%;
+        }
+
+        #ntd-digital-widget .sm\:w-1\/2 {
+            width: 50%;
+        }
+
+        #ntd-digital-widget .flex-row {
+            flex-direction: row;
+        }
+
+        #ntd-digital-widget .sm\:flex-row {
+            flex-direction: row;
+        }
+
+        #ntd-digital-widget .sm\:flex-row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        #ntd-digital-widget .sm\:flex-row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        #ntd-digital-widget .sm\:py-32 {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+    }
