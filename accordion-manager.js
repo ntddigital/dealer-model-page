@@ -41,7 +41,7 @@
   // Switch token to avoid race conditions on rapid toggles
   let switchToken = 0;
 
-  /** Safely updates the main media for a given type/index with fade + autoplay tolerance */
+  /** Safely updates the main media for a given type/index with instant switching */
   function updateMedia(type, index) {
     const items = document.querySelectorAll(`.${type}-accordion-item`);
     const item = items[index];
@@ -55,50 +55,31 @@
 
     const myToken = ++switchToken;
 
-    // Fade out current
-    mainImage.style.opacity = "0";
-    mainVideo.style.opacity = "0";
+    if (mediaType === "video") {
+      // Show video, hide image
+      mainVideo.src = mediaUrl;
+      mainVideo.muted = true; // improve autoplay success
+      mainVideo.playsInline = true;
 
-    // Small delay helps reduce flicker between swaps
-    setTimeout(() => {
-      if (myToken !== switchToken) return; // stale switch
+      mainVideo.style.display = "block";
+      mainImage.style.display = "none";
 
-      if (mediaType === "video") {
-        // Show video, hide image
-        mainVideo.src = mediaUrl;
-        mainVideo.muted = true; // improve autoplay success
-        mainVideo.playsInline = true;
-
-        mainVideo.style.display = "block";
-        mainImage.style.display = "none";
-
-        const p = mainVideo.play();
-        if (p && typeof p.catch === "function") {
-          p.catch(() => {
-            // Autoplay blocked — fail quietly.
-          });
-        }
-        mainVideo.style.opacity = "1";
-      } else {
-        // Show image, hide video (fade in after load when possible)
-        mainImage.onload = () => {
-          if (myToken !== switchToken) return;
-          mainImage.style.opacity = "1";
-        };
-        mainImage.src = mediaUrl;
-
-        if (mainImage.complete) {
-          // Cache-hit path: trigger fade-in anyhow
-          mainImage.style.opacity = "1";
-        }
-
-        try {
-          mainVideo.pause();
-        } catch (_) {}
-        mainVideo.style.display = "none";
-        mainImage.style.display = "block";
+      const p = mainVideo.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(() => {
+          // Autoplay blocked — fail quietly.
+        });
       }
-    }, 120);
+    } else {
+      // Show image, hide video
+      mainImage.src = mediaUrl;
+
+      try {
+        mainVideo.pause();
+      } catch (_) {}
+      mainVideo.style.display = "none";
+      mainImage.style.display = "block";
+    }
   }
 
   /** Toggle a given item within a type; auto = invoked by rotation */
