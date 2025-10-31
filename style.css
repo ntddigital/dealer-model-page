@@ -1,1195 +1,1273 @@
-   /* for kia */
-   * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    a {
-        text-decoration: none !important;
-    }
-
-    .digital-container-max-xl {
-        max-width: 1440px;
-        margin: 0 auto;
-    }
-
-    .digital-vehicle-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        align-items: center;
-    }
-
-    .digital-vehicle-image {
-        text-align: center;
-        height: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        order: 1;
-    }
-
-    .digital-vehicle-image img {
-        height: 100%;
-        width: 100%;
-        /* border-radius: 8px; */
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        object-fit: cover;
-    }
-
-    .digital-vehicle-info {
-        order: 2;
-    }
-
-    .digital-vehicle-info h2 {
-        font-family: "DDC Heading Font Face"
-            , Arial, sans-serif;
-        font-size: 1.75rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-        color: var(--text-color);
-    }
-
-    .digital-vehicle-info p {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--text-color);
-        margin-bottom: 1.5rem;
-    }
-
-    .digital-vehicle-highlights {
-        list-style: none;
-        margin: 1.5rem 0;
-    }
-
-    .digital-vehicle-highlights li {
-        padding: 0.5rem 0;
-        font-size: 1rem;
-        color: var(--text-color);
-        border-bottom: 1px solid var(--color-neutral-200);
-    }
-
-    .digital-vehicle-highlights li:last-child {
-        border-bottom: none;
-    }
-
-    .digital-cta-section {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .digital-btn {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        text-align: center;
-        text-decoration: none;
-        /* border-radius: 6px; */
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-
-    .digital-btn-primary {
-        background: #333333;
-        color: white;
-    }
-
-    .digital-btn-primary:hover {
-        background: #ffffff;
-        color: #333333;
-        border: 2px solid #333333;
-    }
-
-    .digital-btn-secondary {
-        background: transparent;
-        color: #333333;
-        border: 2px solid #333333;
-        border-left-width: 2px !important;
-    }
-
-    .digital-btn-secondary:hover {
-        background: #333333;
-        color: white;
-    }
-
-    .digital-px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-
-    @media (min-width: 768px) {
-        .digital-vehicle-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .digital-vehicle-image {
-            height: 400px;
-            order: 0;
-        }
-
-        .digital-vehicle-info {
-            order: 0;
-        }
-
-        .digital-vehicle-info h2 {
-            font-size: 2rem;
-        }
-
-        .digital-vehicle-highlights li {
-            font-size: 1.125rem;
-        }
-
-        .digital-cta-section {
-            flex-direction: row;
-            gap: 1rem;
-        }
-
-        .digital-btn {
-            flex: 1;
-        }
-    }
-
-    .digital-container {
-        max-width: 1440px;
-        margin: 0 auto;
-    }
-
-    .digital-header {
-        background: url('https://pictures.dealer.com/s/serramontekia/1234/ea77e493792c4b3c9db58e22f4349f68.jpeg');
-        background-size: cover;
-        background-position: center 60%;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        color: white;
-        padding: 0;
-        text-align: center;
-        height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-    }
-
-    .digital-hero-content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 80vh;
-    }
-
-    .digital-hero-title-section {
-        padding-top: 2rem;
-    }
-
-    .digital-hero-stats-section {
-        padding-bottom: 5rem;
-    }
-
-    .digital-hero-stats {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        flex-wrap: wrap;
-    }
-
-    .digital-stat {
-        text-align: center;
-        padding: 2rem;
-        border-radius: 0;
-    }
-
-    .digital-stat-number {
-        font-size: 3rem;
-        font-weight: bold;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-    .digital-stat-label {
-        font-size: 0.9rem;
-        opacity: 0.9;
-        margin-top: 0.5rem;
-    }
-
-    .digital-section {
-        padding: 4rem 0;
-    }
-
-    .digital-section:nth-child(even) {
-        background-color: #f8f8f8;
-    }
-
-    h1 {
-        font-size: 3rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        font-weight: 300;
-        letter-spacing: 2px;
-    }
-
-    h2 {
-        font-size: 2.5rem!important;
-        text-align: center;
-        color: #000;
-        font-weight: 300;
-    }
-
-    h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: #000;
-        font-weight: 400;
-    }
-
-    .digital-whats-new {
-        color: #000;
-        padding: 4rem 0;
-    }
-
-    .digital-whats-new h2 {
-        color: #000;
-    }
-
-    .digital-whats-new-intro {
-        text-align: center;
-        font-size: 1.3rem;
-        margin-bottom: 3rem;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        color: #666;
-    }
-
-    .digital-new-features {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    @media (max-width: 1200px) {
-        .digital-new-features {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .digital-hero-stats {
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            justify-items: center;
-        }
-
-        .digital-stat {
-            padding: 1.5rem 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 120px;
-        }
-
-        .digital-stat-number {
-            font-size: 2.5rem;
-        }
-
-        .digital-stat-label {
-            font-size: 18px;
-            margin-top: 0.3rem;
-        }
-
-        .digital-new-features {
-            grid-template-columns: 1fr;
-        }
-
-
-        .digital-content-text {
-            order: 2;
-            font-size: 18px;
-        }
-
-        .digital-content-image {
-            order: 1;
-        }
-
-
-        .digital-content-grid .digital-content-image {
-            order: 1 !important;
-        }
-
-        .digital-content-grid .digital-content-text {
-            order: 2 !important;
-        }
-
-        .digital-h1 {
-            font-size: 2rem;
-        }
-
-        .digital-h2 {
-            font-size: 2rem;
-        }
-
-
-        p {
-            font-size: 18px !important;
-        }
-
-        li {
-            font-size: 18px !important;
-        }
-
-        .digital-feature-card p {
-            font-size: 18px !important;
-        }
-
-        .digital-trim-content ul li {
-            font-size: 18px !important;
-        }
-
-        .digital-safety-feature-content p {
-            font-size: 18px !important;
-        }
-
-        .digital-trim-price-label {
-            font-size: 18px !important;
-        }
-
-        .digital-whats-new-intro {
-            font-size: 18px !important;
-        }
-
-
-        .digital-content-image img {
-            height: 250px !important;
-        }
-
-
-        .digital-section {
-            padding: 2rem 0;
-        }
-
-
-        .digital-cta-button,
-        .digital-cta-button-outline {
-            display: block;
-            margin: 0.5rem auto !important;
-            width: 90%;
-            text-align: center;
-            font-size: 16px !important;
-        }
-    }
-
-    .digital-feature-card {
-        padding: 2rem;
-        border: 2px solid #000;
-        transition: all 0.3s ease;
-    }
-
-    .digital-feature-card:hover {
-        background: #000;
-        color: white;
-        transform: translateY(-5px);
-    }
-
-    .digital-feature-card:hover h3 {
-        color: white;
-    }
-
-    .digital-feature-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-
-    .digital-feature-card p {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-
-    .digital-carousel-section {
-        background: #f8f8f8;
-        padding: 5rem 0;
-        position: relative;
-    }
-
-    .digital-carousel-container {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        overflow: hidden;
-    }
-
-    .digital-carousel-track {
-        display: flex;
-        transition: transform 0.5s ease;
-    }
-
-    .digital-carousel-slide {
-        min-width: 100%;
-        position: relative;
-    }
-
-    .digital-carousel-image {
-        width: 100%;
-        height: 500px;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .digital-carousel-caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 2rem;
-        text-align: center;
-    }
-
-    .digital-carousel-caption h3 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-    }
-
-    .digital-carousel-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        border: none;
-        padding: 1rem;
-        cursor: pointer;
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-    }
-
-    .digital-carousel-nav:hover {
-        background: #000;
-    }
-
-    .digital-carousel-prev {
-        left: 20px;
-    }
-
-    .digital-carousel-next {
-        right: 20px;
-    }
-
-    .digital-carousel-dots {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    .digital-carousel-dot {
-        width: 15px;
-        height: 15px;
-        border-radius: 0;
-        background: #ccc;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .digital-carousel-dot.active {
-        background: #000;
-    }
-
-
-
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    .digital-lightbox-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 90%;
-        max-height: 90%;
-        text-align: center;
-    }
-
-    .digital-lightbox-image {
-        width: 100%;
-        height: auto;
-        max-height: 80vh;
-        object-fit: contain;
-    }
-
-    .digital-lightbox-caption {
-        color: white;
-        padding: 1rem;
-        text-align: center;
-    }
-
-    .digital-lightbox-caption h3 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        text-transform: capitalize;
-        letter-spacing: 2px;
-    }
-
-    .digital-lightbox-caption p {
-        font-size: 1.2rem;
-        opacity: 0.9;
-    }
-
-    .digital-lightbox-close {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: white;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 1001;
-    }
-
-    .digital-lightbox-close:hover {
-        color: #ccc;
-    }
-
-    .digital-lightbox-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: white;
-        font-size: 3rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        user-select: none;
-    }
-
-    .digital-lightbox-nav:hover {
-        color: #ccc;
-    }
-
-    .digital-lightbox-prev {
-        left: 30px;
-    }
-
-    .digital-lightbox-next {
-        right: 30px;
-    }
-
-    .digital-trims-container {
-        position: relative;
-        overflow-x: auto;
-        overflow-y: hidden;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        scrollbar-width: none;
-        cursor: grab;
-    }
-
-    .digital-trims-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .digital-trims-container.grabbing {
-        cursor: grabbing;
-    }
-
-    .digital-trims-grid {
-        display: flex;
-        gap: 2rem;
-        transition: transform 0.3s ease;
-        padding: 0 2rem;
-        width: max-content;
-    }
-
-    @media (min-width: 768px) {
-        .digital-trims-grid {
-            padding: 0 calc((100vw - 1200px) / 2);
-        }
-    }
-
-    .digital-trim-card {
-        background: white;
-        border-radius: 0;
-        transition: all 0.3s ease;
-        flex: 0 0 280px;
-        width: 280px;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #eee;
-    }
-
-    @media (min-width: 768px) {
-        .digital-trim-card {
-            flex: 0 0 340px;
-            width: 340px;
-        }
-    }
-
-    .digital-trim-card:hover {
-        background: #000;
-        color: white;
-        border-color: #000;
-    }
-
-    .digital-trim-header {
-        padding: 1.5rem 1.5rem 0;
-        text-align: center;
-    }
-
-    .digital-trim-name {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .digital-trim-price {
-        font-size: 1.8rem;
-        color: #000;
-        font-weight: bold;
-        margin-bottom: 0.25rem;
-        transition: color 0.3s ease;
-    }
-
-    .digital-trim-card:hover .digital-trim-price {
-        color: white;
-    }
-
-    .digital-trim-price-label {
-        font-size: 0.9rem;
-        color: #666;
-        margin-bottom: 1rem;
-    }
-
-    .digital-trim-card:hover .digital-trim-price-label {
-        color: #ccc;
-    }
-
-    .digital-trim-image {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        margin-bottom: 1rem;
-    }
-
-    @media (max-width: 768px) {
-        .digital-trim-image {
-            height: 120px;
-        }
-    }
-
-    .digital-trim-content {
-        padding: 0 1.5rem;
-        flex: 1;
-    }
-
-    .digital-trim-title {
-        font-size: 1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #000;
-    }
-
-    .digital-trim-card:hover .digital-trim-title {
-        color: white;
-    }
-
-    .digital-trim-content ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        height: 300px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #ccc transparent;
-    }
-
-    .digital-trim-content ul::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    .digital-trim-content ul::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    .digital-trim-content ul::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 0;
-    }
-
-    .digital-trim-card:hover .digital-trim-content ul::-webkit-scrollbar-thumb {
-        background: #666;
-    }
-
-    .digital-trim-content ul li {
-        padding: 0.4rem 0;
-        border-bottom: 1px solid #eee;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .digital-trim-card:hover .digital-trim-content ul li {
-        border-bottom-color: #333;
-    }
-
-    .digital-trim-content ul li:last-child {
-        border-bottom: none;
-    }
-
-    .digital-trim-cta {
-        padding: 1.5rem;
-        text-align: center;
-        margin-top: auto;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .digital-trim-cta span {
-        font-size: 1rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-
-    .digital-trim-card:hover .digital-trim-cta span {
-        color: white;
-    }
-
-    .digital-arrow-icon {
-        font-style: normal;
-        transition: transform 0.3s ease;
-    }
-
-    .digital-trim-cta:hover .digital-arrow-icon {
-        transform: translateX(5px);
-    }
-
-    .digital-cta-button {
-        background: #000;
-        color: white;
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 0;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 1rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: bold;
-    }
-
-    .digital-cta-button:hover {
-        background: white;
-        color: black;
-        border: 1px solid #000;
-    }
-
-    .digital-cta-button-outline {
-        background: #fff;
-        color: #000;
-        padding: 1rem 2rem;
-        border: 1px solid #000;
-        border-radius: 0;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 1rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: bold;
-    }
-
-    .digital-cta-button-outline:hover {
-        background: #000;
-        color: #fff;
-        border: 1px solid #000;
-    }
-
-    .digital-content-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-        margin-top: 3rem;
-    }
-
-    @media (max-width: 768px) {
-        .digital-content-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-    }
-
-
-    .digital-content-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-    }
-
-    .digital-content-image {
-        position: relative;
-        height: 400px;
-        background-size: cover;
-        background-position: center;
-    }
-
-    @media (max-width: 768px) {
-        .digital-content-image {
-            height: auto;
-        }
-    }
-
-    .digital-digital-content-image-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 1rem;
-        text-align: center;
-        font-weight: bold;
-    }
-
-
-    .digital-safety-features-container {
-        position: relative;
-        overflow-x: auto;
-        overflow-y: hidden;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        cursor: grab;
-    }
-
-    .digital-safety-features-container::-webkit-scrollbar {
-        display: none;
-        /* Chrome, Safari and Opera */
-    }
-
-    .digital-safety-features-container:active {
-        cursor: grabbing;
-    }
-
-    .digital-safety-features {
-        display: flex;
-        gap: 2rem;
-        transition: transform 0.3s ease;
-        padding: 0 2rem;
-        width: max-content;
-    }
-
-    .digital-safety-feature {
-        flex: 0 0 550px;
-        width: 550px;
-    }
-
-    .digital-safety-feature:last-child {
-        margin-right: 50%;
-    }
-
-
-    .digital-safety-indicators {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 2rem;
-    }
-
-    .digital-safety-indicator {
-        width: 12px;
-        height: 12px;
-        background: #ccc;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .digital-safety-indicator.active {
-        background: #000;
-    }
-
-    @media (max-width: 768px) {
-        .digital-safety-feature {
-            flex: 0 0 300px;
-            width: 300px;
-        }
-
-        .digital-safety-feature:last-child {
-            margin-right: 20%;
-        }
-    }
-
-    @media (max-width: 1200px) and (min-width: 769px) {
-        .digital-safety-feature {
-            flex: 0 0 450px;
-            width: 450px;
-        }
-    }
-
-    .digital-safety-feature {
-        background: white;
-        text-align: left;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .digital-safety-feature:hover {
-        background: #000;
-        color: white;
-    }
-
-    .digital-safety-feature:hover h3 {
-        color: white;
-    }
-
-    .digital-safety-feature-image {
-        width: 100%;
-        height: 250px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin-bottom: 1rem;
-    }
-
-    .digital-safety-feature-content {
-        padding: 1.5rem;
-    }
-
-    .digital-safety-feature h3 {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-    }
-
-    .digital-contact-form {
-        background: #000;
-        color: white;
-        padding: 4rem 0;
-    }
-
-    .digital-contact-form h2 {
-        color: white;
-    }
-
-    .digital-form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    .digital-form-group {
-        margin-bottom: 1rem;
-    }
-
-    .digital-form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-    }
-
-    .digital-form-group input,
-    .digital-form-group select,
-    .digital-form-group textarea {
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid #fff;
-        border-radius: 0;
-        font-size: 1rem;
-        background: transparent;
-        color: white;
-    }
-
-    .digital-form-group input::placeholder,
-    .digital-form-group textarea::placeholder {
-        color: #ccc;
-    }
-
-    .digital-form-group select {
-        background: #000;
-    }
-
-    .digital-form-group textarea {
-        height: 120px;
-        resize: vertical;
-    }
-
-    footer {
-        background: #fff;
-        color: #000;
-        padding: 3rem 0 1rem;
-    }
-
-    .digital-footer-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .digital-footer-section h3 {
-        color: #000;
-        margin-bottom: 1rem;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: bold;
-    }
-
-    .digital-footer-section ul {
-        list-style: none;
-    }
-
-    .digital-footer-section ul li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .digital-footer-section ul li:last-child {
-        border-bottom: none;
-    }
-
-    .digital-footer-section ul li a {
-        color: #000;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
-
-    .digital-footer-section ul li a:hover {
-        color: #666;
-        padding-left: 10px;
-    }
-
-    .digital-footer-bottom {
-        text-align: center;
-        padding-top: 2rem;
-        border-top: 1px solid #ddd;
-        font-size: 0.9rem;
-        margin-top: 2rem;
-    }
-
-    .digital-footer-bottom a {
-        color: #000;
-        font-weight: bold;
-    }
-
-    .digital-driver-assistance-img {
-        background-size: cover;
-        background-position: center;
-        border: none;
-        box-shadow: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .digital-trims-wrapper,
-    .digital-safety-wrapper {
-        position: relative;
-        margin-top: 3rem;
-    }
-
-    .digital-trim-nav-btn,
-    .digital-safety-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(128, 128, 128, 0.8);
-        color: white;
-        border: 2px solid rgba(128, 128, 128, 0.2);
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        font-weight: bold;
-        z-index: 10;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .digital-trim-nav-btn:hover,
-    .digital-safety-nav-btn:hover {
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        border-color: rgba(0, 0, 0, 0.9);
-        transform: translateY(-50%) scale(1.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .digital-trim-nav-btn:disabled,
-    .digital-safety-nav-btn:disabled {
-        background: rgba(204, 204, 204, 0.6);
-        color: #999;
-        border-color: rgba(204, 204, 204, 0.6);
-        cursor: not-allowed;
-        transform: translateY(-50%);
-        box-shadow: none;
-    }
-
-    .digital-nav-left {
-        left: 20px;
-    }
-
-    .digital-nav-right {
-        right: 20px;
-    }
-
-    .digital-trim-nav-btn span,
-    .digital-safety-nav-btn span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Hide navigation buttons on mobile devices */
-    @media (max-width: 768px) {
-        .digital-trim-nav-btn,
-        .digital-safety-nav-btn {
-            display: none;
-        }
-    }
+/* for kia */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.digital-container-max-xl {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.digital-vehicle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.digital-vehicle-image {
+  text-align: center;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: 1;
+}
+
+.digital-vehicle-image img {
+  height: 100%;
+  width: 100%;
+  /* border-radius: 8px; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.digital-vehicle-info {
+  order: 2;
+}
+
+.digital-vehicle-info h2 {
+  font-family: "DDC Heading Font Face", Arial, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.digital-vehicle-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.digital-vehicle-highlights {
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.digital-vehicle-highlights li {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+.digital-vehicle-highlights li:last-child {
+  border-bottom: none;
+}
+
+.digital-cta-section {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.digital-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  /* border-radius: 6px; */
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.digital-btn-primary {
+  background: #333333;
+  color: white;
+}
+
+.digital-btn-primary:hover {
+  background: #ffffff;
+  color: #333333;
+  border: 2px solid #333333;
+}
+
+.digital-btn-secondary {
+  background: transparent;
+  color: #333333;
+  border: 2px solid #333333;
+  border-left-width: 2px !important;
+}
+
+.digital-btn-secondary:hover {
+  background: #333333;
+  color: white;
+}
+
+.digital-px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .digital-vehicle-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .digital-vehicle-image {
+    height: 400px;
+    order: 0;
+  }
+
+  .digital-vehicle-info {
+    order: 0;
+  }
+
+  .digital-vehicle-info h2 {
+    font-size: 2rem;
+  }
+
+  .digital-vehicle-highlights li {
+    font-size: 1.125rem;
+  }
+
+  .digital-cta-section {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .digital-btn {
+    flex: 1;
+  }
+}
+
+.digital-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.digital-header {
+  background: url("https://pictures.dealer.com/s/serramontekia/1234/ea77e493792c4b3c9db58e22f4349f68.jpeg");
+  background-size: cover;
+  background-position: center 60%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  padding: 0;
+  text-align: center;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.digital-hero-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+}
+
+.digital-hero-title-section {
+  padding-top: 2rem;
+}
+
+.digital-hero-stats-section {
+  padding-bottom: 5rem;
+}
+
+.digital-hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.digital-stat {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0;
+}
+
+.digital-stat-number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.digital-stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
+
+.digital-section {
+  padding: 4rem 0;
+}
+
+.digital-section:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+h1 {
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 2.5rem !important;
+  text-align: center;
+  color: #000;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #000;
+  font-weight: 400;
+}
+
+.digital-whats-new {
+  color: #000;
+  padding: 4rem 0;
+}
+
+.digital-whats-new h2 {
+  color: #000;
+}
+
+.digital-whats-new-intro {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #666;
+}
+
+.digital-new-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .digital-new-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .digital-hero-stats {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+
+  .digital-stat {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 120px;
+  }
+
+  .digital-stat-number {
+    font-size: 2.5rem;
+  }
+
+  .digital-stat-label {
+    font-size: 18px;
+    margin-top: 0.3rem;
+  }
+
+  .digital-new-features {
+    grid-template-columns: 1fr;
+  }
+
+  .digital-content-text {
+    order: 2;
+    font-size: 18px;
+  }
+
+  .digital-content-image {
+    order: 1;
+  }
+
+  .digital-content-grid .digital-content-image {
+    order: 1 !important;
+  }
+
+  .digital-content-grid .digital-content-text {
+    order: 2 !important;
+  }
+
+  .digital-h1 {
+    font-size: 2rem;
+  }
+
+  .digital-h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 18px !important;
+  }
+
+  li {
+    font-size: 18px !important;
+  }
+
+  .digital-feature-card p {
+    font-size: 18px !important;
+  }
+
+  .digital-trim-content ul li {
+    font-size: 18px !important;
+  }
+
+  .digital-safety-feature-content p {
+    font-size: 18px !important;
+  }
+
+  .digital-trim-price-label {
+    font-size: 18px !important;
+  }
+
+  .digital-whats-new-intro {
+    font-size: 18px !important;
+  }
+
+  .digital-content-image img {
+    height: 250px !important;
+  }
+
+  .digital-section {
+    padding: 2rem 0;
+  }
+
+  .digital-cta-button,
+  .digital-cta-button-outline {
+    display: block;
+    margin: 0.5rem auto !important;
+    width: 90%;
+    text-align: center;
+    font-size: 16px !important;
+  }
+}
+
+.digital-feature-card {
+  padding: 2rem;
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+}
+
+.digital-feature-card:hover {
+  background: #000;
+  color: white;
+  transform: translateY(-5px);
+}
+
+.digital-feature-card:hover h3 {
+  color: white;
+}
+
+.digital-feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.digital-feature-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.digital-carousel-section {
+  background: #f8f8f8;
+  padding: 5rem 0;
+  position: relative;
+}
+
+.digital-carousel-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.digital-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.digital-carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.digital-carousel-image {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.digital-carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.digital-carousel-caption h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.digital-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.digital-carousel-nav:hover {
+  background: #000;
+}
+
+.digital-carousel-prev {
+  left: 20px;
+}
+
+.digital-carousel-next {
+  right: 20px;
+}
+
+.digital-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.digital-carousel-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 0;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.digital-carousel-dot.active {
+  background: #000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.digital-lightbox-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.digital-lightbox-image {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.digital-lightbox-caption {
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.digital-lightbox-caption h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+}
+
+.digital-lightbox-caption p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.digital-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.digital-lightbox-close:hover {
+  color: #ccc;
+}
+
+.digital-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.digital-lightbox-nav:hover {
+  color: #ccc;
+}
+
+.digital-lightbox-prev {
+  left: 30px;
+}
+
+.digital-lightbox-next {
+  right: 30px;
+}
+
+.digital-trims-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.digital-trims-container::-webkit-scrollbar {
+  display: none;
+}
+
+.digital-trims-container.grabbing {
+  cursor: grabbing;
+}
+
+.digital-trims-grid {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.3s ease;
+  padding: 0 2rem;
+  width: max-content;
+}
+
+@media (min-width: 768px) {
+  .digital-trims-grid {
+    padding: 0 calc((100vw - 1200px) / 2);
+  }
+}
+
+.digital-trim-card {
+  background: white;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .digital-trim-card {
+    flex: 0 0 340px;
+    width: 340px;
+  }
+}
+
+.digital-trim-card:hover {
+  background: #000;
+  color: white;
+  border-color: #000;
+}
+
+.digital-trim-header {
+  padding: 1.5rem 1.5rem 0;
+  text-align: center;
+}
+
+.digital-trim-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.digital-trim-price {
+  font-size: 1.8rem;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.digital-trim-card:hover .digital-trim-price {
+  color: white;
+}
+
+.digital-trim-price-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.digital-trim-card:hover .digital-trim-price-label {
+  color: #ccc;
+}
+
+.digital-trim-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .digital-trim-image {
+    height: 120px;
+  }
+}
+
+.digital-trim-content {
+  padding: 0 1.5rem;
+  flex: 1;
+}
+
+.digital-trim-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.digital-trim-card:hover .digital-trim-title {
+  color: white;
+}
+
+.digital-trim-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.digital-trim-content ul::-webkit-scrollbar {
+  width: 4px;
+}
+
+.digital-trim-content ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.digital-trim-content ul::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 0;
+}
+
+.digital-trim-card:hover .digital-trim-content ul::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.digital-trim-content ul li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.digital-trim-card:hover .digital-trim-content ul li {
+  border-bottom-color: #333;
+}
+
+.digital-trim-content ul li:last-child {
+  border-bottom: none;
+}
+
+.digital-trim-cta {
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.digital-trim-cta span {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.digital-trim-card:hover .digital-trim-cta span {
+  color: white;
+}
+
+.digital-arrow-icon {
+  font-style: normal;
+  transition: transform 0.3s ease;
+}
+
+.digital-trim-cta:hover .digital-arrow-icon {
+  transform: translateX(5px);
+}
+
+.digital-cta-button {
+  background: #000;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.digital-cta-button:hover {
+  background: white;
+  color: black;
+  border: 1px solid #000;
+}
+
+.digital-cta-button-outline {
+  background: #fff;
+  color: #000;
+  padding: 1rem 2rem;
+  border: 1px solid #000;
+  border-radius: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.digital-cta-button-outline:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+.digital-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .digital-content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.digital-content-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.digital-content-image {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .digital-content-image {
+    height: auto;
+  }
+}
+
+.digital-digital-content-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.digital-safety-features-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  cursor: grab;
+}
+
+.digital-safety-features-container::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
+.digital-safety-features-container:active {
+  cursor: grabbing;
+}
+
+.digital-safety-features {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.3s ease;
+  padding: 0 2rem;
+  width: max-content;
+}
+
+.digital-safety-feature {
+  flex: 0 0 550px;
+  width: 550px;
+}
+
+.digital-safety-feature:last-child {
+  margin-right: 50%;
+}
+
+.digital-safety-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.digital-safety-indicator {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.digital-safety-indicator.active {
+  background: #000;
+}
+
+@media (max-width: 768px) {
+  .digital-safety-feature {
+    flex: 0 0 300px;
+    width: 300px;
+  }
+
+  .digital-safety-feature:last-child {
+    margin-right: 20%;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .digital-safety-feature {
+    flex: 0 0 450px;
+    width: 450px;
+  }
+}
+
+.digital-safety-feature {
+  background: white;
+  text-align: left;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.digital-safety-feature:hover {
+  background: #000;
+  color: white;
+}
+
+.digital-safety-feature:hover h3 {
+  color: white;
+}
+
+.digital-safety-feature-image {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 1rem;
+}
+
+.digital-safety-feature-content {
+  padding: 1.5rem;
+}
+
+.digital-safety-feature h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.digital-contact-form {
+  background: #000;
+  color: white;
+  padding: 4rem 0;
+}
+
+.digital-contact-form h2 {
+  color: white;
+}
+
+.digital-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.digital-form-group {
+  margin-bottom: 1rem;
+}
+
+.digital-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.digital-form-group input,
+.digital-form-group select,
+.digital-form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #fff;
+  border-radius: 0;
+  font-size: 1rem;
+  background: transparent;
+  color: white;
+}
+
+.digital-form-group input::placeholder,
+.digital-form-group textarea::placeholder {
+  color: #ccc;
+}
+
+.digital-form-group select {
+  background: #000;
+}
+
+.digital-form-group textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+footer {
+  background: #fff;
+  color: #000;
+  padding: 3rem 0 1rem;
+}
+
+.digital-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.digital-footer-section h3 {
+  color: #000;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.digital-footer-section ul {
+  list-style: none;
+}
+
+.digital-footer-section ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.digital-footer-section ul li:last-child {
+  border-bottom: none;
+}
+
+.digital-footer-section ul li a {
+  color: #000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.digital-footer-section ul li a:hover {
+  color: #666;
+  padding-left: 10px;
+}
+
+.digital-footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+.digital-footer-bottom a {
+  color: #000;
+  font-weight: bold;
+}
+
+.digital-driver-assistance-img {
+  background-size: cover;
+  background-position: center;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+.digital-trims-wrapper,
+.digital-safety-wrapper {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.digital-trim-nav-btn,
+.digital-safety-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(128, 128, 128, 0.8);
+  color: white;
+  border: 2px solid rgba(128, 128, 128, 0.2);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.digital-trim-nav-btn:hover,
+.digital-safety-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border-color: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.digital-trim-nav-btn:disabled,
+.digital-safety-nav-btn:disabled {
+  background: rgba(204, 204, 204, 0.6);
+  color: #999;
+  border-color: rgba(204, 204, 204, 0.6);
+  cursor: not-allowed;
+  transform: translateY(-50%);
+  box-shadow: none;
+}
+
+.digital-nav-left {
+  left: 20px;
+}
+
+.digital-nav-right {
+  right: 20px;
+}
+
+.digital-trim-nav-btn span,
+.digital-safety-nav-btn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide navigation buttons on mobile devices */
+@media (max-width: 768px) {
+  .digital-trim-nav-btn,
+  .digital-safety-nav-btn {
+    display: none;
+  }
+}
+
+/**
+ * Accordion Styles for Kia Pages
+ * Works with accordion-manager.js for a complete accordion solution
+ */
+
+/* ========================================
+   ACCORDION ITEM STYLES
+   ======================================== */
+
+/* Base accordion item styles - applies to all types */
+[class*="-accordion-item"] {
+  border-bottom: 2px solid #e0e0e0;
+  padding: 1.5rem 0;
+}
+
+/* Active state - highlight the title */
+[class*="-accordion-item"].active [class*="-accordion-header"] h3 {
+  color: #05141f;
+}
+
+/* ========================================
+   ACCORDION HEADER STYLES
+   ======================================== */
+
+/* Header container */
+[class*="-accordion-header"] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hover effect */
+[class*="-accordion-header"]:hover h3 {
+  color: #05141f;
+}
+
+/* ========================================
+   ACCORDION ICON ANIMATION
+   ======================================== */
+
+/* Rotate icon when active (+ becomes ×) */
+[class*="-accordion-item"].active [class*="-accordion-icon"] {
+  transform: rotate(45deg);
+}
+
+[class*="-accordion-icon"] {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* ========================================
+   ACCORDION CONTENT STYLES
+   ======================================== */
+
+[class*="-accordion-content"] {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* ========================================
+   RESPONSIVE GRID LAYOUTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Grid layouts become single column on mobile */
+  .interior-grid,
+  .performance-grid,
+  .technology-grid,
+  .connectivity-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Media wrappers lose sticky positioning on mobile */
+  .interior-media-wrapper,
+  .performance-media-wrapper,
+  .technology-media-wrapper,
+  .connectivity-media-wrapper {
+    position: static !important;
+  }
+
+  /* Reduce height of media containers on mobile */
+  #interiorImageContainer,
+  #performanceImageContainer,
+  #technologyImageContainer,
+  #connectivityImageContainer {
+    height: 300px !important;
+  }
+}
