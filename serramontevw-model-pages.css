@@ -30,6 +30,9 @@ h2 {
   }
 }
 
+a {
+  text-decoration: none;
+}
 .serramontevw-button-group {
   display: flex;
   gap: 20px;
