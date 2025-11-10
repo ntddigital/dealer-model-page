@@ -273,7 +273,7 @@ h2 {
 
 .serramontevw-trim-card {
   flex: 0 0 420px;
-  height: 700px;
+  height: 720px;
   background-color: transparent;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
@@ -291,10 +291,19 @@ h2 {
 }
 
 .serramontevw-trim-content {
-  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  height: 100%;
+  margin-top: 18px;
+}
+.top {
+  align-self: flex-start;
+}
+.middle {
+  margin: auto 0;
+}
+.bottom {
+  align-self: flex-end;
 }
 
 .serramontevw-trim-title {
