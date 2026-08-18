@@ -6,10 +6,15 @@
   --subaru-blue: #0068d7;
   --subaru-blue-dark: #004f9f;
   --warm: #f3f0e8;
+  /* Typography follows the dealer site rather than a font of our own: the
+     Subaru theme resolves to Arial / the system stack and loads no brand
+     webfont, so importing one would break the OEM design system. */
+  --font-stack:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   overflow-x: hidden;
   color: var(--ink);
   background: var(--paper);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
 }
 
 .model-page,
@@ -52,7 +57,7 @@
   color: var(--ink);
   text-decoration: none;
   text-transform: uppercase;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-stack);
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -131,7 +136,11 @@
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.025em;
-  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .model-nav__cta {
@@ -164,10 +173,6 @@
 
 .model-nav__cta:hover,
 .button--primary:hover,
-.button--lease:hover {
-  background: var(--subaru-blue-dark);
-}
-
 .model-hero__intro {
   width: min(1440px, calc(100% - 64px));
   margin: 0 auto;
@@ -194,10 +199,10 @@
 .model-hero h1 {
   max-width: 980px;
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(40px, 4.6vw, 68px);
+  font-family: var(--font-stack);
+  font-size: clamp(30px, 3.2vw, 46px);
   font-weight: 600;
-  line-height: 0.92;
+  line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
@@ -227,11 +232,6 @@
 
 .button--secondary {
   border-color: var(--ink);
-  background: var(--paper);
-}
-
-.button--secondary:hover {
-  color: var(--paper);
   background: var(--ink);
 }
 
@@ -240,15 +240,7 @@
   background: var(--subaru-blue);
 }
 
-.button--lease:hover {
-  color: var(--paper);
-}
-
 .button:hover,
-.model-nav__cta:hover {
-  transform: translateY(-1px);
-}
-
 .model-hero__media {
   position: relative;
   width: calc(100% - 32px);
@@ -271,7 +263,11 @@
 .model-hero__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(5, 12, 17, 0.68) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 45%,
+    rgba(5, 12, 17, 0.68) 100%
+  );
   pointer-events: none;
 }
 
@@ -374,8 +370,8 @@
 }
 
 .model-hero__specials-price {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(34px, 3.6vw, 52px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 1;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
@@ -384,7 +380,6 @@
 .model-hero__specials-price span {
   font-size: 0.44em;
 }
-
 
 .model-hero__specials-terms {
   max-width: 560px;
@@ -406,7 +401,9 @@
   letter-spacing: 0.05em;
   white-space: nowrap;
   background: var(--subaru-blue);
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .model-hero__specials-link:hover,
@@ -438,8 +435,8 @@
 
 .model-trims h2 {
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(42px, 4vw, 64px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -504,7 +501,8 @@
 }
 
 .trim-card {
-  flex: 0 0 clamp(300px, calc((var(--trim-shell) - (var(--trim-gap) * 3)) / 4), 360px);
+  flex: 0 0
+    clamp(300px, calc((var(--trim-shell) - (var(--trim-gap) * 3)) / 4), 360px);
   min-height: 760px;
   padding: 22px 30px 30px;
   display: flex;
@@ -690,12 +688,9 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 800;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.trim-card__build:hover {
-  background: var(--subaru-blue-dark);
-  transform: translateY(-1px);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .model-specials {
@@ -725,8 +720,8 @@
 
 .model-specials h2 {
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(42px, 4.2vw, 68px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -809,7 +804,7 @@
   margin-top: 2px;
   display: flex;
   align-items: flex-start;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-stack);
   line-height: 0.84;
 }
 
@@ -885,7 +880,7 @@
 
 .special-card__price-list strong {
   color: var(--ink);
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-stack);
   font-size: 44px;
   line-height: 1;
 }
@@ -928,12 +923,9 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 800;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.special-card__button:hover {
-  background: var(--subaru-blue-dark);
-  transform: translateY(-1px);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .model-specials__note {
@@ -991,8 +983,8 @@
 
 .why-us h2 {
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(42px, 4.2vw, 68px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -1078,7 +1070,9 @@
   letter-spacing: 0.12em;
   border-bottom: 2px solid var(--subaru-blue);
   padding-bottom: 5px;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 .why-card__link:hover,
@@ -1148,18 +1142,15 @@
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.02em;
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .local-story__cta:visited,
 .local-story__cta:hover,
 .local-story__cta:focus-visible {
   color: var(--paper);
-}
-
-.local-story__cta:hover {
-  background: var(--subaru-blue-dark);
-  transform: translateY(-1px);
 }
 
 .local-story__media {
@@ -1232,8 +1223,10 @@
   width: 36px;
   height: 36px;
   background:
-    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 36px 5px no-repeat,
-    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 5px 36px no-repeat;
+    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 36px 5px
+      no-repeat,
+    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 5px 36px
+      no-repeat;
   content: "";
   transition: transform 180ms ease;
 }
@@ -1267,8 +1260,8 @@
 .model-related h2 {
   margin: 0 0 34px;
   color: #202832;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(28px, 2.6vw, 40px);
+  font-family: var(--font-stack);
+  font-size: clamp(24px, 2.2vw, 32px);
   font-weight: 600;
 }
 
@@ -1302,7 +1295,9 @@
   font-size: 14px;
   border-bottom: 1px solid #d8dde2;
   padding-bottom: 2px;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 .model-related__group a:hover,
@@ -1334,8 +1329,8 @@
   max-width: 880px;
   margin: 0;
   color: #202832;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(42px, 4.3vw, 68px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 0.98;
 }
@@ -1478,8 +1473,8 @@
 
 .route-section h2 {
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(42px, 4.3vw, 68px);
+  font-family: var(--font-stack);
+  font-size: clamp(28px, 2.8vw, 40px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -1794,8 +1789,10 @@
     width: 28px;
     height: 28px;
     background:
-      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 28px 4px no-repeat,
-      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 4px 28px no-repeat;
+      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 28px 4px
+        no-repeat,
+      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 4px 28px
+        no-repeat;
   }
 
   .faq-item__answer {
@@ -1890,8 +1887,8 @@
   }
 
   .model-hero h1 {
-    font-size: clamp(38px, 13vw, 54px);
-    line-height: 0.94;
+    font-size: clamp(26px, 8vw, 36px);
+    line-height: 1.1;
   }
 
   .model-hero__lead {
@@ -1940,4 +1937,43 @@
   .model-nav__cta {
     display: none;
   }
+}
+
+/* Buttons: white label, no underline, and no visual change on hover.
+   .button--secondary carries a dark fill rather than the old white one, because
+   a white label on a white button would be invisible.
+   :focus-visible is deliberately kept — that is keyboard focus, not hover, and
+   dropping it would leave keyboard users with no visible focus target. */
+.model-page .button,
+.model-page .model-nav__cta,
+.model-page .model-hero__specials-link,
+.model-page .trim-card__build,
+.model-page .special-card__button,
+.model-page .local-story__cta {
+  color: var(--paper);
+  text-decoration: none;
+  transition: none;
+}
+
+.model-page .button:hover,
+.model-page .model-nav__cta:hover,
+.model-page .model-hero__specials-link:hover,
+.model-page .trim-card__build:hover,
+.model-page .special-card__button:hover,
+.model-page .local-story__cta:hover {
+  color: var(--paper);
+  text-decoration: none;
+  transform: none;
+}
+
+.special-card__vehicle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.model-hero__specials-terms a {
+  color: inherit;
+  text-decoration: underline;
 }
