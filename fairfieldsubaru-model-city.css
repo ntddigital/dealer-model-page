@@ -1,11 +1,17 @@
 .model-page {
-  --ink: #101820;
-  --muted: #536170;
+  /* Design tokens measured 2026-08-18 from subaru.com and the live
+     fairfieldsubaru.com theme. The dealer site publishes its own
+     --website-primary-theme-color (#1971d4, identical to subaru.com's
+     rgb(25,113,212)), so we consume it and fall back to the measured
+     value. If the retailer re-themes, these pages follow automatically. */
+  --subaru-blue: var(--website-primary-theme-color, #1971d4);
+  --subaru-blue-dark: #1458a5;
+  --ink: #212529; /* fairfieldsubaru.com body color rgb(33,37,41) */
+  --muted: #5c6163; /* subaru.com body color rgb(92,97,99) */
   --line: #d9e0e6;
   --paper: #ffffff;
-  --subaru-blue: #0068d7;
-  --subaru-blue-dark: #004f9f;
   --warm: #f3f0e8;
+  --radius-button: 4px; /* dealer theme uses 4px, subaru.com 5px */
   /* Typography follows the dealer site rather than a font of our own: the
      Subaru theme resolves to Arial / the system stack and loads no brand
      webfont, so importing one would break the OEM design system. */
@@ -102,7 +108,7 @@
 }
 
 .model-nav__links a:hover::after,
-.model-nav__links .is-active::after {
+.model-nav__links .model-nav__link--active::after {
   transform: scaleX(1);
 }
 
@@ -126,16 +132,20 @@
 }
 
 .model-nav__cta,
-.button {
+.model-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
   border: 1px solid transparent;
+  border-radius: var(--radius-button);
   text-decoration: none;
-  font-size: 15px;
+  /* 16px / normal tracking matches the live dealer theme's buttons.
+     Weight stays 700: the host loads no Helvetica Neue Medium face, so
+     Subaru's 400-on-65Medium would render thin in the Arial fallback. */
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.025em;
+  letter-spacing: normal;
   transition:
     background 180ms ease,
     border-color 180ms ease,
@@ -152,14 +162,14 @@
 .model-page .model-nav__cta:visited,
 .model-page .model-nav__cta:hover,
 .model-page .model-nav__cta:focus-visible,
-.model-page .button--primary,
-.model-page .button--primary:visited,
-.model-page .button--primary:hover,
-.model-page .button--primary:focus-visible,
-.model-page .button--lease,
-.model-page .button--lease:visited,
-.model-page .button--lease:hover,
-.model-page .button--lease:focus-visible,
+.model-page .model-button--primary,
+.model-page .model-button--primary:visited,
+.model-page .model-button--primary:hover,
+.model-page .model-button--primary:focus-visible,
+.model-page .model-button--lease,
+.model-page .model-button--lease:visited,
+.model-page .model-button--lease:hover,
+.model-page .model-button--lease:focus-visible,
 .model-page .trim-card__build,
 .model-page .trim-card__build:visited,
 .model-page .trim-card__build:hover,
@@ -198,9 +208,9 @@
   max-width: 980px;
   margin: 0;
   font-family: var(--font-stack);
-  font-size: clamp(30px, 3.2vw, 46px);
-  font-weight: 600;
-  line-height: 1.05;
+  font-size: clamp(26px, 2.6vw, 32px) !important;
+  font-weight: 600 !important;
+  line-height: 1.05 !important;
   letter-spacing: -0.02em;
 }
 
@@ -218,22 +228,22 @@
   gap: 10px;
 }
 
-.button {
+.model-button {
   min-height: 56px;
   padding: 0 26px;
 }
 
-.button--primary {
+.model-button--primary {
   color: var(--paper);
   background: var(--subaru-blue);
 }
 
-.button--secondary {
+.model-button--secondary {
   border-color: var(--ink);
   background: var(--ink);
 }
 
-.button--lease {
+.model-button--lease {
   color: var(--paper);
   background: var(--subaru-blue);
 }
@@ -368,7 +378,7 @@
 
 .model-hero__specials-price {
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 1;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
@@ -433,7 +443,7 @@
 .model-trims h2 {
   margin: 0;
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -544,7 +554,7 @@
 .trim-card h3 {
   margin: 4px 0 0;
   color: #1c2733;
-  font-size: 30px;
+  font-size: 21px;
   line-height: 1;
 }
 
@@ -718,7 +728,7 @@
 .model-specials h2 {
   margin: 0;
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -750,7 +760,11 @@
 }
 
 .special-card--lease {
-  background: linear-gradient(135deg, #0068d7 0%, #004f9f 100%);
+  background: linear-gradient(
+    135deg,
+    var(--subaru-blue) 0%,
+    var(--subaru-blue-dark) 100%
+  );
   color: var(--paper);
 }
 
@@ -786,7 +800,7 @@
 .special-card h3 {
   max-width: 580px;
   margin: 0;
-  font-size: clamp(25px, 2vw, 34px);
+  font-size: clamp(18px, 1.5vw, 21px);
   line-height: 1.15;
 }
 
@@ -981,7 +995,7 @@
 .why-us h2 {
   margin: 0;
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -1044,7 +1058,7 @@
 
 .why-card h3 {
   margin: 0 0 16px;
-  font-size: clamp(22px, 1.6vw, 27px);
+  font-size: clamp(17px, 1.4vw, 20px);
   font-weight: 800;
   line-height: 1.16;
 }
@@ -1112,7 +1126,7 @@
   max-width: 720px;
   margin: 0;
   color: #202832;
-  font-size: clamp(34px, 3.3vw, 52px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 800;
   line-height: 1.12;
 }
@@ -1174,7 +1188,7 @@
   margin: 0 0 42px;
   color: #202832;
   text-align: center;
-  font-size: clamp(38px, 3.5vw, 54px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 400;
   line-height: 1.12;
 }
@@ -1258,7 +1272,7 @@
   margin: 0 0 34px;
   color: #202832;
   font-family: var(--font-stack);
-  font-size: clamp(24px, 2.2vw, 32px);
+  font-size: clamp(19px, 1.9vw, 23px);
   font-weight: 600;
 }
 
@@ -1282,8 +1296,9 @@
   padding: 0;
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .model-related__group a {
@@ -1327,7 +1342,7 @@
   margin: 0;
   color: #202832;
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 0.98;
 }
@@ -1391,7 +1406,7 @@
 
 .compare-table thead th {
   padding: 24px 22px;
-  background: #101820;
+  background: var(--ink);
   color: var(--paper);
   font-size: 15px;
   font-weight: 800;
@@ -1420,13 +1435,13 @@
   line-height: 1.55;
 }
 
-.compare-table .is-highlight {
+.compare-table .compare-table__highlight {
   background: #eaf4ff;
   color: #142333;
   font-weight: 800;
 }
 
-.compare-table thead .is-highlight {
+.compare-table thead .compare-table__highlight {
   background: var(--subaru-blue);
   color: var(--paper);
 }
@@ -1471,7 +1486,7 @@
 .route-section h2 {
   margin: 0;
   font-family: var(--font-stack);
-  font-size: clamp(28px, 2.8vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 600;
   line-height: 0.96;
 }
@@ -1675,7 +1690,7 @@
   }
 
   .trim-card h3 {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .model-specials {
@@ -1742,7 +1757,7 @@
   }
 
   .local-story h2 {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 1.12;
   }
 
@@ -1768,7 +1783,7 @@
   .model-faq h2 {
     margin-bottom: 28px;
     padding: 0 20px;
-    font-size: 34px;
+    font-size: 24px;
   }
 
   .model-faq__list {
@@ -1808,7 +1823,7 @@
   }
 
   .model-compare h2 {
-    font-size: 38px;
+    font-size: 24px;
   }
 
   .model-compare__header p:last-child {
@@ -1833,7 +1848,7 @@
   }
 
   .route-section h2 {
-    font-size: 38px;
+    font-size: 24px;
   }
 
   .route-section__copy > p {
@@ -1884,8 +1899,8 @@
   }
 
   .model-hero h1 {
-    font-size: clamp(26px, 8vw, 36px);
-    line-height: 1.1;
+    font-size: clamp(24px, 7vw, 30px) !important;
+    line-height: 1.1 !important;
   }
 
   .model-hero__lead {
@@ -1922,7 +1937,7 @@
   }
 
   .model-hero__specials-price {
-    font-size: 34px;
+    font-size: 24px;
   }
 }
 
@@ -1954,13 +1969,13 @@
    rule there wins on cascade order every time. This is the only reliable way to
    hold the button colours in a page we do not own.
    :focus-visible is left alone — that is keyboard focus, not hover. */
-.model-page .button,
+.model-page .model-button,
 .model-page .model-nav__cta,
 .model-page .model-hero__specials-link,
 .model-page .trim-card__build,
 .model-page .special-card__button,
 .model-page .local-story__cta,
-.model-page .button:hover,
+.model-page .model-button:hover,
 .model-page .model-nav__cta:hover,
 .model-page .model-hero__specials-link:hover,
 .model-page .trim-card__build:hover,
@@ -1972,27 +1987,27 @@
   transform: none !important;
 }
 
-.model-page .button--primary,
-.model-page .button--lease,
+.model-page .model-button--primary,
+.model-page .model-button--lease,
 .model-page .model-nav__cta,
 .model-page .model-hero__specials-link,
 .model-page .trim-card__build,
 .model-page .special-card__button,
 .model-page .local-story__cta,
-.model-page .button--primary:hover,
-.model-page .button--lease:hover,
+.model-page .model-button--primary:hover,
+.model-page .model-button--lease:hover,
 .model-page .model-nav__cta:hover,
 .model-page .model-hero__specials-link:hover,
 .model-page .trim-card__build:hover,
 .model-page .special-card__button:hover,
 .model-page .local-story__cta:hover {
-  background: #0068d7 !important;
+  background: var(--subaru-blue) !important;
 }
 
-.model-page .button--secondary,
-.model-page .button--secondary:hover {
-  background: #101820 !important;
-  border-color: #101820 !important;
+.model-page .model-button--secondary,
+.model-page .model-button--secondary:hover {
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
 }
 
 /* Source note after a competitor column heading. Plain inline text rather than
@@ -2033,7 +2048,7 @@
    Each button's own measurements are restated on :hover only, so the base and
    responsive rules (full-width buttons on mobile, for instance) are untouched
    and hover simply cannot change the box. */
-.model-page .button:hover {
+.model-page .model-button:hover {
   font-size: 15px !important;
   min-height: 56px !important;
   padding: 0 26px !important;
