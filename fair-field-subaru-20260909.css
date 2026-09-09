@@ -769,11 +769,6 @@ img {
   margin-bottom: 28px;
 }
 
-.new-models-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
-}
 
 .new-model-card {
   background: var(--white);
@@ -1218,10 +1213,7 @@ img {
     grid-template-columns: 1fr 1fr;
   }
 
-  .new-models-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
+  
   .inventory-detail-grid {
     grid-template-columns: 1fr;
   }
@@ -1264,10 +1256,7 @@ img {
   .models-grid,
   .feature-grid,
   .service-showcase-points,
-  .new-models-grid {
-    grid-template-columns: 1fr;
-  }
-
+  
   .location-card,
   .summary-card,
   .hours-card,
@@ -1572,46 +1561,6 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    should depend on. */
 .section--inventory { background: var(--white); }
 
-/* Lineup tiles: image as the tile background, an overlay over it, copy centred on
-   top, and the whole tile is one link. Replaces the image-above-text card. */
-.new-model-card--tile { border: none; border-radius: 8px; overflow: hidden; }
-.new-model-tile-link {
-  position: relative;
-  display: block;
-  aspect-ratio: 4 / 3;
-  text-decoration: none;
-}
-.new-model-tile-link img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: var(--white);
-  aspect-ratio: auto;
-}
-.new-model-tile-link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(5, 24, 64, 0.55);
-  transition: background 0.25s ease;
-}
-.new-model-tile-link:hover::after { background: rgba(5, 24, 64, 0.68); }
-.new-model-tile-body {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 18px;
-  text-align: center;
-}
-.new-model-card--tile .new-model-name { color: var(--white); }
-.new-model-card--tile .new-model-link { margin-top: 0; color: var(--white); }
 
 /* "Handle the rest" is a panel on the white inventory section, not a full-width
    band: its own light ground separates it from the lineup tiles above, while the
@@ -1684,7 +1633,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
      offer banners, and the dealer's banner artwork (library id 792173) whose 4:1
      shape will not sit in a 1.5:1 band. --subaru-offer-bg keeps the subaru.com
      value on file. */
-  background: var(--black, #051840);
+  background: #1c242b;
   color: var(--white);
 }
 
@@ -2107,11 +2056,17 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 .spec-price dt { color: rgba(255, 255, 255, 0.6); flex: 1 1 auto; min-width: 0; }
 .spec-price dd { flex: 0 0 auto; }
 .spec-price dd { margin: 0; color: rgba(255, 255, 255, 0.82); font-variant-numeric: tabular-nums; }
-/* The discount is the selling point, so it is set at the same weight as the
-   final price rather than at label size. Colour, not size, keeps the two
-   apart: green for what comes off, white for what is left. */
-.spec-price .spec-price__off { color: #7ec9a0; font-size: 16px; font-weight: 700; }
-.spec-price .spec-price__now { color: var(--white); font-size: 15px; font-weight: 700; }
+/* Was #7ec9a0. The design system's palette is #051840 #111 #1971d4 #393937
+   #b3b5b5 #e3e7ee #f8f5f7 #fff — no green at all, so that was an invented
+   colour. The dealer's own specials card sets the discount in plain grey at
+   weight 400, i.e. its least emphasised row; we keep it larger than the labels
+   because the discount is the selling point, but it is white now, not a hue.
+   Their system blue #1971d4 was not an option here: on this navy band it is
+   3.60:1, below the 4.5:1 AA floor for text this size. */
+.spec-price .spec-price__off { color: rgba(255, 255, 255, 0.82); font-size: 16px; font-weight: 700; }
+/* The strongest row, as on the dealer's own card, where Your Price is 20px
+   against the discount's 16px. */
+.spec-price .spec-price__now { color: var(--white, #fff); font-size: 20px; font-weight: 900; }
 
 /* ------------------------------------------------------------------
    Link-styling defence for the offer band and service panel
@@ -2140,20 +2095,134 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 .section-specials .spec-disclaimer a { color: #9cc4ff !important; }
 .section-specials .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
 
-/* The fragment always sits inside #custompageblock, so scoping to that id
-   gives 1-3-0 specificity — enough to beat a host rule written as
-   `#custompageblock a { ... !important }`, which plain class selectors lose
-   to even with !important (id 1-0-1 > three classes 0-3-0). */
-#custompageblock .spec-cta .btn-white,
-#custompageblock .service-showcase-actions .service-showcase-link {
+/* ------------------------------------------------------------------
+   Link-styling defence
+   Every CTA here is an <a> inside a CMS content block on a page whose
+   stylesheet we do not control. The stock .btn-* rules set a colour but
+   rely on the stylesheet's own `a { text-decoration: none }`, and the host
+   overrides that: on the live page the buttons rendered with dark
+   underlined text on blue.
+   Scoped to #custompageblock (1-3-0) with !important, because a host rule
+   written as `#custompageblock a { ... !important }` beats plain class
+   selectors even when those carry !important — an id is 1-0-1, three
+   classes are 0-3-0. Verified against exactly that rule.
+   Colours are the ones the CDN already declares for each class, not new
+   choices: filled buttons are white on --subaru-blue, outline buttons are
+   --subaru-blue on transparent and invert on hover.
+   ------------------------------------------------------------------ */
+#custompageblock a,
+#custompageblock .btn-white,
+#custompageblock .btn-outline-white,
+#custompageblock .btn-black,
+#custompageblock .btn-outline-black,
+#custompageblock .service-showcase-link,
+#custompageblock .model-link,
+#custompageblock .subaru-blue-link,
+#custompageblock .lineup-item,
+#custompageblock .feature-card,
+#custompageblock .model-card,
+#custompageblock .spec-slide {
   text-decoration: none !important;
 }
-#custompageblock .spec-cta .btn-white { color: var(--white, #fff) !important; }
-#custompageblock .spec-cta .btn-white:hover { color: var(--black, #051840) !important; }
+/* filled: white on blue */
+#custompageblock .btn-white,
+#custompageblock .btn-black { color: var(--white, #fff) !important; }
+#custompageblock .btn-white:hover,
+#custompageblock .btn-black:hover { color: var(--white, #fff) !important; }
+/* outline: blue text, inverts to white on hover */
+#custompageblock .btn-outline-white,
+#custompageblock .btn-outline-black { color: var(--subaru-blue, #1971d4) !important; }
+#custompageblock .btn-outline-white:hover,
+#custompageblock .btn-outline-black:hover { color: var(--white, #fff) !important; }
+/* the offer band overrides these two, so they need the band-scoped form */
+#custompageblock .section-specials .spec-cta .btn-white { color: var(--white, #fff) !important; }
+#custompageblock .section-specials .spec-cta .btn-white:hover { color: var(--black, #051840) !important; }
+/* service panel sits on Subaru blue, so its buttons are inverted there */
 #custompageblock .service-showcase-link { color: var(--subaru-blue, #1971d4) !important; }
 #custompageblock .service-showcase-link:hover { color: var(--white, #fff) !important; }
 #custompageblock .service-showcase-link-secondary { color: var(--white, #fff) !important; }
 #custompageblock .service-showcase-link-secondary:hover { color: var(--subaru-blue, #1971d4) !important; }
+/* inline text links */
+#custompageblock .model-link,
+#custompageblock .subaru-blue-link { color: var(--subaru-blue, #1971d4) !important; }
+/* real text links on the dark band: an underline is fine, the host's dark
+   link colour would not be readable on navy */
 #custompageblock .spec-fine a,
-#custompageblock .spec-disclaimer a { color: #9cc4ff !important; }
+#custompageblock .spec-disclaimer a { color: #9cc4ff !important; text-decoration: underline !important; }
 #custompageblock .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
+/* the host has been seen forcing dt to bold; keep labels lighter than figures */
+#custompageblock .spec-price dt { font-weight: 400 !important; }
+
+/* ------------------------------------------------------------------
+   Lineup carousel (.lineup-slider)
+   Was a four-across grid of dark tiles: each product shot sat under a
+   0.55 navy overlay, which made the transparent Scene7 cut-outs almost
+   invisible. This follows the dealer's own lineup carousel instead —
+   white ground, the product shot untouched, the model name in bold navy
+   underneath, circular arrows at the edges.
+   Same mechanics as the offer slider: a native overflow-x + scroll-snap
+   track, so every model ships in the HTML and stays reachable and
+   indexable with scripting off. The arrows are progressive enhancement
+   and stay hidden until the script confirms it can drive the track.
+   ------------------------------------------------------------------ */
+.lineup-slider { position: relative; margin-top: 26px; }
+.lineup-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.lineup-track::-webkit-scrollbar { display: none; }
+.lineup-item {
+  flex: 0 0 calc((100% - 96px) / 5);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+.lineup-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 422;
+  object-fit: contain;
+}
+.lineup-name {
+  margin-top: 10px;
+  text-align: center;
+  font-size: clamp(17px, 1.5vw, 22px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--subaru-dark-blue);
+}
+.lineup-item:hover .lineup-name { color: var(--subaru-blue); }
+.lineup-arrow {
+  display: none;
+  position: absolute;
+  top: 33%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(57, 57, 55, 0.55);
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lineup-slider.is-enhanced .lineup-arrow { display: block; }
+.lineup-arrow:hover { background: var(--subaru-dark-blue); }
+.lineup-arrow[disabled] { opacity: 0.25; cursor: default; }
+.lineup-arrow[disabled]:hover { background: rgba(57, 57, 55, 0.55); }
+.lineup-arrow--prev { left: -6px; }
+.lineup-arrow--next { right: -6px; }
+@media (max-width: 1200px) { .lineup-item { flex-basis: calc((100% - 72px) / 4); } }
+@media (max-width: 1024px) { .lineup-item { flex-basis: calc((100% - 48px) / 3); } }
+@media (max-width: 640px)  { .lineup-item { flex-basis: calc((100% - 24px) / 2); } }
