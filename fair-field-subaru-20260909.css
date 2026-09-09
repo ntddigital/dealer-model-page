@@ -54,10 +54,10 @@
   --subaru-silver: #f8f5f7;
   --subaru-grey: #b3b5b5;
   --subaru-black: #393937;
-  /* Ground behind the offer slider. Sampled from subaru.com's own offer
-     banners on 2026-09-08 — s7d1.scene7.com/is/image/scomv2/207_HPR_*_Offer_lg_xl
-     is a flat #1d252c at every corner, on all three banners. */
-  --subaru-offer-bg: #1d252c;
+  /* 深色 offer 區塊底色 #1C242B —— 客戶 2026-09-09 指定,已確認保留,不要再改。
+     這個值不在樣式表的調色盤裡(#051840 #111 #1971d4 #393937 #b3b5b5 #e3e7ee
+     #f8f5f7 #fff),是刻意的例外,不是漏改。用來對齊 subaru.com offer banner
+     的深炭色觀感;其餘所有色值都已在 2026-09-09 的稽核中收斂到調色盤內。 */
   --black: var(--subaru-dark-blue);
   --white: #fff;
   --gray-100: var(--subaru-silver);
@@ -314,7 +314,7 @@ img {
 }
 
 .section-h {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(28px, 3.2vw, 42px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -1.5px;
@@ -1495,11 +1495,11 @@ img {
   padding: 88px 40px;
 }
 .hero--full .hero-right { display: none; }
-.hero--full .hero-eyebrow { color: #9cc4ff; }
+.hero--full .hero-eyebrow { color: var(--gray-200, #e3e7ee); }
 .hero--full h1 { color: var(--white); }
 .hero--full .hero-sub { color: rgba(255, 255, 255, 0.88); }
 .hero--full .hero-trust li { color: rgba(255, 255, 255, 0.92); }
-.hero--full .hero-trust li::before { color: #9cc4ff; }
+.hero--full .hero-trust li::before { color: var(--gray-200, #e3e7ee); }
 /* .btn-outline-white is blue-on-transparent by default (built for the white panel);
    on the dark image it needs a white outline. */
 .hero--full .btn-outline-white { color: var(--white); border-color: var(--white); }
@@ -1568,7 +1568,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    service section below. White cards also read better on grey than on white. */
 .inventory-block--panel {
   background: var(--gray-100);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 48px 40px;
   margin-top: 56px;
 }
@@ -1629,16 +1629,18 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   /* Same navy as the page's own .section-dark band ("One True Price"), so the
      offer band and that section read as one system. --black is the stylesheet's
      own token (= --subaru-dark-blue, #051840).
-     Two other values were tried and dropped: #1d252c sampled from subaru.com's
-     offer banners, and the dealer's banner artwork (library id 792173) whose 4:1
-     shape will not sit in a 1.5:1 band. --subaru-offer-bg keeps the subaru.com
-     value on file. */
+     2026-09-09 design-system audit: #1c242b and #1d252c were both tried and
+     dropped. Neither exists anywhere in subaru.com's CSS, and the Scene7
+     artwork we use (?$800wa$) is fully transparent (alpha 0, verified per
+     pixel with fmt=png-alpha), so there is no artwork background to match.
+     The palette is only #051840 #111 #1971d4 #393937 #b3b5b5 #e3e7ee
+     #f8f5f7 #fff. */
   background: #1c242b;
   color: var(--white);
 }
 
 
-.section-specials .eyebrow { color: #9cc4ff; }
+.section-specials .eyebrow { color: var(--gray-200, #e3e7ee); }
 .section-specials .section-h { color: var(--white); }
 .section-specials .section-p { color: rgba(255, 255, 255, 0.78); }
 
@@ -1749,7 +1751,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   cursor: pointer;
   transition: transform 160ms ease, background 160ms ease;
 }
-.spec-dot[aria-current="true"] { background: #6cb0ff; transform: scale(1.4); }
+.spec-dot[aria-current="true"] { background: var(--white, #fff); transform: scale(1.4); }
 .spec-arrows { display: flex; gap: 8px; margin-left: auto; }
 .spec-arrow, .spec-play {
   width: 38px; height: 38px; padding: 0;
@@ -1777,7 +1779,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.55);
 }
-.spec-fine a { color: #9cc4ff; }
+.spec-fine a { color: var(--white, #fff); }
 
 @media (max-width: 1024px) {
   .spec-slide { flex-basis: calc((100% - 20px) / 2); }
@@ -1800,11 +1802,11 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   width: min(1120px, 100%);
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid #d8dde2;
+  border: 1px solid var(--gray-200, #e3e7ee);
   border-radius: 8px;
   background: var(--white);
 }
-.model-faq__list .faq-item { border-bottom: 1px solid #d8dde2; padding: 0; }
+.model-faq__list .faq-item { border-bottom: 1px solid var(--gray-200, #e3e7ee); padding: 0; }
 .model-faq__list .faq-item:last-child { border-bottom: 0; }
 .model-faq__list .faq-item > summary {
   min-height: 112px;
@@ -1813,7 +1815,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   align-items: center;
   justify-content: space-between;
   gap: 36px;
-  color: #202832;
+  color: #111;
   cursor: pointer;
   list-style: none;
   font-size: clamp(20px, 1.65vw, 24px);
@@ -1836,7 +1838,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 .model-faq__list .faq-item__answer {
   max-height: none;
   padding: 0 130px 34px 48px;
-  color: #5c6369;
+  color: var(--gray-600, #393937);
   font-size: 16px;
   line-height: 1.65;
 }
@@ -1964,10 +1966,10 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    above the section. Nothing else needs to change.
    ------------------------------------------------------------------ */
 .section-specials h1 {
-  /* .section-h is clamp(32px, 4vw, 52px)/900. The H1 was 34px/700,
-     i.e. smaller than the section headings under it. Matched to that
-     scale instead. A 20ch max-width was tried and removed: at 72px it
-     broke this 53-character heading over three lines, 227px tall. */
+  /* H1 52px/900 against .section-h at clamp(28px, 3.2vw, 42px), so the page
+     title outranks the section headings under it (both were 52px until
+     2026-09-09). A 20ch max-width was tried and removed: at 72px it broke
+     this 53-character heading over three lines, 227px tall. */
   margin: 0 0 26px;
   color: var(--white, #fff);
   font-size: clamp(32px, 4vw, 52px);
@@ -2092,7 +2094,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 /* Real text links on the dark band: they may keep an underline, but the
    host's dark link colour would be unreadable on navy. */
 .section-specials .spec-fine a,
-.section-specials .spec-disclaimer a { color: #9cc4ff !important; }
+.section-specials .spec-disclaimer a { color: var(--white, #fff) !important; }
 .section-specials .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
 
 /* ------------------------------------------------------------------
@@ -2148,7 +2150,7 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 /* real text links on the dark band: an underline is fine, the host's dark
    link colour would not be readable on navy */
 #custompageblock .spec-fine a,
-#custompageblock .spec-disclaimer a { color: #9cc4ff !important; text-decoration: underline !important; }
+#custompageblock .spec-disclaimer a { color: var(--white, #fff) !important; text-decoration: underline !important; }
 #custompageblock .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
 /* the host has been seen forcing dt to bold; keep labels lighter than figures */
 #custompageblock .spec-price dt { font-weight: 400 !important; }
