@@ -2015,12 +2015,16 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    above the section. Nothing else needs to change.
    ------------------------------------------------------------------ */
 .section-specials h1 {
-  max-width: 1000px;
+  /* .section-h is clamp(32px, 4vw, 52px)/900. The H1 was 34px/700,
+     i.e. smaller than the section headings under it. Matched to that
+     scale instead. A 20ch max-width was tried and removed: at 72px it
+     broke this 53-character heading over three lines, 227px tall. */
   margin: 0 0 26px;
-  color: var(--white);
-  font-size: clamp(24px, 2.5vw, 34px);
-  font-weight: 700;
-  line-height: 1.2;
+  color: var(--white, #fff);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.5px;
 }
 
 /* "Plus tax and license." and the Model #/VIN line, both of which the live
@@ -2065,17 +2069,36 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    three. Rows are omitted, never zero-filled: five of the eight offers have no
    dealer discount, and inventing a "-$0" line would misrepresent them. */
 .spec-price {
+  /* Two-column grid on the <dl> itself, with <dt>/<dd> as direct children.
+     It used to be one wrapper <div> per row with display:flex — valid HTML5,
+     but the row collapsed to stacked label-over-value on the live page,
+     which is what happens when a CMS sanitiser strips <div> from inside
+     <dl>. Grid needs no wrapper, so there is nothing left to strip.
+     display and the column definition carry !important because the host
+     page has already been seen overriding our rules (see the link defence). */
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  align-items: baseline;
+  column-gap: 12px;
+  row-gap: 2px;
   margin: 10px 0 0;
   padding: 10px 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 12px;
 }
-.spec-price > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding: 2px 0;
+.spec-price dt {
+  grid-column: 1 !important;
+  min-width: 0;
+  margin: 0;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+}
+.spec-price dd {
+  grid-column: 2 !important;
+  margin: 0;
+  text-align: right !important;
+  color: rgba(255, 255, 255, 0.82);
+  font-variant-numeric: tabular-nums;
 }
 /* Labels are the dealer's own, verbatim: "Total Suggested Retail Price",
    "Dealer Discount", "Your Price" / "Buy For". The long one is 28 characters in
@@ -2089,4 +2112,48 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
    apart: green for what comes off, white for what is left. */
 .spec-price .spec-price__off { color: #7ec9a0; font-size: 16px; font-weight: 700; }
 .spec-price .spec-price__now { color: var(--white); font-size: 15px; font-weight: 700; }
-.spec-price > div:last-child { margin-top: 2px; }
+
+/* ------------------------------------------------------------------
+   Link-styling defence for the offer band and service panel
+   These CTAs are <a> elements inside a CMS content block on a page whose
+   stylesheet we do not control. The stock .btn-* rules set a colour but
+   rely on the stylesheet's own `a { text-decoration: none }`, and the host
+   overrides that — on the live site the buttons came out dark and
+   underlined on blue. Tested against a host rule using !important, which
+   plain specificity cannot beat, so these few properties carry it too.
+   That is what !important is for: defending a fragment from an
+   uncontrolled host. .hero h1 in this stylesheet already does the same.
+   ------------------------------------------------------------------ */
+.section-specials .spec-cta .btn-white,
+.service-showcase-actions .service-showcase-link {
+  text-decoration: none !important;
+}
+.section-specials .spec-cta .btn-white { color: var(--white, #fff) !important; }
+.section-specials .spec-cta .btn-white:hover { color: var(--black, #051840) !important; }
+.service-showcase-actions .service-showcase-link { color: var(--subaru-blue, #1971d4) !important; }
+.service-showcase-actions .service-showcase-link:hover { color: var(--white, #fff) !important; }
+.service-showcase-actions .service-showcase-link-secondary { color: var(--white, #fff) !important; }
+.service-showcase-actions .service-showcase-link-secondary:hover { color: var(--subaru-blue, #1971d4) !important; }
+/* Real text links on the dark band: they may keep an underline, but the
+   host's dark link colour would be unreadable on navy. */
+.section-specials .spec-fine a,
+.section-specials .spec-disclaimer a { color: #9cc4ff !important; }
+.section-specials .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
+
+/* The fragment always sits inside #custompageblock, so scoping to that id
+   gives 1-3-0 specificity — enough to beat a host rule written as
+   `#custompageblock a { ... !important }`, which plain class selectors lose
+   to even with !important (id 1-0-1 > three classes 0-3-0). */
+#custompageblock .spec-cta .btn-white,
+#custompageblock .service-showcase-actions .service-showcase-link {
+  text-decoration: none !important;
+}
+#custompageblock .spec-cta .btn-white { color: var(--white, #fff) !important; }
+#custompageblock .spec-cta .btn-white:hover { color: var(--black, #051840) !important; }
+#custompageblock .service-showcase-link { color: var(--subaru-blue, #1971d4) !important; }
+#custompageblock .service-showcase-link:hover { color: var(--white, #fff) !important; }
+#custompageblock .service-showcase-link-secondary { color: var(--white, #fff) !important; }
+#custompageblock .service-showcase-link-secondary:hover { color: var(--subaru-blue, #1971d4) !important; }
+#custompageblock .spec-fine a,
+#custompageblock .spec-disclaimer a { color: #9cc4ff !important; }
+#custompageblock .spec-disclaimer > summary { color: rgba(255, 255, 255, 0.72) !important; }
