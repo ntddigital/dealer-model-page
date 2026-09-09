@@ -1,0 +1,2092 @@
+.container-max-md {
+  a {
+    text-decoration: none !important;
+  }
+
+  max-width: 100% !important;
+}
+
+@media (min-width: 1200px) {
+  .pl-xl-8,
+  .px-xl-8 {
+    padding-left: 0 !important;
+  }
+
+  .pr-xl-8,
+  .px-xl-8 {
+    padding-right: 0 !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .pl-lg-6,
+  .px-lg-6 {
+    padding-left: 0 !important;
+  }
+
+  .pr-lg-6,
+  .px-lg-6 {
+    padding-right: 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .p-md-5 {
+    padding: 0 !important;
+  }
+}
+
+.p-4 {
+  padding: 0 !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --subaru-blue: #1971d4;
+  --subaru-dark-blue: #051840;
+  --subaru-silver: #f8f5f7;
+  --subaru-grey: #b3b5b5;
+  --subaru-black: #393937;
+  /* Ground behind the offer slider. Sampled from subaru.com's own offer
+     banners on 2026-09-08 — s7d1.scene7.com/is/image/scomv2/207_HPR_*_Offer_lg_xl
+     is a flat #1d252c at every corner, on all three banners. */
+  --subaru-offer-bg: #1d252c;
+  --black: var(--subaru-dark-blue);
+  --white: #fff;
+  --gray-100: var(--subaru-silver);
+  --gray-200: #e3e7ee;
+  --gray-400: var(--subaru-grey);
+  --gray-600: var(--subaru-black);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.5;
+  overflow-x: hidden;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  min-height: 84vh;
+  background: var(--black);
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 76px 64px;
+  position: relative;
+  z-index: 2;
+  background: var(--white);
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--subaru-blue);
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 5.5vw, 72px) !important;
+  font-weight: 900;
+  color: var(--subaru-dark-blue);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 22px;
+}
+
+.hero-sub {
+  font-size: 19px;
+  color: var(--subaru-black);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-white,
+.btn-outline-white,
+.btn-black,
+.btn-outline-black {
+  padding: 14px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: inline-block;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.btn-white {
+  background: var(--subaru-blue);
+  color: var(--white);
+  border: 2px solid var(--subaru-blue);
+}
+
+.btn-white:hover {
+  background: var(--subaru-dark-blue);
+  border-color: var(--subaru-dark-blue);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: var(--subaru-blue);
+  border: 2px solid var(--subaru-blue);
+}
+
+.btn-outline-white:hover {
+  color: var(--white);
+  border-color: var(--subaru-blue);
+  background: var(--subaru-blue);
+}
+
+.btn-black {
+  background: var(--subaru-blue);
+  color: var(--white);
+  border: 2px solid var(--subaru-blue);
+}
+
+.btn-black:hover {
+  background: var(--subaru-dark-blue);
+  border-color: var(--subaru-dark-blue);
+}
+
+.btn-outline-black {
+  background: transparent;
+  color: var(--subaru-blue);
+  border: 2px solid var(--subaru-blue);
+}
+
+.btn-outline-black:hover {
+  background: var(--subaru-blue);
+  color: var(--white);
+}
+
+.hero-trust {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  margin-top: 28px;
+  max-width: 620px;
+}
+
+.hero-trust li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--subaru-black);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.hero-trust li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--subaru-blue);
+  font-weight: 700;
+}
+
+.hero-right {
+  background:
+    linear-gradient(90deg, rgba(5, 24, 64, 0.42), rgba(5, 24, 64, 0.08)),
+    url("https://service.secureoffersites.com/images/GetLibraryImage?fileNameOrId=652578");
+  background-size: cover;
+  background-position: center;
+  filter: none;
+}
+
+/* White panel with a black border, inset to the same 1360px content column the
+   sections use, so it reads as its own card between the dark offer band above
+   and the section below. Was full-bleed navy.
+   The 1px grid gap over a --gray-200 background is what draws the dividers:
+   they then appear wherever two cells meet and nowhere else, so the 4 / 2 / 1
+   column breakpoints need no nth-child rules and no divider ever lands on the
+   outer border. */
+.stat-bar {
+  width: min(1360px, calc(100% - 80px));
+  margin: 48px auto;
+  background: var(--gray-200);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--black);
+}
+
+.stat-item {
+  padding: 26px 28px;
+  text-align: center;
+  background: var(--white);
+}
+
+.stat-num {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 5px;
+}
+
+.stat-num small {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-600);
+  letter-spacing: 0.6px;
+}
+
+.stat-num + .stat-num {
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
+
+.section {
+  padding: 84px 40px;
+}
+
+.section-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.section-alt {
+  background: var(--gray-100);
+}
+
+.section-dark {
+  background: var(--black);
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+
+.section-h {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 14px;
+}
+
+.section-p {
+  font-size: 19px;
+  color: var(--gray-600);
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: 56px;
+  font-weight: 300;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.location-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.location-card,
+.summary-card,
+.hours-card,
+.feature-card,
+.community-stat {
+  background: var(--white);
+  padding: 34px 32px;
+}
+
+.location-card h3,
+.summary-card h3,
+.hours-card h3,
+.feature-card h3 {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+}
+
+.location-card p,
+.summary-card p,
+.hours-card p,
+.feature-card p {
+  font-size: 17px;
+  color: var(--gray-600);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.location-stack {
+  display: block;
+}
+
+.map-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.location-map-full {
+  width: 100%;
+}
+
+.map-embed {
+  height: 520px;
+}
+
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-card .location-cta {
+  margin-top: 0;
+  padding: 0;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+}
+
+@media (min-width: 1025px) {
+  .location-grid {
+    align-items: start;
+  }
+
+  .location-stack {
+    height: 100%;
+  }
+}
+
+.location-cta {
+  margin-top: 24px;
+}
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  font-size: 16px;
+  color: var(--gray-600);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.hours-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hours-row strong {
+  color: var(--black);
+  font-weight: 700;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--gray-200);
+  border-left: 1px solid var(--gray-200);
+}
+
+.feature-card {
+  min-height: 520px;
+  padding: 72px 56px 58px;
+  border-right: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: color 0.35s ease;
+  isolation: isolate;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--subaru-blue) 0%,
+    var(--subaru-dark-blue) 100%
+  );
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.48s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: -1;
+}
+
+.feature-card:hover::before,
+.feature-card:focus-within::before {
+  transform: scaleY(1);
+}
+
+.feature-card h3 {
+  font-size: clamp(34px, 3.2vw, 52px);
+  line-height: 1.08;
+  letter-spacing: 0;
+  max-width: 420px;
+  margin-bottom: 18px;
+  transition:
+    color 0.28s ease,
+    transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.feature-card p {
+  max-width: 360px;
+  color: var(--white);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.28s ease 0.08s,
+    transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s;
+}
+
+.feature-card:hover h3,
+.feature-card:focus-within h3 {
+  color: var(--white);
+  transform: translateY(-8px);
+}
+
+.feature-card:hover p,
+.feature-card:focus-within p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-badge {
+  position: absolute;
+  left: 56px;
+  bottom: 58px;
+  margin-top: 0;
+  transition:
+    opacity 0.22s ease,
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0.22s ease;
+}
+
+.feature-badge a {
+  width: 68px;
+  height: 68px;
+  border: 1.5px solid var(--subaru-black);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--subaru-black);
+  font-size: 0;
+  text-decoration: none;
+}
+
+.feature-badge a::before {
+  content: "›";
+  font-size: 42px;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+.feature-card:hover .feature-badge,
+.feature-card:focus-within .feature-badge {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+}
+
+.feature-grid:not(:hover):not(:focus-within) .feature-card:first-child::before {
+  transform: scaleY(1);
+}
+
+.feature-grid:not(:hover):not(:focus-within) .feature-card:first-child h3 {
+  color: var(--white);
+  transform: translateY(-8px);
+}
+
+.feature-grid:not(:hover):not(:focus-within) .feature-card:first-child p {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--white);
+}
+
+.feature-grid:not(:hover):not(:focus-within)
+  .feature-card:first-child
+  .feature-badge {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+}
+
+.section-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.section-ctas-center {
+  justify-content: center;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.model-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-shadow: 0 16px 40px rgba(5, 24, 64, 0.08);
+}
+
+.model-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  transition:
+    opacity 0.4s,
+    transform 0.6s;
+}
+
+.model-card:nth-child(2) .model-img,
+.model-card:nth-child(3) .model-img,
+.model-card:nth-child(4) .model-img {
+  object-position: center 58%;
+}
+
+.model-card:nth-child(6) .model-img {
+  object-position: center 42%;
+}
+
+.model-card:hover .model-img {
+  opacity: 0.94;
+  transform: scale(1.04);
+}
+
+.model-body {
+  padding: 32px 34px 34px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.model-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--subaru-blue);
+  margin-bottom: 8px;
+}
+
+.model-name {
+  font-size: clamp(28px, 2.6vw, 38px);
+  font-weight: 900;
+  color: var(--subaru-dark-blue);
+  margin-bottom: 12px;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.model-desc {
+  font-size: 17px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.model-stats {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--gray-200);
+  padding-top: 18px;
+  margin-bottom: 22px;
+}
+
+.mstat {
+  flex: 1;
+  padding-right: 14px;
+}
+
+.mstat + .mstat {
+  padding-left: 14px;
+  border-left: 1px solid var(--gray-200);
+  padding-right: 0;
+}
+
+.mstat-val {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--subaru-dark-blue);
+  line-height: 1;
+}
+
+.mstat-val small {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-600);
+}
+
+.mstat-key {
+  font-size: 12px;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.mstat-key.keep-case {
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.model-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.model-price {
+  font-size: 15px;
+  color: var(--gray-600);
+}
+
+.model-link {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--subaru-blue);
+}
+
+.inventory-block + .inventory-block {
+  margin-top: 44px;
+}
+
+.inventory-subhead {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--subaru-blue);
+  margin-bottom: 14px;
+}
+
+.inventory-subtitle {
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 900;
+  line-height: 1.12;
+  color: var(--subaru-dark-blue);
+  margin-bottom: 10px;
+}
+
+.inventory-subcopy {
+  font-size: 17px;
+  color: var(--gray-600);
+  line-height: 1.65;
+  font-weight: 300;
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.new-models-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.new-model-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 40px rgba(5, 24, 64, 0.08);
+  min-height: 100%;
+}
+
+.new-model-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 0.45s ease,
+    opacity 0.3s ease;
+}
+
+.new-model-card:hover img {
+  transform: scale(1.03);
+  opacity: 0.96;
+}
+
+.new-model-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.new-model-name {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--subaru-dark-blue);
+}
+
+.new-model-link {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--subaru-blue);
+}
+
+.inventory-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.service-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  background: var(--subaru-blue);
+  min-height: 720px;
+  overflow: hidden;
+}
+
+.service-showcase-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 68px 56px 44px;
+  color: var(--white);
+}
+
+.service-showcase-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.44);
+  margin-bottom: 22px;
+}
+
+.service-showcase-tag {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 18px;
+}
+
+.service-showcase-title {
+  font-size: clamp(38px, 4.2vw, 62px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--white);
+  margin-bottom: 28px;
+  max-width: 560px;
+}
+
+.service-showcase-desc {
+  font-size: 19px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 680px;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.service-showcase-points {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  max-width: 620px;
+}
+
+.service-showcase-points li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.service-showcase-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.service-showcase-actions {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+.service-showcase-link {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.service-showcase-link-secondary {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.service-showcase-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+  margin-top: 60px;
+}
+
+.service-showcase-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--white);
+}
+
+.service-showcase-count-current {
+  font-size: clamp(44px, 4vw, 60px);
+  line-height: 1;
+  font-weight: 900;
+}
+
+.service-showcase-count-total {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.service-showcase-nav {
+  display: flex;
+  align-items: center;
+}
+
+.service-showcase-nav button {
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.service-showcase-nav button + button {
+  border-left: 0;
+}
+
+.service-showcase-nav button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.service-showcase-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.service-showcase-media {
+  position: relative;
+  min-height: 720px;
+}
+
+.service-showcase-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(25, 113, 212, 0.08) 0%,
+    rgba(25, 113, 212, 0) 18%
+  );
+  pointer-events: none;
+}
+
+.service-showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.community-main a {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.community-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 3px;
+  align-items: stretch;
+}
+
+.community-stats {
+  display: grid;
+  gap: 3px;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.community-main {
+  padding: 52px 48px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.community-main .eyebrow {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.community-main .section-h {
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.community-main .section-p {
+  color: rgba(255, 255, 255, 0.64);
+  max-width: 560px;
+  margin-bottom: 28px;
+}
+
+.community-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.community-stat-num {
+  font-size: clamp(64px, 9vw, 116px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -3px;
+  color: var(--black);
+}
+
+.community-stat-label {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.local-section {
+  background: var(--gray-100);
+  text-align: center;
+}
+
+.local-section .eyebrow {
+  display: block;
+  text-align: center;
+}
+
+.local-section h2 {
+  font-size: clamp(26px, 3.5vw, 44px) !important;
+  font-weight: 900;
+  max-width: 860px;
+  margin: 0 auto 22px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.local-section p {
+  font-size: 18px;
+  color: var(--gray-600);
+  line-height: 1.75;
+  max-width: 780px;
+  margin: 0 auto 12px;
+  font-weight: 300;
+}
+
+.local-btns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.faq-section {
+  background: var(--white);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--gray-200);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--black);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  letter-spacing: -0.2px;
+}
+
+.faq-arrow {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: var(--black);
+  transition: transform 0.3s;
+}
+
+.faq-item.open .faq-arrow {
+  transform: rotate(180deg);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    padding 0.3s;
+  padding: 0;
+}
+
+.faq-item.open .faq-a {
+  max-height: 720px;
+  padding-bottom: 24px;
+}
+
+.faq-a p {
+  font-size: 17px;
+  color: var(--gray-600);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 820px;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-right {
+    height: 360px;
+  }
+
+  .hero-left {
+    padding: 56px 20px;
+  }
+
+  .stat-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .location-grid,
+  .community-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .location-cards,
+  .models-grid,
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .new-models-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .inventory-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .service-showcase-media {
+    min-height: 420px;
+    order: -1;
+  }
+
+  .service-showcase-panel {
+    padding: 44px 34px 36px;
+  }
+
+  .service-showcase-title {
+    max-width: none;
+  }
+
+  .service-showcase-footer {
+    margin-top: 42px;
+  }
+
+  .feature-card {
+    min-height: 420px;
+    padding: 42px 34px 40px;
+  }
+
+  .feature-badge {
+    left: 34px;
+    bottom: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-trust,
+  .location-cards,
+  .models-grid,
+  .feature-grid,
+  .service-showcase-points,
+  .new-models-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-card,
+  .summary-card,
+  .hours-card,
+  .community-main,
+  .community-stat {
+    padding: 28px 24px;
+  }
+
+  .feature-card {
+    min-height: 360px;
+    padding: 34px 24px 32px;
+  }
+
+  .service-showcase-panel {
+    padding: 34px 24px 28px;
+  }
+
+  .service-showcase-media {
+    min-height: 300px;
+  }
+
+  .service-showcase-title {
+    font-size: 40px;
+    margin-bottom: 22px;
+  }
+
+  .service-showcase-desc {
+    font-size: 17px;
+  }
+
+  .service-showcase-actions {
+    gap: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-showcase-footer {
+    margin-top: 32px;
+  }
+
+  .service-showcase-nav button {
+    width: 52px;
+    height: 52px;
+  }
+
+  .feature-card h3 {
+    font-size: 34px;
+  }
+
+  .feature-card p {
+    opacity: 1;
+    transform: none;
+    color: var(--gray-600);
+  }
+
+  .feature-card:hover p,
+  .feature-card:focus-within p,
+  .feature-card:hover h3,
+  .feature-card:focus-within h3 {
+    transform: none;
+  }
+
+  .feature-card:hover p,
+  .feature-card:focus-within p {
+    color: var(--white);
+  }
+
+  .feature-badge {
+    left: 24px;
+    bottom: 32px;
+  }
+
+  .feature-badge a {
+    width: 58px;
+    height: 58px;
+  }
+
+  .model-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-bar {
+    grid-template-columns: 1fr;
+    width: calc(100% - 40px);
+    margin: 32px auto;
+  }
+
+  .hero-btns,
+  .section-ctas,
+  .local-btns {
+    flex-direction: column;
+  }
+
+  .hero-btns .btn-white,
+  .hero-btns .btn-outline-white,
+  .section-ctas .btn-black,
+  .section-ctas .btn-outline-black,
+  .local-btns .btn-black,
+  .local-btns .btn-outline-black,
+  .location-cta .btn-black {
+    width: 100%;
+    text-align: center;
+  }
+
+  .faq-q {
+    font-size: 17px;
+  }
+}
+
+.cite {
+  display: inline-block !important;
+  cursor: help;
+  vertical-align: baseline;
+  margin-left: 1px;
+  position: relative;
+  font-style: normal;
+  text-decoration: none;
+  color: currentColor !important;
+  font-size: 0.85em !important;
+  font-weight: 700;
+  line-height: 1;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  transition: color 0.2s;
+}
+
+.dark-cite {
+  background: transparent !important;
+}
+
+.cite-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+  padding: 10px 14px;
+  border-radius: 4px;
+  width: 280px;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.15s,
+    visibility 0.15s;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.cite-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #111;
+}
+
+.cite.tooltip-visible .cite-tooltip {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.cite-tooltip strong {
+  display: block;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.cite-tooltip a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: underline;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.hero h1,
+.section-h,
+.local-section h2 {
+  letter-spacing: 0;
+}
+
+.subaru-blue-link {
+  color: var(--subaru-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------
+   .hero--full — full-bleed hero (image as the whole background)
+   Added 2026-09-08 for the five dealer city pages, then retired 2026-09-08
+   when those pages dropped the hero for a full-width offer slider. Kept
+   here, and only here, so the photo hero can be restored; the fragments no
+   longer carry these rules. Opt-in modifier so the
+   three model pages that share .hero keep the split layout.
+   Per-page image: set both variables inline on the hero section, desktop and mobile
+   widths separately, so phones do not download the 2000px file:
+     style="--hero-lg:url(...Width=2000...);--hero-sm:url(...Width=1200...)"
+   ------------------------------------------------------------------ */
+.hero.hero--full {
+  --hero-img-default: url("https://service.secureoffersites.com/images/GetLibraryImage?fileNameOrId=652578&Width=2000&Height=0&quality=82&type=webp");
+  grid-template-columns: 1fr;
+  position: relative;
+  min-height: 78vh;
+  color: var(--white);
+  background:
+    linear-gradient(90deg, rgba(5, 24, 64, 0.86) 0%, rgba(5, 24, 64, 0.62) 48%, rgba(5, 24, 64, 0.22) 100%),
+    var(--hero-lg, var(--hero-sm, var(--hero-img-default))) center 45% / cover no-repeat;
+}
+/* Content column mirrors the sections below exactly: .section pads 40px each side and
+   .section-inner caps at 1360px, so 1360 + 40 + 40 = 1440 here. Left edges line up. */
+.hero--full .hero-left {
+  background: transparent;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 88px 40px;
+}
+.hero--full .hero-right { display: none; }
+.hero--full .hero-eyebrow { color: #9cc4ff; }
+.hero--full h1 { color: var(--white); }
+.hero--full .hero-sub { color: rgba(255, 255, 255, 0.88); }
+.hero--full .hero-trust li { color: rgba(255, 255, 255, 0.92); }
+.hero--full .hero-trust li::before { color: #9cc4ff; }
+/* .btn-outline-white is blue-on-transparent by default (built for the white panel);
+   on the dark image it needs a white outline. */
+.hero--full .btn-outline-white { color: var(--white); border-color: var(--white); }
+.hero--full .btn-outline-white:hover { background: var(--white); color: var(--subaru-dark-blue); border-color: var(--white); }
+/* ≤1024px: stack instead of overlay — the photo becomes its own block on top and the
+   copy sits below on a solid navy panel. Text over a darkened photo does not read
+   well on a phone. The ::before pseudo-element is the photo block: .hero is a grid
+   container, so it takes row 1 and .hero-left drops to row 2 — no markup change.
+   The per-page --hero-img override still applies to it. */
+@media (max-width: 1024px) {
+  .hero.hero--full {
+    --hero-img-default: url("https://service.secureoffersites.com/images/GetLibraryImage?fileNameOrId=652578&Width=1200&Height=0&quality=82&type=webp");
+    min-height: auto;
+    background: var(--subaru-dark-blue);
+  }
+  .hero.hero--full::before {
+    content: "";
+    display: block;
+    height: min(62vw, 380px);
+    background: var(--hero-sm, var(--hero-lg, var(--hero-img-default))) center 45% / cover no-repeat;
+  }
+  .hero--full .hero-left { padding: 40px 20px 56px; }
+}
+
+/* Lease cards carry the official per-trim product shot (Scene7, 800x422, alpha).
+   .model-img is cover/320px, built for the photo cards below — that crops a wide
+   transparent product shot. Contain it and let the aspect ratio set the height. */
+.model-card--lease .model-img {
+  width: 75%;
+  height: auto;
+  aspect-ratio: 800 / 422;
+  object-fit: contain;
+  background: var(--white);
+  display: block;
+  margin: 20px auto 0;
+}
+
+/* Lineup cards carry the entry-trim product shot: same contain treatment as the
+   lease cards, since .new-model-card img is 4/3 cover and would crop a 1.90 shot. */
+.new-model-card--trim img {
+  height: auto;
+  aspect-ratio: 800 / 422;
+  object-fit: contain;
+  background: var(--white);
+}
+/* FAQ uses the native disclosure element. The markup previously called a JS toggle
+   function that was never shipped, so the accordion did nothing at all. These rules
+   mirror the .open styles onto [open] and hide the default marker. */
+details.faq-item > summary.faq-q { cursor: pointer; list-style: none; }
+details.faq-item > summary.faq-q::-webkit-details-marker { display: none; }
+details.faq-item > summary.faq-q::marker { content: ""; }
+details.faq-item[open] .faq-arrow { transform: rotate(180deg); }
+details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
+
+/* The inventory section (lineup + the text-only "handle the rest" block) declares
+   its own white ground instead of inheriting it. The base .section is transparent,
+   which shows whatever the host page paints behind the fragment — fine today
+   (fairfieldsubaru.com body is #fff) but not something a pasted-in fragment
+   should depend on. */
+.section--inventory { background: var(--white); }
+
+/* Lineup tiles: image as the tile background, an overlay over it, copy centred on
+   top, and the whole tile is one link. Replaces the image-above-text card. */
+.new-model-card--tile { border: none; border-radius: 8px; overflow: hidden; }
+.new-model-tile-link {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+}
+.new-model-tile-link img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--white);
+  aspect-ratio: auto;
+}
+.new-model-tile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 24, 64, 0.55);
+  transition: background 0.25s ease;
+}
+.new-model-tile-link:hover::after { background: rgba(5, 24, 64, 0.68); }
+.new-model-tile-body {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px;
+  text-align: center;
+}
+.new-model-card--tile .new-model-name { color: var(--white); }
+.new-model-card--tile .new-model-link { margin-top: 0; color: var(--white); }
+
+/* "Handle the rest" is a panel on the white inventory section, not a full-width
+   band: its own light ground separates it from the lineup tiles above, while the
+   rounded corners and the section padding keep it from merging into the grey
+   service section below. White cards also read better on grey than on white. */
+.inventory-block--panel {
+  background: var(--gray-100);
+  border-radius: 12px;
+  padding: 48px 40px;
+  margin-top: 56px;
+}
+@media (max-width: 640px) {
+  .inventory-block--panel { padding: 32px 20px; border-radius: 8px; }
+}
+
+/* Dealer credentials, merged in from the hero. Same tick list as .hero-trust but
+   scoped to a light section, so the type stays dark. */
+.section-trust {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 18px;
+  margin: 0 0 32px;
+  padding: 0;
+}
+.section-trust li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--subaru-black);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.section-trust li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--subaru-blue);
+  font-weight: 700;
+}
+@media (max-width: 640px) { .section-trust { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------
+   Specials slider (.section-specials / .spec-slider)
+   Added 2026-09-08. Dark offer band directly under the hero, laid out
+   after the offer banners on subaru.com: model line, "Lease for", the
+   payment as the dominant figure, then term and due-at-signing on one
+   rule, then the call to action.
+   Design-system notes — every value here comes from the stylesheet's own
+   tokens rather than a new one: the band is --black washed with
+   --subaru-blue (the same navy as .section-dark), cards take the 8px
+   radius used by .new-model-card--tile and .inventory-block--panel, and
+   the call to action is the stock square .btn-white, not a bespoke
+   button. Only the hover pair is overridden, because .btn-white:hover
+   drops to --subaru-dark-blue and would vanish against this band — the
+   same reason .hero--full overrides .btn-outline-white.
+   SEO / answer-engine note: every offer ships in the initial HTML
+   inside a native horizontal scroller. The companion script only adds
+   dots, arrows and rotation; with scripting off every offer is still
+   scrollable and still readable to crawlers, so nothing depends on JS.
+   ------------------------------------------------------------------ */
+.section-specials {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  /* Same navy as the page's own .section-dark band ("One True Price"), so the
+     offer band and that section read as one system. --black is the stylesheet's
+     own token (= --subaru-dark-blue, #051840).
+     Two other values were tried and dropped: #1d252c sampled from subaru.com's
+     offer banners, and the dealer's banner artwork (library id 792173) whose 4:1
+     shape will not sit in a 1.5:1 band. --subaru-offer-bg keeps the subaru.com
+     value on file. */
+  background: var(--black, #051840);
+  color: var(--white);
+}
+
+
+.section-specials .eyebrow { color: #9cc4ff; }
+.section-specials .section-h { color: var(--white); }
+.section-specials .section-p { color: rgba(255, 255, 255, 0.78); }
+
+.spec-slider { position: relative; margin: 26px 0 20px; }
+.spec-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.spec-track::-webkit-scrollbar { display: none; }
+
+.spec-slide {
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 26px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+/* Same small-caps label as .eyebrow, one scale step down for card level. */
+.spec-new {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.spec-model {
+  /* Two lines' worth of room on every card: the longest trim names wrap and the
+     rest do not, and without a floor the figure blocks below stop lining up
+     across the three visible slides. */
+  min-height: 2.4em;
+  margin: 0 0 4px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+}
+.spec-figure { margin: 6px 0 10px; text-align: center; }
+.spec-figure img {
+  display: inline-block;
+  width: 92%;
+  height: auto;
+  aspect-ratio: 800 / 422;
+  object-fit: contain;
+}
+.spec-lead {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+.spec-amount {
+  margin: 0;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+.spec-per {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.spec-terms {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+.spec-alt {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.62);
+}
+.spec-cta { margin: auto 0 0; }
+.section-specials .spec-cta .btn-white:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+/* Controls stay hidden until the script confirms it can drive the track. */
+.spec-controls { display: none; align-items: center; gap: 14px; margin-top: 6px; }
+.spec-slider.is-enhanced .spec-controls { display: flex; }
+.spec-dots { display: flex; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.spec-dot {
+  width: 9px; height: 9px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.34);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+.spec-dot[aria-current="true"] { background: #6cb0ff; transform: scale(1.4); }
+.spec-arrows { display: flex; gap: 8px; margin-left: auto; }
+.spec-arrow, .spec-play {
+  width: 38px; height: 38px; padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--white);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.spec-arrow:hover, .spec-play:hover { background: var(--white); color: var(--black); }
+.spec-arrow[disabled] { opacity: 0.3; cursor: default; }
+.spec-arrow[disabled]:hover { background: transparent; color: var(--white); }
+
+/* Consolidated fine print under the slider. Was four separate paragraphs at
+   13px, which took more vertical space than the disclosure warranted. One
+   block at 12px instead. Every legal sentence is verbatim — including
+   "Residential restrictions may apply", which is the dealer's own wording and
+   must not be reworded. */
+.spec-fine {
+  max-width: 1100px;
+  margin: 18px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.55);
+}
+.spec-fine a { color: #9cc4ff; }
+
+@media (max-width: 1024px) {
+  .spec-slide { flex-basis: calc((100% - 20px) / 2); }
+  .spec-amount { font-size: 46px; }
+}
+@media (max-width: 640px) {
+  .spec-slide { flex-basis: 86%; padding: 20px; }
+  .spec-amount { font-size: 42px; }
+  .spec-model { font-size: 19px; }
+  .spec-cta .btn-white { padding: 12px 24px; font-size: 15px; }
+}
+
+/* ------------------------------------------------------------------
+   FAQ — same disclosure pattern as the model x city pages, so both page
+   families look and behave identically: bordered list card, plain
+   summary text, plus sign that rotates into a minus when open.
+   Overrides the older disclosure rules that ship in the site stylesheet.
+   ------------------------------------------------------------------ */
+.model-faq__list {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #d8dde2;
+  border-radius: 8px;
+  background: var(--white);
+}
+.model-faq__list .faq-item { border-bottom: 1px solid #d8dde2; padding: 0; }
+.model-faq__list .faq-item:last-child { border-bottom: 0; }
+.model-faq__list .faq-item > summary {
+  min-height: 112px;
+  padding: 30px 64px 30px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  color: #202832;
+  cursor: pointer;
+  list-style: none;
+  font-size: clamp(20px, 1.65vw, 24px);
+  font-weight: 400;
+  line-height: 1.18;
+}
+.model-faq__list .faq-item > summary::-webkit-details-marker { display: none; }
+.model-faq__list .faq-item > summary::marker { content: ""; }
+.model-faq__list .faq-item > summary::after {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  background:
+    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 36px 5px no-repeat,
+    linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 5px 36px no-repeat;
+  content: "";
+  transition: transform 180ms ease;
+}
+.model-faq__list .faq-item[open] > summary::after { transform: rotate(45deg); }
+.model-faq__list .faq-item__answer {
+  max-height: none;
+  padding: 0 130px 34px 48px;
+  color: #5c6369;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.model-faq__list .faq-item__answer p { max-width: 820px; margin: 0; }
+@media (max-width: 640px) {
+  .model-faq__list .faq-item > summary { min-height: 0; padding: 22px 20px; gap: 18px; font-size: 18px; }
+  .model-faq__list .faq-item > summary::after { width: 24px; height: 24px;
+    background:
+      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 24px 4px no-repeat,
+      linear-gradient(var(--subaru-blue), var(--subaru-blue)) center / 4px 24px no-repeat; }
+  .model-faq__list .faq-item__answer { padding: 0 20px 24px; font-size: 15px; }
+}
+
+/* ------------------------------------------------------------------
+   Service panel actions as buttons
+   Added 2026-09-08. The two actions were plain bold text on the blue
+   panel and did not read as clickable. They now carry the same button
+   metrics as .btn-white / .btn-outline-white (14px 36px, 16px/700,
+   0.5px tracking, square, 2px border) with the fill inverted, because
+   the stock pair is blue-on-white and this panel is already Subaru
+   blue — the same reason .hero--full restyles .btn-outline-white.
+   ------------------------------------------------------------------ */
+.service-showcase-actions {
+  gap: 14px;
+  align-items: center;
+}
+.service-showcase-link {
+  padding: 14px 36px;
+  border: 2px solid var(--white);
+  background: var(--white);
+  color: var(--subaru-blue);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.service-showcase-link:hover {
+  background: transparent;
+  color: var(--white);
+}
+.service-showcase-link-secondary {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.service-showcase-link-secondary:hover {
+  background: var(--white);
+  color: var(--subaru-blue);
+  border-color: var(--white);
+}
+@media (max-width: 640px) {
+  .service-showcase-link { padding: 12px 24px; font-size: 15px; }
+}
+
+/* ------------------------------------------------------------------
+   .sr-only — off-canvas but still rendered
+   The five dealer city pages hide their H1: the offer slider is the top
+   of the page. Clip-rect rather than display:none, so the heading is
+   still rendered, still announced by screen readers, and still weighted
+   by crawlers — display:none text is dropped outright.
+   ------------------------------------------------------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------------
+   Collapsed legal disclaimer under the offer slider
+   Added 2026-09-08, following the "Disclosure" link on subaru.com's own
+   offer banners. Only the legal boilerplate folds away; the offer terms,
+   the live-specials pointer and the freshness line stay visible in
+   .spec-fine above, because those are what a shopper actually acts on.
+   Native details/summary, same as the FAQ — the text ships in the HTML
+   and stays indexable whether or not it is open, and it needs no script.
+   Scoped selectors so the .faq-item rules do not reach it.
+   ------------------------------------------------------------------ */
+.spec-disclaimer {
+  max-width: 1100px;
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+}
+.spec-disclaimer > summary {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.spec-disclaimer > summary::-webkit-details-marker { display: none; }
+.spec-disclaimer > summary::marker { content: ""; }
+.spec-disclaimer > summary::after {
+  content: " +";
+  display: inline-block;
+  text-decoration: none;
+}
+.spec-disclaimer[open] > summary::after { content: " \2212"; }
+.spec-disclaimer > summary:hover { color: var(--white); }
+.spec-disclaimer p { margin: 8px 0 0; }
+
+/* ------------------------------------------------------------------
+   Visible H1 at the top of the offer band
+   Unhidden 2026-09-08 to look at. The heading lives inside
+   .section-inner so it picks up the band's padding and dark ground —
+   outside the section it would render unstyled on the page default.
+   Sized below .section-h because the copy is a full sentence, written
+   when the heading was hidden.
+   To hide it again: put `sr-only` back on the h1 class and move it
+   above the section. Nothing else needs to change.
+   ------------------------------------------------------------------ */
+.section-specials h1 {
+  max-width: 1000px;
+  margin: 0 0 26px;
+  color: var(--white);
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* "Plus tax and license." and the Model #/VIN line, both of which the live
+   specials card shows and this card was missing. The qualifier belongs next to
+   the payment figures, not only inside the collapsed disclaimer. Model number
+   and VIN are read out of the card's own image URL and detail link, so they
+   cannot drift from the offer they sit under. */
+/* "Plus tax and license." now rides on the term line as a quiet qualifier, and
+   the due-at-signing figure gets its own line below. Inline, so it drops the
+   term line's uppercase and tracking — a qualifier set in bold caps competes
+   with the figures it is qualifying. */
+.spec-plus {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+}
+.spec-das {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+.spec-ids {
+  margin: 4px 0 16px;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.45);
+  overflow-wrap: anywhere;
+}
+
+/* Full price breakdown, as the live specials card shows it: MSRP, the dealer
+   discount where there is one, then the final price. The card previously
+   showed only the final price, which hid the discount — the actual selling
+   point — and disagreed with the model x city pages, which always showed all
+   three. Rows are omitted, never zero-filled: five of the eight offers have no
+   dealer discount, and inventing a "-$0" line would misrepresent them. */
+.spec-price {
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 12px;
+}
+.spec-price > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 2px 0;
+}
+/* Labels are the dealer's own, verbatim: "Total Suggested Retail Price",
+   "Dealer Discount", "Your Price" / "Buy For". The long one is 28 characters in
+   a third-width card, so it is allowed to wrap while the figure stays put on
+   the first line. */
+.spec-price dt { color: rgba(255, 255, 255, 0.6); flex: 1 1 auto; min-width: 0; }
+.spec-price dd { flex: 0 0 auto; }
+.spec-price dd { margin: 0; color: rgba(255, 255, 255, 0.82); font-variant-numeric: tabular-nums; }
+/* The discount is the selling point, so it is set at the same weight as the
+   final price rather than at label size. Colour, not size, keeps the two
+   apart: green for what comes off, white for what is left. */
+.spec-price .spec-price__off { color: #7ec9a0; font-size: 16px; font-weight: 700; }
+.spec-price .spec-price__now { color: var(--white); font-size: 15px; font-weight: 700; }
+.spec-price > div:last-child { margin-top: 2px; }
