@@ -1,11 +1,10 @@
 /* huntingtonbeachford-dealer-city.css
    Huntington Beach Ford — dealer / location pages (Orange County and the other 21).
-   Served from this repo via jsDelivr, which returns text/css:
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ntddigital/dealer-model-page@main/huntingtonbeachford-dealer-city.css">
-   Do NOT use raw.githubusercontent.com — it returns text/plain and browsers refuse it.
-   jsDelivr caches @main for up to 7 days; after a push, purge with
-     https://purge.jsdelivr.net/gh/ntddigital/dealer-model-page@main/huntingtonbeachford-dealer-city.css
-   Source of truth: Ntddigital-GEO/HB-Ford/dealer-pages/_ford-dealer-pages.css */
+   Lives in github.com/ntddigital/dealer-model-page and is served by Cloudflare Pages:
+     <link rel="stylesheet" href="https://dealer-model-page.pages.dev/huntingtonbeachford-dealer-city.css">
+   Pages redeploys on push, so there is no cache to purge by hand.
+   Source of truth: Ntddigital-GEO/HB-Ford/dealer-pages/_ford-dealer-pages.css — edit there,
+   copy here, push. */
 
 /* ============================================================================
    _ford-dealer-pages.css — Ford-styled CSS for Huntington Beach Ford dealer pages
@@ -88,7 +87,8 @@
 /* One width for every section, matching the homepage strips (.container-fluid = viewport minus
    a 50px gutter each side; 1340 at 1440). The hero rail uses the same 50px so all edges align. */
 .hbf-inner { max-width: none; margin: 0 auto; padding: 0 50px; }
-@media (max-width: 860px) { .hbf-inner { padding: 0 20px; } }
+@media (max-width: 1100px) { .hbf-inner { padding: 0 30px; } }
+@media (max-width: 640px)  { .hbf-inner { padding: 0 20px; } }
 
 .hbf-eyebrow {
   font-family: var(--f-cond);
@@ -102,8 +102,6 @@
   letter-spacing: -.02em; color: var(--ford-blue); margin: 0 0 14px;
 }
 .hbf-section--navy .hbf-h1 { color: #fff; }
-/* Requested: banner sits flush at the top like the homepage; H1 kept in the DOM for SEO. */
-.hbf-h1--hidden { display: none; }
 
 .hbf-h2 {
   font-family: var(--f-bold); font-weight: normal;
@@ -126,7 +124,9 @@
 .hbf-here__inner > .hbf-p { text-align: center; }
 .hbf-section > .hbf-inner > .hbf-p,
 .hbf-here__inner > .hbf-p { margin-left: auto; margin-right: auto; }
-.hbf-section .hbf-h2, .hbf-cta .hbf-h2 { max-width: 800px; margin-left: auto; margin-right: auto; }
+.hbf-section .hbf-h2, .hbf-cta .hbf-h2,
+.hbf-section > .hbf-inner > .hbf-p, .hbf-here__inner > .hbf-p,
+.hbf-lineup__sub, .hbf-cta .hbf-p { max-width: 800px; margin-left: auto; margin-right: auto; }
 .hbf-section .hbf-btns { justify-content: center; }
 .hbf-trust { justify-content: center; }
 .hbf-faq { margin-left: auto; margin-right: auto; }
@@ -201,14 +201,17 @@
 .hbf-slide {
   position: relative;
   display: grid; grid-template-columns: 48fr 52fr; align-items: stretch;
-  aspect-ratio: 3.2 / 1; min-height: 0;   /* the dealer's banners are 2000×619 */
+  /* The dealer's banners are 2000×619 (3.2:1). A hard aspect-ratio clipped the offer
+     panel on tablets, so 3.2:1 is a FLOOR, not a cap — the slide grows when the panel
+     needs more room. */
+  min-height: min(31.25vw, 560px);
   /* Ford palette instead of a flat white panel: warm coast light on the car side
      fading into a pale Ford-blue sky on the offer side. */
   background: linear-gradient(100deg, #f3e4d3 0%, #f6e9db 40%, #e8edf5 100%);
   color: var(--ink);
 }
-.hbf-slide__media { position: relative; z-index: 1; padding: 18px 40px 18px 100px; display: flex; align-items: flex-end; min-height: 0; }
-.hbf-slide__media img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; object-position: left bottom; }
+.hbf-slide__media { position: relative; z-index: 1; padding: 16px 16px 16px 56px; display: flex; align-items: flex-end; min-height: 0; }
+.hbf-slide__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
 
 .hbf-slide__panel {
   position: relative; z-index: 2;
@@ -251,6 +254,15 @@
 .hbf-slide__btn:hover, .hbf-slide__btn:focus-visible { background: #0562d2; border-color: #0562d2; color: #fff; }
 .hbf-slide__avail { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #fff; }
 .hbf-slide__avail svg { color: #7fb4ff; flex: 0 0 auto; }
+
+/* Expiry sits on the card, not only inside the collapsed disclaimer — it is the one
+   figure that makes the offer act-now, and the dealer's own specials page prints it. */
+.hbf-slide__expires {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 6px;
+  font-family: var(--f-small); font-size: 12.5px; letter-spacing: 0;
+  color: rgba(255, 255, 255, .7);
+}
+.hbf-slide__expires svg { flex: 0 0 auto; width: 13px; height: 13px; color: rgba(255, 255, 255, .55); }
 
 .hbf-slide__more { margin: 0 0 6px; }
 .hbf-slide__more a { font-family: var(--f-small); font-size: 13px; color: #9cc6ff; text-decoration: none; }
@@ -318,7 +330,7 @@
     content: "Swipe for all 5 lease specials \2192";
     font-family: var(--f-small); font-size: 13px; color: var(--mute);
   }
-  .hbf-slide { grid-template-columns: 1fr; aspect-ratio: auto; overflow: hidden; }
+  .hbf-slide { grid-template-columns: 1fr; min-height: 0; overflow: hidden; }
   .hbf-slide__media { padding: 22px 22px 0; align-self: auto; }
   .hbf-slide__panel { clip-path: none; padding: 22px 22px 24px; }
   .hbf-slide__model { font-size: 40px; }
@@ -331,7 +343,11 @@
 
 /* ── cards ───────────────────────────────────────────────────────────────── */
 
-.hbf-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); }
+/* Explicit column counts rather than auto-fit: auto-fit dropped to 3 columns on tablets
+   and left the 4th card orphaned on its own row. 4 → 2 → 1 always divides evenly. */
+.hbf-grid { display: grid; gap: 28px 24px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .hbf-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px)  { .hbf-grid { grid-template-columns: 1fr; } }
 
 .hbf-card {
   background: #fff; border: 1px solid var(--line);
@@ -341,14 +357,14 @@
 .hbf-card p:last-child { margin-bottom: 0; }
 .hbf-card__more { margin-top: 14px; }
 
-/* Borderless variant with a line icon — hand-drawn inline SVG rather than an icon
-   font or a stock download: no licence to track, no extra request, and the stroke
-   inherits Ford Blue via currentColor. */
+/* Borderless variant with a line icon. Icons are inline SVG so there is no icon font and
+   no extra request; the stroke follows currentColor. The handshake is Lucide v1.47.0
+   (ISC licence, lucide.dev); the rest are drawn to match its 24x24 / round-cap style. */
 .hbf-card--plain { background: none; border: 0; padding: 4px 0 0; text-align: center; }
 .hbf-card--plain .hbf-h3, .hbf-card--plain p { text-align: center; }
 .hbf-card--plain .hbf-card__more { margin-top: 12px; }
-.hbf-card__icon { display: block; color: var(--ford-accent); margin: 0 0 18px; }
-.hbf-card__icon svg { display: block; margin: 0 auto; width: 150px; height: 150px; max-width: 100%; }
+.hbf-card__icon { display: block; color: #8a9199; margin: 0 0 16px; }
+.hbf-card__icon svg { display: block; margin: 0 auto; width: 64px; height: 64px; max-width: 100%; }
 
 .hbf-trust { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0 0 26px; }
 .hbf-trust li {
@@ -365,6 +381,9 @@
   color: #fff; text-decoration: none; background: var(--ford-blue);
 }
 .hbf-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease, filter .3s ease; }
+/* The evergreen banner is a finished 4:3 creative with its own headline and button, so it is
+   fitted whole rather than cropped to 16:9 like the photographic tiles. */
+.hbf-tile__img--banner { object-fit: contain; background: #eef1f5; }
 .hbf-tile__bar {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -382,7 +401,7 @@
 .hbf-tile:hover img, .hbf-tile:focus-visible img { transform: scale(1.04); }
 .hbf-tile:hover .hbf-tile__desc, .hbf-tile:focus-visible .hbf-tile__desc { opacity: 1; transform: none; }
 .hbf-tile:hover .hbf-tile__bar, .hbf-tile:focus-visible .hbf-tile__bar { background: var(--ford-blue); }
-@media (max-width: 560px)  { .hbf-tiles { grid-template-columns: 1fr; } .hbf-tile { aspect-ratio: 16 / 10; } }
+@media (max-width: 640px)  { .hbf-tiles { grid-template-columns: 1fr; } .hbf-tile { aspect-ratio: 16 / 10; } }
 @media (hover: none) {
   .hbf-here { background-attachment: scroll; }
   /* Touch screens have no hover: keep the description readable below the bar instead of hidden. */
@@ -410,7 +429,7 @@
 .hbf-here__inner { position: relative; z-index: 2; }
 /* Keep all copy in the left half so the car on the right stays visible; the map
    drops under the cards instead of sitting on top of the photo. */
-.hbf-here .hbf-p { max-width: 70ch; }
+
 .hbf-here .hbf-loc { grid-template-columns: 1fr 2fr; gap: 40px; align-items: stretch; margin-top: 8px; }
 .hbf-here .hbf-map { position: relative; display: flex; flex-direction: column; }
 /* CTA floats over the map's top-right corner instead of taking a row below it. */
@@ -431,7 +450,7 @@
 .hbf-here .hbf-map__cta { background: none; padding: 14px 0 0; text-align: left; }
 .hbf-here .hbf-map__cta .hbf-btn--primary { background: #fff; color: var(--ford-blue); border-color: #fff; }
 .hbf-here .hbf-map__cta .hbf-btn--primary:hover { background: var(--ford-accent); border-color: var(--ford-accent); color: #fff; }
-@media (max-width: 860px) {
+@media (max-width: 1100px) {
   .hbf-here { padding: 48px 0 44px; background-attachment: scroll; background-position: 70% 50%; }
   .hbf-here .hbf-loc { grid-template-columns: 1fr; }
   .hbf-here .hbf-map__cta { position: static; padding: 14px 0 0; text-align: center; }
@@ -441,7 +460,7 @@
 /* ── location ────────────────────────────────────────────────────────────── */
 
 .hbf-loc { display: grid; gap: 20px; grid-template-columns: 1fr; }
-@media (min-width: 900px) { .hbf-loc { grid-template-columns: 1fr 1.05fr; } }
+@media (min-width: 1101px) { .hbf-loc { grid-template-columns: 1fr 1.05fr; } }
 .hbf-map { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
 .hbf-map iframe { display: block; width: 100%; height: 340px; border: 0; }
 .hbf-map__cta { padding: 16px; text-align: center; }
@@ -477,7 +496,7 @@
 .hbf-tabpanel__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin: 0 0 22px; font-size: 15px; }
 .hbf-tabpanel__links a { color: var(--ford-accent); text-decoration: none; border-bottom: 0; }
 .hbf-tabpanel__links a:hover, .hbf-tabpanel__links a:focus-visible { color: var(--ford-blue); text-decoration: underline; }
-@media (max-width: 860px) {
+@media (max-width: 1100px) {
   .hbf-tabs__bar { flex-wrap: wrap; }
   .hbf-tab { padding: 10px 14px; font-size: 15px; }
   .hbf-lineup-row { flex-wrap: wrap; padding: 0; gap: 18px 12px; }
@@ -488,7 +507,7 @@
 
 .hbf-lineup-sec { background: #eeeff1; padding: 48px 0 52px; }
 .hbf-lineup__h { text-align: center; color: #333; font-family: var(--f-light); font-size: clamp(28px, 3.4vw, 46px); margin: 0 0 8px; letter-spacing: -.01em; }
-.hbf-lineup__sub { text-align: center; max-width: none; color: #6b7280; font-size: 17px; margin: 0 0 28px; }
+.hbf-lineup__sub { text-align: center; color: #6b7280; font-size: 17px; margin: 0 auto 28px; }
 
 .hbf-lineup { position: relative; margin: 0 0 30px; padding: 0 64px; }
 /* position:fixed, not absolute: clicking a <label> focuses its radio, and the browser
@@ -543,14 +562,14 @@
 .hbf-btn--block { border-radius: 0; background: #1c7ec2; border-color: #1c7ec2; color: #fff; padding: 16px 48px; font-family: var(--f-body); font-size: 18px; letter-spacing: 0; }
 .hbf-btn--block:hover, .hbf-btn--block:focus-visible { background: var(--ford-blue); border-color: var(--ford-blue); color: #fff; }
 
-@media (max-width: 860px) {
-  /* Phone: native swipe instead of paging. */
+@media (max-width: 1100px) {
+  /* Tablet and phone: native swipe instead of 5-across paging. */
   .hbf-lineup { padding: 0; }
   .hbf-lineup__viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .hbf-lineup__viewport::-webkit-scrollbar { display: none; }
   .hbf-lineup__track { width: auto; transform: none !important; transition: none; gap: 12px; padding: 0 16px; }
   .hbf-lineup-page { flex: 0 0 auto; display: contents; }
-  .hbf-model { flex: 0 0 42vw; scroll-snap-align: start; }
+  .hbf-model { flex: 0 0 clamp(150px, 26vw, 230px); scroll-snap-align: start; }
   .hbf-model__name { font-size: 15px; }
   .hbf-lineup__nav, .hbf-lineup__dots { display: none; }
 }
@@ -594,7 +613,8 @@
 .hbf-citylinks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 0; }
 .hbf-citylinks a { color: #9cc6ff; text-decoration: none; border-bottom: 0; font-size: 15px; }
 .hbf-citylinks a:hover, .hbf-citylinks a:focus-visible { color: #fff; text-decoration: underline; }
-@media (max-width: 860px) { .hbf-svc { grid-template-columns: 1fr; } .hbf-svc__list { columns: 1; } }
+@media (max-width: 1100px) { .hbf-svc { grid-template-columns: 1fr; } }
+@media (max-width: 700px)  { .hbf-svc__list { columns: 1; } }
 
 /* ── FAQ ─────────────────────────────────────────────────────────────────── */
 
