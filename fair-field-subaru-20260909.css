@@ -2228,3 +2228,26 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
 @media (max-width: 1200px) { .lineup-item { flex-basis: calc((100% - 72px) / 4); } }
 @media (max-width: 1024px) { .lineup-item { flex-basis: calc((100% - 48px) / 3); } }
 @media (max-width: 640px)  { .lineup-item { flex-basis: calc((100% - 24px) / 2); } }
+
+.spec-offer-disclosure {
+  margin: 12px 0 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.spec-offer-disclosure > summary {
+  width: fit-content;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.spec-offer-disclosure > summary::-webkit-details-marker { display: none; }
+.spec-offer-disclosure > summary::marker { content: ""; }
+.spec-offer-disclosure > summary::after { content: " +"; }
+.spec-offer-disclosure[open] > summary::after { content: " -"; }
+.spec-offer-disclosure p { margin: 9px 0 0; }
