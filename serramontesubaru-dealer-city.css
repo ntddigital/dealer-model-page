@@ -945,27 +945,25 @@
 }
 
 /* ===========================================================================
-   13. Hero specials 滑軌 + 優惠磁磚（純 CSS，2026-09-18）
+   13. Hero specials 滑軌（純 CSS，2026-09-18 定稿）
+   每張 slide 就是原本的 hero 版式（.model-hero__inner：深底、文案在左、
+   兩個大數字、車子去背圖在右），一屏一條，八條靠 scroll-snap 橫向滑動。
 
-   為什麼不用 JS：這些頁面貼進 CKEditor 4，<script> 會被過濾；radio/:checked
-   那套要空的 <input>，同樣會被清掉（見 §4 的圓點註記）。所以用 scroll-snap
-   加錨點連結 —— 觸控滑動、觸控板、鍵盤都能用，零腳本、零空元素，八條優惠
-   全部留在 DOM 裡可被爬取。
-
-   磁磚版式還原 9/10 那封 email 創意：淺底、文案在左、車子去背圖在右、
-   紅色手寫標籤、底部細則橫條。背景用對應車型的 exterior PNG。
+   為什麼不用 JS：頁面貼進 CKEditor 4，<script> 會被過濾；radio/:checked
+   需要的空 <input> 也會被清掉（見 §4）。scroll-snap + 錨點跳轉列零腳本、
+   零空元素，八條內容全部留在 DOM 裡可被爬取。
    ======================================================================== */
 .hero-rail { position: relative; }
 
 .hero-rail__track {
   display: flex;
-  gap: 16px;
+  gap: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 14px;
+  padding-bottom: 12px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.12);
 }
@@ -980,128 +978,44 @@
   border-radius: 99px;
 }
 
-/* ---- 優惠磁磚 ---- */
-/* 一屏一條：每張優惠獨佔整個滑軌寬度（原本 470px 並排是誤解需求）。 */
-.offer-tile {
+.hero-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: 8px;
-  background: var(--paper);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 0;
 }
 
-/* 車子去背圖當背景，靠右下；左側留給文案。
-   --offer-car 由每張磁磚的 inline style 指定，換車型不必動樣式表。 */
-.offer-tile__body {
-  position: relative;
-  flex: 1;
-  padding: clamp(24px, 3.4vw, 46px) clamp(22px, 4vw, 56px) clamp(22px, 3vw, 38px);
-  min-height: clamp(300px, 34vw, 440px);
-  background-color: #eef1f4;
-  background-image:
-    linear-gradient(100deg, #ffffff 0%, #ffffff 40%, rgba(255, 255, 255, 0.2) 58%, rgba(255, 255, 255, 0) 70%),
-    var(--offer-car, none);
-  background-repeat: no-repeat, no-repeat;
-  background-position: left center, right 1% center;
-  background-size: auto, 54% auto;
+/* slide 內沿用 hero 的兩欄，但寬度交給滑軌，不再套 --shell */
+.hero-slide .model-hero__inner {
+  width: 100%;
+  min-height: clamp(300px, 26vw, 400px);
 }
 
-.offer-tile__eyebrow {
-  position: relative;
-  margin: 0 0 3px;
-  font-size: clamp(11px, 1.1vw, 13px);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray-600);
+/* 車型名沿用鍍鉻字標；在 slide 裡是 h3（頁面 H1 在滑軌上方） */
+.hero-slide .model-hero__wordmark {
+  font-size: clamp(22px, 2.6vw, 34px);
 }
 
-.offer-tile__model {
-  position: relative;
-  margin: 0;
-  font-size: clamp(34px, 5.2vw, 62px);
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.offer-tile__trim {
-  position: relative;
-  margin: 4px 0 0;
-  font-size: clamp(11px, 1.05vw, 13px);
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--gray-600);
-}
-
-/* 原創意用紅色手寫體；系統字庫沒有對應字體，用斜體 + 紅色近似。 */
-.offer-tile__tag {
-  position: relative;
-  margin: 9px 0 0;
-  font-size: clamp(16px, 1.9vw, 23px);
-  font-weight: 700;
+.hero-slide .model-hero__eyebrow em {
   font-style: italic;
-  color: #c8102e;
-}
-
-.offer-tile__from {
-  position: relative;
-  margin: clamp(16px, 2.2vw, 26px) 0 0;
-  font-size: clamp(14px, 1.3vw, 17px);
   font-weight: 700;
-  color: var(--ink);
+  color: #ff8a9a;          /* 紅色標籤在深底上的可讀版 */
 }
 
-.offer-tile__price {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  gap: 3px;
-  margin: 0;
+.hero-slide .model-hero__specials-terms {
+  max-width: 44ch;
+  font-size: clamp(13.5px, 1.15vw, 15.5px);
 }
 
-.offer-tile__figure {
-  font-size: clamp(52px, 7.4vw, 88px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--ink);
+/* :target 標示目前這張 */
+.hero-slide:target .model-hero__inner {
+  outline: 2px solid rgba(156, 195, 255, 0.55);
+  outline-offset: -2px;
+  border-radius: 8px;
 }
 
-.offer-tile__mo { font-size: clamp(17px, 1.7vw, 22px); font-weight: 600; color: var(--ink); }
-
-.offer-tile__tax {
-  position: relative;
-  margin: 2px 0 0;
-  font-size: clamp(13px, 1.2vw, 16px);
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.offer-tile__cta { position: relative; margin: 14px 0 0; }
-
-/* ---- 底部細則橫條（照原創意逐字排版） ---- */
-.offer-tile__fine {
-  margin: 0;
-  padding: 11px 18px;
-  background: #e3e7ee;
-  color: #1c2b4a;
-  font-size: clamp(11.5px, 1.05vw, 13.5px);
-  font-weight: 700;
-  line-height: 1.45;
-  text-align: center;
-}
-
-/* ---- 跳轉列：取代匿名圓點，帶車型與月付，對使用者和搜尋引擎都更有用，
-        而且不必用 JS 維護 active 狀態 ---- */
+/* 跳轉列：帶車型與月付，不用 JS 維護 active 狀態 */
 .hero-rail__jump {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
   display: flex;
@@ -1131,37 +1045,27 @@
   outline-offset: 2px;
 }
 
-/* :target 是純 CSS 能表達「目前這張」的唯一手段 */
-.offer-tile:target {
-  border-color: #9cc3ff;
-  box-shadow: 0 0 0 3px rgba(156, 195, 255, 0.55);
-}
-
 .hero-rail__hint {
   margin: 10px 0 0;
   font-size: 12.5px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-@media (max-width: 680px) {
-  .offer-tile__body {
-    min-height: 260px;
-    background-image:
-      linear-gradient(170deg, #ffffff 0%, #ffffff 54%, rgba(255, 255, 255, 0.35) 78%, rgba(255, 255, 255, 0) 94%),
-      var(--offer-car, none);
-    background-position: left center, right -8% bottom 6%;
-    background-size: auto, 104% auto;
+/* §11 在 1040px 以下把 hero 切成單欄（車圖在上、文案在下），對「一屏一條」
+   的 slide 來說太早：1024px 的平板/小筆電上車圖會佈滿整寬、文字被推到底。
+   slide 內在 761px 以上維持兩欄；.hero-slide 前綴 (0,2,0) 壓過 §11 的
+   .model-hero__inner (0,1,0)。 */
+@media (min-width: 761px) and (max-width: 1040px) {
+  .hero-slide .model-hero__inner {
+    grid-template-columns: minmax(240px, 40%) 1fr;
+    min-height: 300px;
   }
+  .hero-slide .model-hero__media { order: 0; }
+  .hero-slide .model-hero__media img { transform: scale(1.04); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-rail__track { scroll-behavior: auto; }
-}
-
-/* 滑軌上方的導語是頁面級引文，不是車型面板的說明，放寬到正常段落寬度。
-   （.model-hero__specials-terms 的 36ch 是給單車型 hero 用的） */
-.model-hero .dc-shell > .model-hero__specials-terms {
-  max-width: 76ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -1275,3 +1179,99 @@
 }
 
 .dealer-city-page .lineup-card__links a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------------------
+   16. 特色卡（圖在上、文在下、標題 H2），2026-09-18
+   參考 subaru.com 首頁那組「Love Promise Retailer of the Year / Limited-time
+   offers」卡片：白卡、上方景觀圖、下方粗體標題 + 說明 + 藍色文字連結。
+   取代原本 .why-card / .route-section__copy 的純文字兩欄。
+
+   __media 是選用的 —— 還沒拿到合適照片的卡片可以先不放圖，版式依然成立。
+   ------------------------------------------------------------------------ */
+.dc-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(22px, 3vw, 34px);
+}
+
+.dc-feature {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.dc-feature__media {
+  background: var(--gray-100);
+}
+
+.dc-feature__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.dc-feature__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(20px, 2.4vw, 30px) clamp(20px, 2.4vw, 32px) clamp(22px, 2.6vw, 30px);
+}
+
+.dc-feature__title {
+  margin: 0 0 14px;
+  font-size: clamp(20px, 2.1vw, 26px);
+  font-weight: 700;
+  line-height: 1.22;
+  color: var(--ink);
+}
+
+.dc-feature__body p {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.dc-feature__list {
+  margin: 0 0 14px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.dc-feature__list li { margin-bottom: 6px; }
+
+.dc-feature__links {
+  margin: auto 0 0;
+  padding-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 15px;
+}
+
+.dealer-city-page .dc-feature__links a {
+  color: var(--subaru-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dealer-city-page .dc-feature__links a:hover { text-decoration: underline; }
+
+/* 深色帶裡的特色卡（服務區）走反色 */
+.dc-section--navy .dc-feature {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.dc-section--navy .dc-feature__title { color: var(--white); }
+.dc-section--navy .dc-feature__body p,
+.dc-section--navy .dc-feature__list { color: rgba(255, 255, 255, 0.84); }
+.dc-section--navy .dc-feature__media { background: rgba(255, 255, 255, 0.1); }
