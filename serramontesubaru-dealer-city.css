@@ -1275,3 +1275,110 @@
 .dc-section--navy .dc-feature__body p,
 .dc-section--navy .dc-feature__list { color: rgba(255, 255, 255, 0.84); }
 .dc-section--navy .dc-feature__media { background: rgba(255, 255, 255, 0.1); }
+
+/* ---------------------------------------------------------------------------
+   17. 車系輪播（純 CSS，2026-09-18 定稿）
+   參考 subaru.com 的車系版式，驅動方式抄 huntingtonbeachford-dealer-city 的
+   hbf-rail：隱藏 radio + <label for> 當箭頭，用 :checked ~ 平移軌道。
+
+   為什麼不是錨點連結：實測過 scroll-snap + <a href="#page-2"> 這條路，
+   瀏覽器對「嵌套滾動容器內錨點的橫向分量」處理不可靠 —— mandatory /
+   proximity / none 三種吸附模式下橫向都不動，而且錨點還會順帶把整頁往下
+   對齊（量到 480px 的跳動）。radio 方案沒有導航行為，兩個問題都不存在。
+
+   選擇器用 :nth-of-type 而不是 id，這樣同一份樣式表可以服務多個城市頁
+   （每頁的 radio id 各自不同）。
+   ------------------------------------------------------------------------ */
+.lineup-rail {
+  position: relative;
+  padding-inline: clamp(0px, 3vw, 52px);
+}
+
+/* 不用 display:none —— 部分瀏覽器會讓它退出焦點序列，鍵盤就切不了頁 */
+.lineup-rail__radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lineup-rail__viewport { overflow: hidden; }
+
+.lineup-rail__track {
+  display: flex;
+  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.lineup-page {
+  flex: 0 0 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.lineup-rail__radio:nth-of-type(1):checked ~ .lineup-rail__viewport .lineup-rail__track {
+  transform: translateX(0);
+}
+
+.lineup-rail__radio:nth-of-type(2):checked ~ .lineup-rail__viewport .lineup-rail__track {
+  transform: translateX(-100%);
+}
+
+/* 箭頭：每個分頁狀態只露出屬於它的那一對 */
+.lineup-rail__arrow {
+  position: absolute;
+  top: 38%;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gray-400);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--gray-600);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lineup-rail__arrow:hover { border-color: var(--ink); color: var(--ink); }
+.lineup-rail__arrow--prev { left: 0; }
+.lineup-rail__arrow--next { right: 0; }
+
+.lineup-rail__radio:nth-of-type(1):checked ~ .lineup-rail__nav .lineup-rail__on-1,
+.lineup-rail__radio:nth-of-type(2):checked ~ .lineup-rail__nav .lineup-rail__on-2 {
+  display: flex;
+}
+
+/* 鍵盤焦點落在 radio 上，把焦點圈畫到對應的箭頭上 */
+.lineup-rail__radio:focus-visible ~ .lineup-rail__nav .lineup-rail__arrow {
+  outline: 3px solid var(--subaru-blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  /* 手機端交回原生橫向滑動：分頁溶掉、軌道不再平移 */
+  .lineup-rail { padding-inline: 0; }
+  .lineup-rail__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .lineup-rail__viewport::-webkit-scrollbar { display: none; }
+  .lineup-rail__track { gap: 14px; transform: none !important; transition: none; }
+  .lineup-page { display: contents; }
+  .lineup-rail .lineup-card {
+    flex: 0 0 min(78%, 320px);
+    scroll-snap-align: center;
+  }
+  .lineup-rail__nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lineup-rail__track { transition: none; }
+}
