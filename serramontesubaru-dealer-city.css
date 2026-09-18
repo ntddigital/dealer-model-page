@@ -160,6 +160,17 @@
   color: transparent;
 }
 
+/* 文字型標題（landing 頁 H1 是「Subaru Dealer near {City}」這種長句，
+   不是車型名），用正常標題樣式；__wordmark 留給單一車型名。 */
+.model-hero__title {
+  margin: 0 0 clamp(12px, 2vw, 18px);
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
 .model-hero__specials {
   display: flex;
   align-items: flex-start;
@@ -412,84 +423,6 @@
 
 .special-card__actions {
   margin-top: auto;
-}
-
-/* ---------------------------------------------------------------------------
-   7. 車系卡（dealer-city 專屬：一個城市 × 多車型）
-   ------------------------------------------------------------------------ */
-.model-lineup {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.lineup-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-}
-
-.lineup-card__media {
-  background: var(--black);
-  padding: 10px 8px 0;
-}
-
-.lineup-card__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.lineup-card__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 16px 18px 18px;
-}
-
-.lineup-card__name {
-  margin: 0 0 4px;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.lineup-card__lede {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.lineup-card__trims {
-  margin: 0 0 14px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.lineup-card__trims strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.lineup-card__links {
-  margin: auto 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  font-size: 14.5px;
-}
-
-.lineup-card__links a {
-  color: var(--subaru-blue);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.lineup-card__links a:hover {
-  text-decoration: underline;
 }
 
 /* ---------------------------------------------------------------------------
@@ -753,3 +686,592 @@
     animation: none !important;
   }
 }
+
+/* ===========================================================================
+   12. Landing-page 級板塊（2026-09-18 追加）
+   參考 huntingtonbeachford-dealer-city.css / orange-county.html 的做法：
+   城市頁不只是路線頁，而是「優惠 → 車系 → 位置地圖 → 為什麼選我們 → 服務 →
+   金融 → FAQ → CTA」的全漏斗長頁。以下是 §1–11 沒有的組件。
+   ======================================================================== */
+
+/* ---- 資質徽章列 ---- */
+.dc-trust {
+  margin: 0 0 clamp(20px, 3vw, 28px);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.dc-trust li {
+  padding: 7px 14px;
+  border: 1px solid currentColor;
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---- 深色帶（服務區用） ---- */
+.dc-section--navy {
+  background: var(--black);
+  color: var(--white);
+}
+
+.dc-section--navy .dc-section__eyebrow { color: #9cc3ff; }
+.dc-section--navy .dc-section__intro,
+.dc-section--navy .why-card__body,
+.dc-section--navy .why-card__list { color: rgba(255, 255, 255, 0.84); }
+.dc-section--navy .why-card__list strong,
+.dc-section--navy .why-card__title { color: var(--white); }
+
+/* ---- 背景照片帶（Getting Here 用）----
+   inline style 設 background-image，換城市時不必動樣式表。
+   iOS 忽略 background-attachment:fixed，所以手機端退回普通捲動。 */
+.dc-photoband {
+  position: relative;
+  background-color: var(--black);
+  background-position: center;
+  background-size: cover;
+  color: var(--white);
+}
+
+.dc-photoband::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5, 24, 64, 0.94) 0%, rgba(5, 24, 64, 0.78) 55%, rgba(5, 24, 64, 0.5) 100%);
+}
+
+.dc-photoband > * { position: relative; }
+.dc-photoband .dc-section__eyebrow { color: #9cc3ff; }
+.dc-photoband .dc-section__intro,
+.dc-photoband .why-card__body,
+.dc-photoband .route-points { color: rgba(255, 255, 255, 0.86); }
+.dc-photoband .route-points strong { color: var(--white); }
+
+.dc-photoband .why-card {
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+}
+
+/* ---- 地圖 ---- */
+.dc-map {
+  margin-top: clamp(20px, 3vw, 28px);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--gray-200);
+}
+
+.dc-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 34vw, 400px);
+  border: 0;
+}
+
+.dc-map__cta {
+  padding: 14px;
+  background: var(--paper);
+  text-align: center;
+}
+
+/* ---- 照片磁磚（Why us 用）----
+   說明文字留在 DOM 裡（可被爬取），hover / 鍵盤 focus 時顯示。 */
+.dc-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 18px;
+}
+
+/* 用 .dealer-city-page 前綴提高特異性：磁砖是 <a>，§2 的
+   .dealer-city-page a{color:inherit} (0,1,1) 否則會贏過 .dc-tile (0,1,0)，
+   標題白字會被打回 --ink，深藍底上看不見。2026-09-18 實測。 */
+.dealer-city-page .dc-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* height:auto 是必要的 —— <img height="556"> 的 presentational hint 會壓過
+   aspect-ratio，不寫就變成 556px 高的柱子。2026-09-18 實測。 */
+.dc-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.dc-tile__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--black);
+}
+
+.dc-tile__h {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dc-tile__go { flex: 0 0 auto; color: #9cc3ff; }
+
+.dc-tile__desc {
+  display: block;
+  max-height: 0;
+  padding: 0 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+  transition: max-height 0.22s ease, padding 0.22s ease;
+}
+
+.dc-tile:hover .dc-tile__desc,
+.dc-tile:focus-visible .dc-tile__desc {
+  max-height: 11em;
+  padding: 0 16px 15px;
+}
+
+/* 觸控裝置沒有 hover，直接展開 */
+@media (hover: none) {
+  .dc-tile__desc { max-height: none; padding: 0 16px 15px; }
+}
+
+/* ---- 服務圖示清單 ---- */
+.dc-svc__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 9px 20px;
+}
+
+.dc-svc__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14.5px;
+}
+
+.dc-svc__list li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: #9cc3ff;
+}
+
+/* ---- 通用卡片格（金融區用） ---- */
+.dc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 18px;
+}
+
+.dc-card {
+  padding: 20px 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.dc-card__title {
+  margin: 0 0 8px;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dc-card p { margin: 0 0 10px; color: var(--muted); font-size: 14.5px; }
+.dc-card p:last-child { margin: 0; }
+.dc-card a { color: var(--subaru-blue); font-weight: 600; text-decoration: none; }
+.dc-card a:hover { text-decoration: underline; }
+
+/* ---- 收尾 CTA ---- */
+.dc-cta {
+  background: var(--subaru-blue);
+  color: var(--white);
+  text-align: center;
+}
+
+.dc-cta .dc-section__eyebrow { color: rgba(255, 255, 255, 0.82); }
+.dc-cta .dc-section__title { color: var(--white); }
+.dc-cta .dc-section__intro {
+  margin-inline: auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dc-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.dealer-city-page .dc-cta .model-button--primary,
+.dealer-city-page .dc-cta .model-button--primary:hover {
+  background: var(--white) !important;
+  color: var(--black) !important;
+}
+
+.dealer-city-page .dc-cta .model-button--outline,
+.dealer-city-page .dc-cta .model-button--outline:hover {
+  background: transparent !important;
+  border-color: var(--white) !important;
+  color: var(--white) !important;
+}
+
+@media (max-width: 680px) {
+  .dc-cta__actions .model-button { width: 100%; }
+  .dc-svc__list { grid-template-columns: 1fr; }
+}
+
+/* ===========================================================================
+   13. Hero specials 滑軌 + 優惠磁磚（純 CSS，2026-09-18）
+
+   為什麼不用 JS：這些頁面貼進 CKEditor 4，<script> 會被過濾；radio/:checked
+   那套要空的 <input>，同樣會被清掉（見 §4 的圓點註記）。所以用 scroll-snap
+   加錨點連結 —— 觸控滑動、觸控板、鍵盤都能用，零腳本、零空元素，八條優惠
+   全部留在 DOM 裡可被爬取。
+
+   磁磚版式還原 9/10 那封 email 創意：淺底、文案在左、車子去背圖在右、
+   紅色手寫標籤、底部細則橫條。背景用對應車型的 exterior PNG。
+   ======================================================================== */
+.hero-rail { position: relative; }
+
+.hero-rail__track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.12);
+}
+
+.hero-rail__track::-webkit-scrollbar { height: 8px; }
+.hero-rail__track::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 99px;
+}
+.hero-rail__track::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 99px;
+}
+
+/* ---- 優惠磁磚 ---- */
+/* 一屏一條：每張優惠獨佔整個滑軌寬度（原本 470px 並排是誤解需求）。 */
+.offer-tile {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--paper);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 車子去背圖當背景，靠右下；左側留給文案。
+   --offer-car 由每張磁磚的 inline style 指定，換車型不必動樣式表。 */
+.offer-tile__body {
+  position: relative;
+  flex: 1;
+  padding: clamp(24px, 3.4vw, 46px) clamp(22px, 4vw, 56px) clamp(22px, 3vw, 38px);
+  min-height: clamp(300px, 34vw, 440px);
+  background-color: #eef1f4;
+  background-image:
+    linear-gradient(100deg, #ffffff 0%, #ffffff 40%, rgba(255, 255, 255, 0.2) 58%, rgba(255, 255, 255, 0) 70%),
+    var(--offer-car, none);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left center, right 1% center;
+  background-size: auto, 54% auto;
+}
+
+.offer-tile__eyebrow {
+  position: relative;
+  margin: 0 0 3px;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.offer-tile__model {
+  position: relative;
+  margin: 0;
+  font-size: clamp(34px, 5.2vw, 62px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.offer-tile__trim {
+  position: relative;
+  margin: 4px 0 0;
+  font-size: clamp(11px, 1.05vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+/* 原創意用紅色手寫體；系統字庫沒有對應字體，用斜體 + 紅色近似。 */
+.offer-tile__tag {
+  position: relative;
+  margin: 9px 0 0;
+  font-size: clamp(16px, 1.9vw, 23px);
+  font-weight: 700;
+  font-style: italic;
+  color: #c8102e;
+}
+
+.offer-tile__from {
+  position: relative;
+  margin: clamp(16px, 2.2vw, 26px) 0 0;
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.offer-tile__price {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin: 0;
+}
+
+.offer-tile__figure {
+  font-size: clamp(52px, 7.4vw, 88px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.offer-tile__mo { font-size: clamp(17px, 1.7vw, 22px); font-weight: 600; color: var(--ink); }
+
+.offer-tile__tax {
+  position: relative;
+  margin: 2px 0 0;
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.offer-tile__cta { position: relative; margin: 14px 0 0; }
+
+/* ---- 底部細則橫條（照原創意逐字排版） ---- */
+.offer-tile__fine {
+  margin: 0;
+  padding: 11px 18px;
+  background: #e3e7ee;
+  color: #1c2b4a;
+  font-size: clamp(11.5px, 1.05vw, 13.5px);
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* ---- 跳轉列：取代匿名圓點，帶車型與月付，對使用者和搜尋引擎都更有用，
+        而且不必用 JS 維護 active 狀態 ---- */
+.hero-rail__jump {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dealer-city-page .hero-rail__jump a {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dealer-city-page .hero-rail__jump a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+}
+
+.dealer-city-page .hero-rail__jump a:focus-visible {
+  outline: 3px solid #9cc3ff;
+  outline-offset: 2px;
+}
+
+/* :target 是純 CSS 能表達「目前這張」的唯一手段 */
+.offer-tile:target {
+  border-color: #9cc3ff;
+  box-shadow: 0 0 0 3px rgba(156, 195, 255, 0.55);
+}
+
+.hero-rail__hint {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 680px) {
+  .offer-tile__body {
+    min-height: 260px;
+    background-image:
+      linear-gradient(170deg, #ffffff 0%, #ffffff 54%, rgba(255, 255, 255, 0.35) 78%, rgba(255, 255, 255, 0) 94%),
+      var(--offer-car, none);
+    background-position: left center, right -8% bottom 6%;
+    background-size: auto, 104% auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rail__track { scroll-behavior: auto; }
+}
+
+/* 滑軌上方的導語是頁面級引文，不是車型面板的說明，放寬到正常段落寬度。
+   （.model-hero__specials-terms 的 36ch 是給單車型 hero 用的） */
+.model-hero .dc-shell > .model-hero__specials-terms {
+  max-width: 76ch;
+}
+
+/* ---------------------------------------------------------------------------
+   14. Intro 兩欄（文案 + 地圖），2026-09-18
+   地圖從 Getting Here 移到這裡：一頁只留一張地圖，Getting Here 專責路線清單。
+   ------------------------------------------------------------------------ */
+.dc-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(24px, 4vw, 44px);
+}
+
+.dc-intro__copy { min-width: 0; }
+.dc-intro__map  { min-width: 0; }
+
+/* 兩欄時地圖已有自己的欄位，不需要再推開上方間距 */
+.dc-intro__map .dc-map { margin-top: 0; }
+
+.dc-intro__map .dc-map iframe {
+  height: clamp(280px, 30vw, 360px);
+}
+
+@media (max-width: 900px) {
+  .dc-intro { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------------
+   15. 車系展示（2026-09-18 改版）
+   參考 subaru.com 的車系輪播版式：白底、無框、車型名在圖「上方」、大圖居中、
+   留白充足。原本的卡片式（深色圖底 + 邊框 + 名稱在下）已移除。
+
+   截圖上的左右箭頭是 subaru.com 用 JS 做的「上一個 / 下一個」。純 CSS 無法
+   表達「相對於目前位置」，硬做只能連到第一張或最後一張，意義不大；六款車
+   用自動換行的格線就排得完，所以不做假箭頭。
+   ------------------------------------------------------------------------ */
+.model-lineup {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(20px, 3vw, 36px) clamp(16px, 2.5vw, 28px);
+}
+
+.lineup-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: center;
+  background: transparent;
+  border: 0;
+}
+
+.lineup-card__name {
+  margin: 0 0 6px;
+  font-size: clamp(17px, 1.7vw, 20px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.lineup-card__media {
+  padding: 0;
+  background: transparent;
+}
+
+.lineup-card__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.lineup-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px 6px 0;
+}
+
+.lineup-card__lede {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.lineup-card__trims {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--gray-600);
+}
+
+.lineup-card__trims strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.lineup-card__links {
+  margin: auto 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  font-size: 14.5px;
+}
+
+.dealer-city-page .lineup-card__links a {
+  color: var(--subaru-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dealer-city-page .lineup-card__links a:hover { text-decoration: underline; }
