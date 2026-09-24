@@ -64,6 +64,8 @@
 .dealer-city-page {
   --subaru-blue: var(--website-primary-theme-color, #1971d4);
   --subaru-blue-dark: #051840;
+  --hero-bg: #1d242d;            /* subaru.com 車型頁 hero 底色，取樣值 rgb(29,36,45) */
+  --hero-label: #acb2b9;         /* hero 數字下方的小標與分隔線，同樣取樣自官網 */
   --ink: #111;
   --muted: #393937;
   --line: #e3e7ee;
@@ -113,26 +115,73 @@
 /* ---------------------------------------------------------------------------
    3. HERO
    ------------------------------------------------------------------------ */
-/* 排版參照 subaru.com 車型頁 hero：深藍滿版、文字靠左約三分之一欄、
-   車圖佔右側大半並貼到版面邊緣，整體是「寬而矮」的橫幅（約 2.6:1）。
-   高度交給 __inner 的 min-height，section 本身不再加上下內距，
-   否則兩者疊加會把 hero 拉得比參考稿高一截。 */
+/* 排版與配色照 subaru.com 車型頁 hero：底色 #1D242D 整面均勻、文字靠左約三分
+   之一欄、車圖佔右側大半、圓點在左下。一屏一個 offer，八屏用原生捲動容器
+   輪播（滑鼠 / 觸控板 / 觸控都能滑），圓點是 ::scroll-marker。
+   沒做官網那顆「暫停」鈕：原生捲動容器沒有純 CSS 的自動輪播可暫停，
+   CKEditor 又會濾掉 <script>，與其放一顆沒功能的按鈕不如不放。 */
 .dealer-city-page .model-hero {
-  background: var(--black);
+  position: relative;
+  background: var(--hero-bg);
   color: var(--white);
   padding: 0;
   overflow: hidden;
 }
 
+/* 頁面 H1：wordmark 每屏都不同，不能當 H1。桌面版把 H1 帶疊在 hero 左上角
+   （官網 wordmark 上方本來就是一大片留白），不佔額外高度；__inner 的 padding-top
+   留出這一帶的位置，文案不會撞上去。≤860 堆疊時圖在最上面，改回正常流。 */
+.model-hero__head {
+  position: absolute;
+  top: clamp(20px, 2.4vw, 32px);
+  left: calc((100% - var(--shell)) / 2);
+  width: var(--shell);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.model-hero__head .model-hero__eyebrow {
+  margin-bottom: 6px;
+}
+
+.model-hero__head .model-hero__title {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.model-hero__rail {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  anchor-name: --model-hero-rail;
+}
+
+.model-hero__rail:focus-visible {
+  outline: 3px solid var(--subaru-blue);
+  outline-offset: -3px;
+}
+
+.model-hero__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
 .model-hero__inner {
   width: var(--shell);
   margin: 0 auto;
-  min-height: clamp(400px, 34vw, 540px);
+  /* 上方還有 __head 那條 H1 帶，所以這裡比單屏版矮一點，整個 hero 才不會過高 */
+  min-height: clamp(340px, 27vw, 420px);
   display: grid;
   grid-template-columns: minmax(250px, 33%) 1fr;
   align-items: center;
   gap: clamp(16px, 2.4vw, 36px);
-  padding-block: clamp(26px, 2.8vw, 38px);
+  /* 上方留給疊上去的 H1 帶，下方多留一截給圓點列 */
+  padding-block: clamp(88px, 8vw, 112px) clamp(52px, 5vw, 62px);
 }
 
 .model-hero__copy {
@@ -151,8 +200,8 @@
 /* 車型字標。官方是鍍鉻 PNG；這裡用漸層文字近似，有官方 wordmark 圖時
    直接把 h1 換成 <img> 即可，不必動其他規則。 */
 .model-hero__wordmark {
-  margin: 0 0 clamp(12px, 2vw, 18px);
-  font-size: clamp(17px, 2vw, 25px);
+  margin: 0 0 clamp(14px, 2vw, 22px);
+  font-size: clamp(18px, 2.1vw, 27px);
   font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -188,7 +237,7 @@
 
 .model-hero__specials-offer + .model-hero__specials-offer {
   padding-left: clamp(16px, 2.5vw, 30px);
-  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  border-left: 1px solid var(--hero-label);
 }
 
 .model-hero__specials-figure {
@@ -206,8 +255,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gray-400);
-  white-space: nowrap;
+  color: var(--hero-label);
 }
 
 .model-hero__specials-terms {
@@ -234,12 +282,69 @@
 
 /* 官方去背 PNG 四周帶透明留白，放大讓車身視覺上填滿右側；
    .model-hero 的 overflow:hidden 會安全裁掉溢出的透明區。 */
+/* 車圖的「版面高度」設上限，hero 高度才由它而不是由整欄寬度決定
+   （823px 寬的欄位放 1054x556 的圖會撐到 434px 高，整個 hero 就拉到 600 以上）。
+   官網 hero 約 2.7:1，車佔高度七成左右。 */
+.model-hero__media {
+  display: flex;
+  justify-content: center;
+}
+
 .model-hero__media img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  transform: scale(1.2) translateX(3%);
+  max-height: clamp(300px, 26vw, 374px);
+  transform: scale(1.12) translateX(3%);
   transform-origin: center;
+}
+
+/* ---- 圓點（Chrome / Edge 135+）：左下角，對齊內容欄左緣；白點 = 其他屏，藍點 = 目前屏 ---- */
+@supports selector(::scroll-marker) {
+  .model-hero__rail {
+    scrollbar-width: none;
+    scroll-marker-group: after;
+  }
+
+  .model-hero__rail::-webkit-scrollbar { display: none; }
+
+  .model-hero__rail::scroll-marker-group {
+    position: absolute;
+    left: calc((100% - var(--shell)) / 2);
+    bottom: clamp(22px, 2.4vw, 30px);
+    display: flex;
+    gap: 14px;
+    padding: 6px 0;
+  }
+
+  .model-hero__slide::scroll-marker {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--white);
+    cursor: pointer;
+  }
+
+  .model-hero__slide::scroll-marker:hover { background: var(--hero-label); }
+
+  .model-hero__slide::scroll-marker:target-current {
+    background: var(--subaru-blue);
+  }
+
+  .model-hero__slide::scroll-marker:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+  }
+}
+
+/* ---- Safari / Firefox：沒有 ::scroll-marker，留一條細捲軸當「可以滑」的提示 ---- */
+@supports not selector(::scroll-marker) {
+  .model-hero__rail {
+    scrollbar-width: thin;
+    scrollbar-color: var(--hero-label) transparent;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -686,7 +791,7 @@
   }
 
   .model-hero__media img {
-    transform: scale(1.12) translateX(2%);
+    transform: scale(1.08) translateX(2%);
   }
 
   .model-hero__specials-terms {
@@ -696,11 +801,17 @@
 
 /* 到這裡文字欄已經窄到放不下兩組數字，才轉成上圖下字。 */
 @media (max-width: 860px) {
+  .model-hero__head {
+    position: static;
+    margin: 0 auto;
+    padding-top: 22px;
+  }
+
   .model-hero__inner {
     grid-template-columns: 1fr;
     min-height: 0;
     gap: clamp(18px, 4vw, 28px);
-    padding-block: clamp(24px, 4vw, 36px);
+    padding-block: 16px 60px;
   }
 
   .model-hero__media {
