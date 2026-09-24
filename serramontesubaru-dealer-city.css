@@ -1576,3 +1576,178 @@
 @media (prefers-reduced-motion: reduce) {
   .lineup-rail__viewport { scroll-behavior: auto; }
 }
+
+/* ---------------------------------------------------------------------------
+   18. 左右對開大圖帶（.dc-split，2026-09-24）
+   深色文字面板配滿版照片，桌機各佔一半、切齊視窗邊緣，所以這個 section
+   自己不套 .dc-section（不要外層留白），內距走 .dc-split__copy。
+   照片用 <img> 而不是 background-image：右半邊要吃 alt 文字，而且
+   loading="lazy" 才有效。手機端改成上下堆疊，照片在上。
+   --------------------------------------------------------------------------- */
+.dc-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--black);
+  color: var(--white);
+}
+
+.dc-split__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 5.5vw, 96px) clamp(24px, 4.5vw, 84px);
+}
+
+.dc-split__media {
+  position: relative;
+  min-height: 320px;
+}
+
+.dc-split__media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dc-split .dc-section__eyebrow { color: rgba(255, 255, 255, 0.72); }
+
+.dc-split__title {
+  margin: 0 0 18px;
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+
+.dc-split__body {
+  margin: 0 0 20px;
+  max-width: 48ch;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.6;
+}
+
+/* 服務項目清單：面板夠寬時走兩欄，免得一條長柱把版面拉高 */
+.dc-split__list {
+  margin: 0 0 22px;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.dc-split__list li { margin-bottom: 6px; }
+
+@media (min-width: 1100px) {
+  .dc-split__list {
+    columns: 2;
+    column-gap: 34px;
+  }
+  .dc-split__list li { break-inside: avoid; }
+}
+
+.dc-split__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* 深底上的按鈕：主要鈕轉白底藍字，外框鈕走白框 */
+.dealer-city-page .dc-split .model-button--primary,
+.dealer-city-page .dc-split .model-button--primary:hover {
+  background: var(--white) !important;
+  border-color: var(--white) !important;
+  color: var(--subaru-blue-dark) !important;
+}
+
+.dealer-city-page .dc-split .model-button--outline,
+.dealer-city-page .dc-split .model-button--outline:hover {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  color: var(--white) !important;
+}
+
+.dc-split a:not(.model-button) { color: #7cb8ff; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .dc-split { grid-template-columns: 1fr; }
+  .dc-split__media { order: -1; min-height: 240px; }
+}
+
+/* ---------------------------------------------------------------------------
+   19. 置中的區塊結尾按鈕列（.dc-section__actions--center，2026-09-24）
+   --------------------------------------------------------------------------- */
+.dc-section__actions--center {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: clamp(26px, 3.4vw, 40px);
+}
+
+/* ---------------------------------------------------------------------------
+   20. 盒裝 FAQ 手風琴（.model-faq__list--boxed，2026-09-24）
+   Subaru.com 的做法：整組包一個外框，每題之間用細線分隔，問句不加粗、
+   左右留寬內距，右邊一個藍色細加號。只是修飾類別，沒套的頁面維持原樣。
+   --------------------------------------------------------------------------- */
+.model-faq__list--boxed {
+  max-width: 900px;
+  margin-inline: auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.model-faq__list--boxed .faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.model-faq__list--boxed .faq-item:last-child {
+  border-bottom: 0;
+}
+
+.model-faq__list--boxed .faq-item__question {
+  padding: clamp(20px, 2.2vw, 28px) clamp(22px, 3vw, 40px);
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 400;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+
+.model-faq__list--boxed .faq-item__question::after {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.model-faq__list--boxed .faq-item__answer {
+  padding: 0 clamp(22px, 3vw, 40px) clamp(20px, 2.4vw, 28px);
+}
+
+/* ---------------------------------------------------------------------------
+   21. intro 地圖拉滿欄高（.dc-intro--tall-map，2026-09-24）
+   burlingame 的左欄多了路線清單，地圖若維持固定高度右邊會空一大塊，
+   所以這個修飾類別讓地圖欄跟著左欄拉伸、iframe 吃掉剩下的高度。
+   手機端單欄時退回一般高度。
+   --------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+  .dc-intro--tall-map { align-items: stretch; }
+
+  .dc-intro--tall-map .dc-intro__map { display: flex; }
+
+  .dc-intro--tall-map .dc-map {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .dc-intro--tall-map .dc-map iframe {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: clamp(320px, 32vw, 460px);
+  }
+}
