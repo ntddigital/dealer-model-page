@@ -98,7 +98,10 @@
   max-width: 100%;
 }
 
-.dealer-city-page section {
+/* 原本這裡有 `.dealer-city-page section { padding: 0 }`。它的特異度 (0,1,1)
+   高於 .dc-section (0,1,0)，把全站每個板塊的上下內距都歸零了 —— 板塊之間完全
+   沒有留白。改成只中和「沒有掛我們自己 class」的 section，我們的板塊自己排版。 */
+.dealer-city-page section:not([class]) {
   padding: 0;
 }
 
@@ -110,21 +113,26 @@
 /* ---------------------------------------------------------------------------
    3. HERO
    ------------------------------------------------------------------------ */
-.model-hero {
+/* 排版參照 subaru.com 車型頁 hero：深藍滿版、文字靠左約三分之一欄、
+   車圖佔右側大半並貼到版面邊緣，整體是「寬而矮」的橫幅（約 2.6:1）。
+   高度交給 __inner 的 min-height，section 本身不再加上下內距，
+   否則兩者疊加會把 hero 拉得比參考稿高一截。 */
+.dealer-city-page .model-hero {
   background: var(--black);
   color: var(--white);
-  padding: clamp(32px, 4.5vw, 60px) 0;
+  padding: 0;
   overflow: hidden;
 }
 
 .model-hero__inner {
   width: var(--shell);
   margin: 0 auto;
-  min-height: clamp(320px, 27vw, 430px);
+  min-height: clamp(400px, 34vw, 540px);
   display: grid;
-  grid-template-columns: minmax(260px, 34%) 1fr;
+  grid-template-columns: minmax(250px, 33%) 1fr;
   align-items: center;
-  gap: clamp(20px, 3vw, 44px);
+  gap: clamp(16px, 2.4vw, 36px);
+  padding-block: clamp(26px, 2.8vw, 38px);
 }
 
 .model-hero__copy {
@@ -230,7 +238,7 @@
   display: block;
   width: 100%;
   height: auto;
-  transform: scale(1.1);
+  transform: scale(1.2) translateX(3%);
   transform-origin: center;
 }
 
@@ -284,8 +292,20 @@
 /* ---------------------------------------------------------------------------
    5. 通用區塊標題
    ------------------------------------------------------------------------ */
-.dc-section {
-  padding: clamp(40px, 5vw, 68px) 0;
+/* 板塊節奏。前綴 .dealer-city-page 讓特異度到 (0,2,0)，同時壓過上面的
+   section reset 與零售商主題表。相鄰兩塊之間 = 2 x padding-block。 */
+.dealer-city-page .dc-section {
+  padding-block: clamp(44px, 5.2vw, 76px);
+  padding-inline: 0;
+}
+
+/* CTA 藍條和頁尾小字是收束用的窄帶，不吃滿版節奏。 */
+.dealer-city-page .dc-section.dc-cta {
+  padding-block: clamp(40px, 4.4vw, 60px);
+}
+
+.dealer-city-page .model-note {
+  padding-block: clamp(20px, 2.4vw, 30px);
 }
 
 .dc-section--tint {
@@ -333,6 +353,30 @@
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 6px;
+}
+
+/* 車型圖，排在標題與價格之間。官方去背 PNG 比例約 1.9:1，固定 aspect-ratio
+   讓八張卡的圖框等高、價格行對齊；img 必須寫死 height:auto，否則 HTML 上的
+   height="556" 會以 presentational hint 的身分贏過 aspect-ratio（.dc-tile 踩過）。 */
+.dealer-city-page .special-card__media {
+  margin: 0 0 12px;
+  /* 用官方去背 PNG 自己的比例（1054x556），contain 進來剛好填滿，
+     既不留上下黑邊、也不會裁到車頂車輪。 */
+  aspect-ratio: 1054 / 556;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-button);
+  background: linear-gradient(160deg, #eef1f6 0%, #dfe5ee 100%);
+}
+
+.dealer-city-page .special-card__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .special-card__topline {
@@ -622,15 +666,41 @@
 /* ---------------------------------------------------------------------------
    11. 響應式（斷點對齊 fairfieldsubaru-model-city.css）
    ------------------------------------------------------------------------ */
+/* 1280 左右文案欄剛好窄到讓 terms 多折一行，hero 會比 1440 高 50px。
+   給文案欄多 3 個百分點把那一行收回來，維持「寬而矮」的橫幅比例。 */
+@media (max-width: 1280px) and (min-width: 1041px) {
+  .model-hero__inner {
+    grid-template-columns: minmax(250px, 36%) 1fr;
+  }
+}
+
 @media (max-width: 1040px) {
   .dealer-city-page {
     --shell: calc(100vw - 40px);
   }
 
+  /* 仍是雙欄，只是文字欄讓出一點寬度給車圖。 */
+  .model-hero__inner {
+    grid-template-columns: minmax(230px, 38%) 1fr;
+    min-height: clamp(340px, 34vw, 420px);
+  }
+
+  .model-hero__media img {
+    transform: scale(1.12) translateX(2%);
+  }
+
+  .model-hero__specials-terms {
+    max-width: none;
+  }
+}
+
+/* 到這裡文字欄已經窄到放不下兩組數字，才轉成上圖下字。 */
+@media (max-width: 860px) {
   .model-hero__inner {
     grid-template-columns: 1fr;
     min-height: 0;
     gap: clamp(18px, 4vw, 28px);
+    padding-block: clamp(24px, 4vw, 36px);
   }
 
   .model-hero__media {
@@ -639,10 +709,6 @@
 
   .model-hero__media img {
     transform: none;
-  }
-
-  .model-hero__specials-terms {
-    max-width: none;
   }
 }
 
@@ -1156,108 +1222,151 @@
 .dc-section--navy .dc-feature__media { background: rgba(255, 255, 255, 0.1); }
 
 /* ---------------------------------------------------------------------------
-   17. 車系輪播（純 CSS，2026-09-18 定稿）
-   參考 subaru.com 的車系版式，驅動方式抄 huntingtonbeachford-dealer-city 的
-   hbf-rail：隱藏 radio + <label for> 當箭頭，用 :checked ~ 平移軌道。
+   17. 車系輪播（原生滾動，2026-09-24 改寫）
 
-   為什麼不是錨點連結：實測過 scroll-snap + <a href="#page-2"> 這條路，
-   瀏覽器對「嵌套滾動容器內錨點的橫向分量」處理不可靠 —— mandatory /
-   proximity / none 三種吸附模式下橫向都不動，而且錨點還會順帶把整頁往下
-   對齊（量到 480px 的跳動）。radio 方案沒有導航行為，兩個問題都不存在。
+   上一版是隱藏 radio + <label for> 驅動 translateX。按鈕能用，但軌道是
+   transform，滑鼠、觸控板、觸控螢幕都拖不動 —— 使用者反映的就是這件事。
+   改成真正的滾動容器：overflow-x:auto，滑動、shift+滾輪、觸控拖曳、鍵盤方向鍵
+   全部回來，而且每個瀏覽器都支援。
 
-   選擇器用 :nth-of-type 而不是 id，這樣同一份樣式表可以服務多個城市頁
-   （每頁的 radio id 各自不同）。
+   箭頭用 CSS Overflow 5 的 ::scroll-button()，圓點用 ::scroll-marker：
+   純 CSS、無需 JS（CKEditor 4 會濾掉 <script>），且瀏覽器自己管理
+   頁首/頁尾的 :disabled 與目前頁的 :target-current。
+   Chrome / Edge 135+ 有；Safari / Firefox 還沒有，那邊落回「一條細滾動條
+   + 直接滑動」（所以 @supports 不成立時我們反而要把滾動條顯示出來）。
+
+   為什麼不是錨點連結：實測過 <a href="#page-2">，三種 scroll-snap 模式下橫向
+   都不動，而且錨點會把整頁往下對齊（量到 480px 跳動）。
    ------------------------------------------------------------------------ */
 .lineup-rail {
   position: relative;
+  /* 兩側留出箭頭的位置；窗口窄到放不下時收到 0。 */
   padding-inline: clamp(0px, 3vw, 52px);
 }
 
-/* 不用 display:none —— 部分瀏覽器會讓它退出焦點序列，鍵盤就切不了頁 */
-.lineup-rail__radio {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.lineup-rail__viewport { overflow: hidden; }
-
-.lineup-rail__track {
+.lineup-rail__viewport {
   display: flex;
-  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+  gap: var(--lineup-gap, clamp(16px, 2.5vw, 28px));
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  anchor-name: --lineup-rail;
 }
 
-.lineup-page {
-  flex: 0 0 100%;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2.5vw, 28px);
-}
-
-.lineup-rail__radio:nth-of-type(1):checked ~ .lineup-rail__viewport .lineup-rail__track {
-  transform: translateX(0);
-}
-
-.lineup-rail__radio:nth-of-type(2):checked ~ .lineup-rail__viewport .lineup-rail__track {
-  transform: translateX(-100%);
-}
-
-/* 箭頭：每個分頁狀態只露出屬於它的那一對 */
-.lineup-rail__arrow {
-  position: absolute;
-  top: 38%;
-  z-index: 2;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--gray-400);
-  border-radius: 50%;
-  background: var(--paper);
-  color: var(--gray-600);
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.lineup-rail__arrow:hover { border-color: var(--ink); color: var(--ink); }
-.lineup-rail__arrow--prev { left: 0; }
-.lineup-rail__arrow--next { right: 0; }
-
-.lineup-rail__radio:nth-of-type(1):checked ~ .lineup-rail__nav .lineup-rail__on-1,
-.lineup-rail__radio:nth-of-type(2):checked ~ .lineup-rail__nav .lineup-rail__on-2 {
-  display: flex;
-}
-
-/* 鍵盤焦點落在 radio 上，把焦點圈畫到對應的箭頭上 */
-.lineup-rail__radio:focus-visible ~ .lineup-rail__nav .lineup-rail__arrow {
+.lineup-rail__viewport:focus-visible {
   outline: 3px solid var(--subaru-blue);
-  outline-offset: 2px;
+  outline-offset: 4px;
+}
+
+/* 原本的 track / page 包層保留（HTML 不動），但不再參與排版，
+   讓所有 .lineup-card 直接成為滾動容器的 flex 項目。 */
+.lineup-rail__track,
+.lineup-page {
+  display: contents;
+}
+
+.lineup-rail .lineup-card {
+  flex: 0 0 calc((100% - 2 * var(--lineup-gap, clamp(16px, 2.5vw, 28px))) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* ---- 箭頭（Chrome / Edge 135+）---- */
+@supports selector(::scroll-button(*)) {
+  .lineup-rail__viewport {
+    scrollbar-width: none;
+    /* 圓點列放在軌道下方 */
+    scroll-marker-group: after;
+  }
+
+  .lineup-rail__viewport::-webkit-scrollbar { display: none; }
+
+  .lineup-rail__viewport::scroll-button(*) {
+    position: fixed;
+    position-anchor: --lineup-rail;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--gray-400);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--gray-600);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .lineup-rail__viewport::scroll-button(*):hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  /* 滾到頭/尾時瀏覽器自動上 :disabled，不用我們管狀態 */
+  .lineup-rail__viewport::scroll-button(*):disabled {
+    opacity: 0.32;
+    cursor: default;
+  }
+
+  /* content 的第二段是給輔助技術用的替代文字 */
+  .lineup-rail__viewport::scroll-button(left) {
+    content: "\2039" / "Previous models";
+    position-area: center left;
+  }
+
+  .lineup-rail__viewport::scroll-button(right) {
+    content: "\203A" / "Next models";
+    position-area: center right;
+  }
+
+  /* ---- 圓點 ---- */
+  .lineup-rail__viewport::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    padding-top: 18px;
+  }
+
+  .lineup-rail .lineup-card::scroll-marker {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--gray-400);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .lineup-rail .lineup-card::scroll-marker:target-current {
+    background: var(--subaru-blue);
+    border-color: var(--subaru-blue);
+  }
+}
+
+/* ---- Safari / Firefox：沒有原生箭頭，就把滾動條留著當滑動的提示 ---- */
+@supports not selector(::scroll-button(*)) {
+  .lineup-rail { padding-inline: 0; }
+
+  .lineup-rail__viewport {
+    padding-bottom: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-400) transparent;
+  }
 }
 
 @media (max-width: 900px) {
-  /* 手機端交回原生橫向滑動：分頁溶掉、軌道不再平移 */
+  /* 手機端：一次露一張多一點，箭頭收掉，直接滑 */
   .lineup-rail { padding-inline: 0; }
-  .lineup-rail__viewport {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .lineup-rail__viewport::-webkit-scrollbar { display: none; }
-  .lineup-rail__track { gap: 14px; transform: none !important; transition: none; }
-  .lineup-page { display: contents; }
   .lineup-rail .lineup-card {
     flex: 0 0 min(78%, 320px);
     scroll-snap-align: center;
   }
-  .lineup-rail__nav { display: none; }
+  .lineup-rail__viewport::scroll-button(*) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lineup-rail__track { transition: none; }
+  .lineup-rail__viewport { scroll-behavior: auto; }
 }
