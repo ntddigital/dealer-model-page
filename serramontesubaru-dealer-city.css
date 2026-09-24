@@ -1751,3 +1751,162 @@
     min-height: clamp(320px, 32vw, 460px);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   20. 「理由」大卡網格（.dc-reasons，2026-09-24）
+   做法學 Fairfield Subaru davis-subaru.html 的 .feature-grid：等寬無間隙、hairline
+   格線、每張卡很高、只露大標題與左下一顆圓形「›」；hover / 鍵盤焦點時藍色漸層從底部
+   刷上來、標題變白上移、說明淡入、圓徽隱去。整組沒有任何 hover 時，第一張預設處於
+   激活態，讓版面不會一整片空白。觸控裝置沒有 hover：說明直接顯示，不玩動畫。
+   Burlingame 的 Financing 區用它（四張 → 桌機四欄）。
+   --------------------------------------------------------------------------- */
+.dc-reasons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--gray-200);
+  border-left: 1px solid var(--gray-200);
+}
+
+.dealer-city-page .dc-reason {
+  position: relative;
+  isolation: isolate;                 /* ::before 用 z-index:-1，要有自己的疊層 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: clamp(360px, 30vw, 460px);
+  padding: clamp(34px, 3.4vw, 56px) clamp(22px, 2.4vw, 36px) clamp(96px, 8vw, 118px);
+  background: var(--paper);
+  border-right: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  overflow: hidden;
+  color: var(--ink);
+}
+
+/* 從底部刷上來的藍色漸層 */
+.dc-reason::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, var(--subaru-blue) 0%, var(--subaru-blue-dark) 100%);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.48s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dealer-city-page .dc-reason__title {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 2.1vw, 32px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: color 0.28s ease, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dc-reason p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--white);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.28s ease 0.08s, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s;
+}
+
+/* 左下圓形「›」徽章：連結文字留給讀屏，視覺上只剩箭頭 */
+/* 前綴 .dc-reason 把特異度提到 (0,2,0)：徽章也是 <p>，否則會吃到上面 .dc-reason p 的 opacity:0 */
+.dc-reason .dc-reason__badge {
+  position: absolute;
+  left: clamp(22px, 2.4vw, 36px);
+  bottom: clamp(30px, 2.8vw, 40px);
+  margin: 0;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.22s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.22s ease;
+}
+
+.dealer-city-page .dc-reason__badge a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 0;
+  text-decoration: none;
+}
+
+.dc-reason__badge a::before {
+  content: "\203A";
+  font-size: 38px;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+/* ---- 激活態：hover / 焦點，或整組沒人 hover 時的第一張 ---- */
+.dc-reason:hover::before,
+.dc-reason:focus-within::before,
+.dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child::before {
+  transform: scaleY(1);
+}
+
+.dealer-city-page .dc-reason:hover .dc-reason__title,
+.dealer-city-page .dc-reason:focus-within .dc-reason__title,
+.dealer-city-page .dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child .dc-reason__title {
+  color: var(--white);
+  transform: translateY(-8px);
+}
+
+.dc-reason:hover p,
+.dc-reason:focus-within p,
+.dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dc-reason:hover .dc-reason__badge,
+.dc-reason:focus-within .dc-reason__badge,
+.dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child .dc-reason__badge {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+}
+
+/* 整張卡可點：一個覆蓋整張卡的透明連結（aria-hidden，讀屏走徽章那個連結） */
+.dc-reason__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  font-size: 0;
+}
+
+@media (max-width: 1100px) {
+  .dc-reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .dc-reasons { grid-template-columns: 1fr; }
+  .dealer-city-page .dc-reason { min-height: 0; padding-bottom: 34px; }
+}
+
+/* 觸控裝置：說明常駐，不做刷色與位移 */
+@media (hover: none) {
+  .dc-reason p { opacity: 1; transform: none; color: var(--muted); }
+  .dealer-city-page .dc-reason { padding-bottom: clamp(34px, 3.4vw, 56px); }
+  .dc-reason .dc-reason__badge { position: static; margin-top: 18px; }
+  .dc-reason:hover::before,
+  .dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child::before { transform: scaleY(0); }
+  .dealer-city-page .dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child .dc-reason__title { color: var(--ink); transform: none; }
+  .dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child .dc-reason__badge { opacity: 1; visibility: visible; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-reason::before, .dc-reason__title, .dc-reason p, .dc-reason__badge { transition: none; }
+}
+
