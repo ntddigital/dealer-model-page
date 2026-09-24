@@ -447,10 +447,9 @@
    ------------------------------------------------------------------------ */
 .specials-grid {
   display: grid;
-  /* 290 起跳在 1280 的 shell 會排成四欄，海報式卡片的文字欄只剩 150px；
-     360 起跳 → 桌面三欄、平板兩欄、手機一欄。 */
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: clamp(16px, 2vw, 24px);
+  /* 一行四張（八個 offer 剛好兩行）：1280 的 shell → 4 欄、1024 → 3、平板 2、手機 1 */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: clamp(14px, 1.6vw, 20px);
 }
 
 /* ---- 優惠卡（2026-09-24 定稿，照 subaru.com 車系卡）----
@@ -618,6 +617,17 @@
 
 .special-card__actions {
   margin: auto 0 0;
+}
+
+/* 卡片窄於 340px（四欄時）：Stock/VIN 三欄擠不下，改成左標右值兩欄 */
+@container (max-width: 340px) {
+  .special-card__details {
+    grid-template-columns: auto 1fr;
+    grid-auto-flow: row;
+    column-gap: 14px;
+    text-align: left;
+  }
+  .special-card__details dd { text-align: right; }
 }
 
 /* ---------------------------------------------------------------------------
