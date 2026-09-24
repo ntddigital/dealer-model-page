@@ -184,6 +184,30 @@
   padding-block: clamp(88px, 8vw, 112px) clamp(52px, 5vw, 62px);
 }
 
+/* 單屏版 hero（沒有 __rail，__inner 直接是 section 的子元素；Burlingame 2026-09-24 起用）：
+   H1 回到文案欄裡，不需要上方那段留白，也沒有圓點列。 */
+.dealer-city-page .model-hero > .model-hero__inner {
+  min-height: clamp(400px, 34vw, 540px);
+  padding-block: clamp(26px, 2.8vw, 38px);
+  /* 文案欄比輪播版寬一點：H1 + 數字 + 條款 + 兩顆按鈕要並排 */
+  grid-template-columns: minmax(260px, 38%) 1fr;
+}
+
+/* 深底上的次按鈕：黑實心會糊掉，改白描邊 */
+.dealer-city-page .model-hero .model-button--secondary,
+.dealer-city-page .model-hero .model-button--secondary:hover {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  color: var(--white) !important;
+}
+.dealer-city-page .model-hero .model-button--secondary:hover {
+  border-color: var(--white) !important;
+}
+
+.model-hero > .model-hero__inner .model-hero__title {
+  font-size: clamp(26px, 3.2vw, 40px);
+}
+
 .model-hero__copy {
   min-width: 0;
 }
