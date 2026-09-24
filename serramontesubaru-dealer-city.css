@@ -453,57 +453,73 @@
   gap: clamp(16px, 2vw, 24px);
 }
 
-/* ---- 海報式優惠卡（2026-09-24）----
-   參考零售商 email 的車型 tile：整張卡是 SOA 官方場景圖（scene7 604_background-*，
-   inline background-image 由 HTML 帶入，換車型只換 URL），左側白色漸隱托住文字，
-   車圖壓在場景右下，法務資訊放底部半透明白條。
+/* ---- 優惠卡（2026-09-24 定稿，照 subaru.com 車系卡）----
+   場景圖（SOA scene7 604_background-*，inline background-image 由 HTML 帶入）只鋪在
+   卡片上半的車圖區，往下漸隱成白；車居中壓在漸隱處；文字在下方白底置中。
    場景圖 wid=1200（$300p$ 預設只有 300px，會糊）。 */
 .dealer-city-page .special-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background-color: #dfe3e8;          /* 圖還沒載入時的底色 */
-  background-position: center 62%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: var(--paper);
   color: var(--ink);
-}
-
-/* 左側白色漸隱：文字區約佔 55% 寬，過了 62% 完全透明讓場景露出 */
-.dealer-city-page .special-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 0.97) 0%,
-    rgba(255, 255, 255, 0.94) 34%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(255, 255, 255, 0) 70%);
-  pointer-events: none;
+  text-align: center;
+  container-type: inline-size;
 }
 
 .special-card__poster {
   position: relative;
-  z-index: 1;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 10;
   display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: #dfe3e8;          /* 圖還沒載入時的底色 */
+  background-position: center 28%;    /* 地平線落在上三分之一 */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* 往下漸隱成白，車輪一帶已經是純白 */
+.special-card__poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.55) 58%,
+    rgba(255, 255, 255, 0.92) 80%,
+    #fff 100%);
+  pointer-events: none;
+}
+
+.dealer-city-page .special-card__car {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  height: auto;
+  margin-bottom: -2%;
+  filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.22));
+}
+
+.special-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 6px 20px 20px;
 }
 
 .special-card__copy {
-  position: relative;
-  z-index: 2;
-  width: 56%;
-  padding: clamp(16px, 4.5%, 22px) 0 0 clamp(16px, 5%, 22px);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 
 .special-card__year {
   margin: 0 0 2px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -511,20 +527,18 @@
 
 .dealer-city-page .special-card__vehicle {
   margin: 0;
-  font-size: clamp(24px, 6.4cqi, 30px);
-  font-weight: 800;
-  line-height: 1;
+  font-size: clamp(28px, 9cqi, 38px);
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--ink);
 }
 
 .special-card__trim {
   display: block;
-  margin-top: 3px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 400;
   color: var(--muted);
 }
 
@@ -534,7 +548,7 @@
   margin: 8px 0 0;
   padding: 0;
   border-radius: 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0;
@@ -553,64 +567,38 @@
 .special-price__lead {
   display: block;
   margin-bottom: 2px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
+  font-size: 15px;
+  color: var(--muted);
 }
 
 .dealer-city-page .special-price__figure {
-  font-size: clamp(38px, 10cqi, 50px);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(30px, 8cqi, 36px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 
 .dealer-city-page .special-price__unit {
   margin-left: 4px;
   font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-/* 車：貼卡片右下，寬約 64%，略微出血讓車頭壓進文字區邊緣 */
-.dealer-city-page .special-card__car {
-  position: absolute;
-  right: -3%;
-  bottom: 5%;
-  z-index: 1;
-  width: 60%;
-  height: auto;
-  max-width: none;
-  filter: drop-shadow(0 14px 12px rgba(0, 0, 0, 0.28));
-}
-
-/* 底部半透明白條：頭款、殘值、Stock/VIN、里程、按鈕 */
-.special-card__body {
-  position: relative;
-  z-index: 2;
-  margin-top: auto;
-  padding: 12px 18px 16px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--muted);
 }
 
 .special-card__due {
-  margin: 0 0 10px;
+  margin: 12px 0 12px;
   font-size: 13.5px;
   font-weight: 600;
   color: var(--ink);
 }
 
 .special-card__details {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: auto auto;
   grid-auto-flow: column;
-  column-gap: 14px;
+  column-gap: 12px;
   row-gap: 4px;
   font-size: 12.5px;
 }
@@ -629,11 +617,8 @@
 }
 
 .special-card__actions {
-  margin: 0;
+  margin: auto 0 0;
 }
-
-/* 容器查詢讓字級跟著卡片寬度縮放（cqi） */
-.dealer-city-page .special-card { container-type: inline-size; }
 
 /* ---------------------------------------------------------------------------
    8. why-us / route / FAQ
