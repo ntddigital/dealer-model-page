@@ -1,19 +1,21 @@
 /* ============================================================================
-   Serramonte Subaru — Dealer City Pages
-   （subaru-dealership-daly-city.htm / subaru-dealership-san-mateo.htm …）
+   Serramonte Subaru - Dealer City Pages
+   (subaru-dealership-daly-city.htm / subaru-dealership-san-mateo.htm / burlingame ...)
 
-   基底 copy 自 fairfieldsubaru-model-city.css（2026-09-09 版）的設計令牌與
-   CMS 相容做法，但獨立成檔：兩家零售商各自維護，互不影響。
+   Design tokens and CMS-compat rules were copied from fairfieldsubaru-model-city.css
+   (2026-09-09) but this is a separate file: the two retailers are maintained independently.
 
-   與 model-city 頁的差別：dealer-city 頁是「一個城市 × 全車系」，所以多了
-   .dealer-facts（聯絡資訊條）與 .model-lineup（多車型卡），沒有 trim 比較表。
+   Compared with the model-city pages, a dealer-city page is "one city x the whole lineup",
+   so it adds .dealer-facts (contact bar) and .model-lineup (multi-model cards) and has no
+   trim comparison table.
 
-   根作用域是 .dealer-city-page（不是 .model-page），避免同站兩種頁型互相污染。
+   Root scope is .dealer-city-page (not .model-page) so the two page types never bleed
+   into each other on the same site.
    ========================================================================= */
 
 /* ---------------------------------------------------------------------------
-   1. 中和 Dealer.com CMS 容器，讓區塊可以滿版
-      （與 serramontekia-model-city-pages.css 同一組覆寫）
+   1. Neutralise the Dealer.com CMS wrappers so sections can go full-bleed
+      (same overrides as serramontekia-model-city-pages.css)
    ------------------------------------------------------------------------ */
 .container-max-md {
   max-width: 100% !important;
@@ -54,29 +56,30 @@
 }
 
 /* ---------------------------------------------------------------------------
-   2. 設計令牌
-      取自 subaru.com 與零售商主題。--website-primary-theme-color 是 dealer 站
-      自己發佈的變數，優先消費它，量到的 #1971d4 當 fallback；零售商改版時這些
-      頁面會自動跟隨。調色盤自行宣告一份，不依賴客戶站是否定義同名變數。
-      字體刻意跟隨 dealer 主題（Arial / system stack），不引入品牌 webfont，
-      否則會破壞 OEM 設計系統。
+   2. Design tokens
+      Taken from subaru.com and the dealer theme. --website-primary-theme-color is a
+      variable the dealer site publishes; we consume it first and fall back to the measured
+      #1971d4, so a theme refresh carries these pages along. The palette is declared here
+      rather than relying on the client site defining the same names.
+      Fonts deliberately follow the dealer theme (Arial / system stack); no brand webfont,
+      which would break the OEM design system.
    ------------------------------------------------------------------------ */
 .dealer-city-page {
   --subaru-blue: var(--website-primary-theme-color, #1971d4);
   --subaru-blue-dark: #051840;
-  --hero-bg: #1d242d;            /* subaru.com 車型頁 hero 底色，取樣值 rgb(29,36,45) */
-  --hero-label: #acb2b9;         /* hero 數字下方的小標與分隔線，同樣取樣自官網 */
+  --hero-bg: #1d242d;            /* subaru.com model-page hero background, sampled rgb(29,36,45) */
+  --hero-label: #acb2b9;         /* small labels and divider under the hero figures, also sampled from subaru.com */
   --ink: #111;
   --muted: #393937;
   --line: #e3e7ee;
   --paper: #ffffff;
   --white: #fff;
   --black: #051840;
-  --gray-100: #fafafa;           /* 2026-09-30：對齊 serramontesubaru.com 淺色板塊底色（原 #f8f5f7 偏粉） */
+  --gray-100: #fafafa;           /* 2026-09-30: match the light band colour on serramontesubaru.com (old #f8f5f7 leaned pink) */
   --gray-200: #e3e7ee;
   --gray-400: #b3b5b5;
   --gray-600: #393937;
-  --radius-button: 0;            /* 2026-09-30：客戶站按鈕全是直角 */
+  --radius-button: 0;            /* 2026-09-30: every button on the client site is square */
   --shell: min(1280px, calc(100vw - 64px));
   --font-stack:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -100,9 +103,9 @@
   max-width: 100%;
 }
 
-/* 原本這裡有 `.dealer-city-page section { padding: 0 }`。它的特異度 (0,1,1)
-   高於 .dc-section (0,1,0)，把全站每個板塊的上下內距都歸零了 —— 板塊之間完全
-   沒有留白。改成只中和「沒有掛我們自己 class」的 section，我們的板塊自己排版。 */
+/* This used to be `.dealer-city-page section { padding: 0 }`. Its specificity (0,1,1) beats
+   .dc-section (0,1,0), which zeroed the vertical padding of every block - no spacing between
+   sections at all. Now it only neutralises sections that carry none of our classes. */
 .dealer-city-page section:not([class]) {
   padding: 0;
 }
@@ -115,11 +118,11 @@
 /* ---------------------------------------------------------------------------
    3. HERO
    ------------------------------------------------------------------------ */
-/* 排版與配色照 subaru.com 車型頁 hero：底色 #1D242D 整面均勻、文字靠左約三分
-   之一欄、車圖佔右側大半、圓點在左下。一屏一個 offer，八屏用原生捲動容器
-   輪播（滑鼠 / 觸控板 / 觸控都能滑），圓點是 ::scroll-marker。
-   沒做官網那顆「暫停」鈕：原生捲動容器沒有純 CSS 的自動輪播可暫停，
-   CKEditor 又會濾掉 <script>，與其放一顆沒功能的按鈕不如不放。 */
+/* Layout and colours follow the subaru.com model-page hero: uniform #1D242D background, copy in
+   the left third, vehicle filling the right, dots bottom-left. One offer per slide; the eight
+   slides live in a native scroll container (mouse / trackpad / touch) with ::scroll-marker dots.
+   No "pause" button like subaru.com: a native scroller has no pure-CSS autoplay to pause and
+   CKEditor strips <script>, so a non-functional button would be worse than none. */
 .dealer-city-page .model-hero {
   position: relative;
   background: var(--hero-bg);
@@ -128,9 +131,10 @@
   overflow: hidden;
 }
 
-/* 頁面 H1：wordmark 每屏都不同，不能當 H1。桌面版把 H1 帶疊在 hero 左上角
-   （官網 wordmark 上方本來就是一大片留白），不佔額外高度；__inner 的 padding-top
-   留出這一帶的位置，文案不會撞上去。≤860 堆疊時圖在最上面，改回正常流。 */
+/* Page H1: the wordmark changes per slide, so it cannot be the H1. On desktop the H1 band is
+   overlaid top-left (subaru.com leaves that space empty above the wordmark) and costs no height;
+   __inner's padding-top reserves the room so the copy never collides. Below 860px the image sits
+   on top and the band returns to normal flow. */
 .model-hero__head {
   position: absolute;
   top: clamp(20px, 2.4vw, 32px);
@@ -174,26 +178,26 @@
 .model-hero__inner {
   width: var(--shell);
   margin: 0 auto;
-  /* 上方還有 __head 那條 H1 帶，所以這裡比單屏版矮一點，整個 hero 才不會過高 */
+  /* the __head H1 band sits above, so this is a little shorter than the single-screen version */
   min-height: clamp(340px, 27vw, 420px);
   display: grid;
   grid-template-columns: minmax(250px, 33%) 1fr;
   align-items: center;
   gap: clamp(16px, 2.4vw, 36px);
-  /* 上方留給疊上去的 H1 帶，下方多留一截給圓點列 */
+  /* room above for the overlaid H1 band, extra room below for the dot row */
   padding-block: clamp(88px, 8vw, 112px) clamp(52px, 5vw, 62px);
 }
 
-/* 單屏版 hero（沒有 __rail，__inner 直接是 section 的子元素；Burlingame 2026-09-24 起用）：
-   H1 回到文案欄裡，不需要上方那段留白，也沒有圓點列。 */
+/* Single-screen hero (no __rail, __inner is a direct child of the section; Burlingame since
+   2026-09-24): the H1 is back in the copy column, so no top reserve and no dot row. */
 .dealer-city-page .model-hero > .model-hero__inner {
   min-height: clamp(400px, 34vw, 540px);
   padding-block: clamp(26px, 2.8vw, 38px);
-  /* 文案欄比輪播版寬一點：H1 + 數字 + 條款 + 兩顆按鈕要並排 */
+  /* copy column slightly wider than the carousel version: H1 + figure + terms + two buttons side by side */
   grid-template-columns: minmax(260px, 38%) 1fr;
 }
 
-/* 深底上的次按鈕：黑實心會糊掉，改白描邊 */
+/* secondary button on the dark ground: solid black muddies, use a white outline */
 .dealer-city-page .model-hero .model-button--secondary,
 .dealer-city-page .model-hero .model-button--secondary:hover {
   background: transparent !important;
@@ -221,8 +225,8 @@
   color: var(--gray-400);
 }
 
-/* 車型字標。官方是鍍鉻 PNG；這裡用漸層文字近似，有官方 wordmark 圖時
-   直接把 h1 換成 <img> 即可，不必動其他規則。 */
+/* Model wordmark. The official one is a chrome PNG; gradient text approximates it. When an
+   official wordmark image is available, swap the h1 for an <img> - no other rule changes. */
 .model-hero__wordmark {
   margin: 0 0 clamp(14px, 2vw, 22px);
   font-size: clamp(18px, 2.1vw, 27px);
@@ -241,8 +245,8 @@
   color: transparent;
 }
 
-/* 文字型標題（landing 頁 H1 是「Subaru Dealer near {City}」這種長句，
-   不是車型名），用正常標題樣式；__wordmark 留給單一車型名。 */
+/* Text headline (a landing-page H1 like "Subaru Dealer near {City}", not a model name) uses
+   normal heading styling; __wordmark is reserved for a single model name. */
 .model-hero__title {
   margin: 0 0 clamp(12px, 2vw, 18px);
   font-size: clamp(26px, 3.2vw, 40px);
@@ -304,11 +308,11 @@
   min-width: 0;
 }
 
-/* 官方去背 PNG 四周帶透明留白，放大讓車身視覺上填滿右側；
-   .model-hero 的 overflow:hidden 會安全裁掉溢出的透明區。 */
-/* 車圖的「版面高度」設上限，hero 高度才由它而不是由整欄寬度決定
-   （823px 寬的欄位放 1054x556 的圖會撐到 434px 高，整個 hero 就拉到 600 以上）。
-   官網 hero 約 2.7:1，車佔高度七成左右。 */
+/* Official transparent PNGs carry padding; scaling up lets the body fill the right side and
+   .model-hero's overflow:hidden safely clips the transparent overflow. */
+/* Cap the vehicle image's layout height so the hero height is driven by it, not by the full
+   column width (a 1054x556 image in an 823px column grows to 434px and pushes the hero past
+   600px). subaru.com's hero is ~2.7:1 with the car about 70% of the height. */
 .model-hero__media {
   display: flex;
   justify-content: center;
@@ -324,7 +328,7 @@
   transform-origin: center;
 }
 
-/* ---- 圓點（Chrome / Edge 135+）：左下角，對齊內容欄左緣；白點 = 其他屏，藍點 = 目前屏 ---- */
+/* ---- Dots (Chrome / Edge 135+): bottom-left, aligned to the content edge; white = other slides, blue = current ---- */
 @supports selector(::scroll-marker) {
   .model-hero__rail {
     scrollbar-width: none;
@@ -363,7 +367,7 @@
   }
 }
 
-/* ---- Safari / Firefox：沒有 ::scroll-marker，留一條細捲軸當「可以滑」的提示 ---- */
+/* ---- Safari / Firefox: no ::scroll-marker, keep a thin scrollbar as the "scrollable" hint ---- */
 @supports not selector(::scroll-marker) {
   .model-hero__rail {
     scrollbar-width: thin;
@@ -372,9 +376,9 @@
 }
 
 /* ---------------------------------------------------------------------------
-   4. 聯絡資訊條（dealer-city 專屬）
-      定位圓點用 ::before 產生，不用空的 <span>：CKEditor 4（Apollo 後台）會清掉
-      空的 inline 元素。
+   4. Dealer facts bar (dealer-city only)
+      The location dot is a ::before, not an empty <span>: CKEditor 4 (Apollo) strips
+      empty inline elements.
    ------------------------------------------------------------------------ */
 .dealer-facts {
   background: var(--subaru-blue-dark);
@@ -419,16 +423,16 @@
 }
 
 /* ---------------------------------------------------------------------------
-   5. 通用區塊標題
+   5. Section headings
    ------------------------------------------------------------------------ */
-/* 板塊節奏。前綴 .dealer-city-page 讓特異度到 (0,2,0)，同時壓過上面的
-   section reset 與零售商主題表。相鄰兩塊之間 = 2 x padding-block。 */
+/* Section rhythm. The .dealer-city-page prefix raises specificity to (0,2,0), beating both the
+   section reset above and the dealer theme. Gap between adjacent blocks = 2 x padding-block. */
 .dealer-city-page .dc-section {
   padding-block: clamp(44px, 5.2vw, 76px);
   padding-inline: 0;
 }
 
-/* CTA 藍條和頁尾小字是收束用的窄帶，不吃滿版節奏。 */
+/* The CTA band and the footer small print are narrow closers and skip the full rhythm. */
 .dealer-city-page .dc-section.dc-cta {
   padding-block: clamp(40px, 4.4vw, 60px);
 }
@@ -465,21 +469,21 @@
 }
 
 /* ---------------------------------------------------------------------------
-   6. 優惠卡
-      .special-card__details 用 dt/dd 直接當 grid 子元素，不要用 <div> 包裝：
-      CKEditor 4 不接受 <dl> 裡有 <div>，會破壞性重組整段。
+   6. Offer cards
+      .special-card__details uses dt/dd directly as grid children - no <div> wrappers:
+      CKEditor 4 rejects <div> inside <dl> and destructively rewrites the block.
    ------------------------------------------------------------------------ */
 .specials-grid {
   display: grid;
-  /* 一行四張（八個 offer 剛好兩行）：1280 的 shell → 4 欄、1024 → 3、平板 2、手機 1 */
+  /* four per row (eight offers = two rows): 1280 shell -> 4 columns, 1024 -> 3, tablet 2, phone 1 */
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: clamp(14px, 1.6vw, 20px);
 }
 
-/* ---- 優惠卡（2026-09-24 定稿，照 subaru.com 車系卡）----
-   場景圖（SOA scene7 604_background-*，inline background-image 由 HTML 帶入）只鋪在
-   卡片上半的車圖區，往下漸隱成白；車居中壓在漸隱處；文字在下方白底置中。
-   場景圖 wid=1200（$300p$ 預設只有 300px，會糊）。 */
+/* ---- Offer card (final 2026-09-24, modelled on subaru.com's lineup card) ----
+   The scene image (SOA scene7 604_background-*, inline background-image from the HTML) sits only
+   behind the vehicle at the top and fades to white; the car is centred over the fade and the copy
+   is centred on white below. Scene images use wid=1200 (the $300p$ preset is only 300px). */
 .dealer-city-page .special-card {
   display: flex;
   flex-direction: column;
@@ -499,13 +503,13 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background-color: #dfe3e8;          /* 圖還沒載入時的底色 */
-  background-position: center 28%;    /* 地平線落在上三分之一 */
+  background-color: #dfe3e8;          /* colour shown until the image loads */
+  background-position: center 28%;    /* horizon in the top third */
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-/* 往下漸隱成白，車輪一帶已經是純白 */
+/* fade to white; pure white by the wheels */
 .special-card__poster::after {
   content: "";
   position: absolute;
@@ -565,7 +569,7 @@
   color: var(--muted);
 }
 
-/* "Hot Deal!"：參考稿是紅色手寫體。不引 webfont（見 §2），用粗斜體近似 */
+/* "Hot Deal!": the reference uses a red script face. No webfont (see section 2), so bold italic approximates it */
 .dealer-city-page .trim-tag {
   display: block;
   margin: 8px 0 0;
@@ -643,7 +647,7 @@
   margin: auto 0 0;
 }
 
-/* 卡片窄於 340px（四欄時）：Stock/VIN 三欄擠不下，改成左標右值兩欄 */
+/* card narrower than 340px (four columns): the three-column Stock/VIN row does not fit, switch to label / value */
 @container (max-width: 340px) {
   .special-card__details {
     grid-template-columns: auto 1fr;
@@ -754,7 +758,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   9. 免責聲明
+   9. Disclaimer
    ------------------------------------------------------------------------ */
 .model-note {
   background: var(--gray-100);
@@ -778,7 +782,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   10. 按鈕
+   10. Buttons
    ------------------------------------------------------------------------ */
 .model-button {
   display: inline-flex;
@@ -806,7 +810,7 @@
 
 .model-button--outline {
   background: transparent;
-  border-color: var(--ink);       /* 客戶站的描邊鈕：深色細框 + 深色字 */
+  border-color: var(--ink);       /* client-site outline button: thin dark border + dark text */
   color: var(--ink);
 }
 
@@ -815,9 +819,9 @@
   outline-offset: 3px;
 }
 
-/* 按鈕顏色鎖定。!important 是刻意的：這些頁面貼進 dealer CMS，主題樣式表在我們
-   之後載入，同權重規則會靠 cascade 順序勝出。這是唯一可靠的保持方式。
-   :focus-visible 不碰 —— 那是鍵盤焦點，不是 hover。 */
+/* Button colour lock. !important is deliberate: these pages are pasted into the dealer CMS,
+   whose theme stylesheet loads after ours, so equal-weight rules lose on cascade order. This is
+   the only reliable way to hold the colours. :focus-visible is left alone - keyboard focus, not hover. */
 .dealer-city-page .model-button,
 .dealer-city-page .special-card__button,
 .dealer-city-page .model-button:hover,
@@ -849,10 +853,11 @@
 }
 
 /* ---------------------------------------------------------------------------
-   11. 響應式（斷點對齊 fairfieldsubaru-model-city.css）
+   11. Responsive (breakpoints aligned with fairfieldsubaru-model-city.css)
    ------------------------------------------------------------------------ */
-/* 1280 左右文案欄剛好窄到讓 terms 多折一行，hero 會比 1440 高 50px。
-   給文案欄多 3 個百分點把那一行收回來，維持「寬而矮」的橫幅比例。 */
+/* Around 1280px the copy column is just narrow enough for the terms to wrap one more line and the
+   hero grows 50px taller than at 1440. Three extra percent on the copy column wins that line back
+   and keeps the wide-and-short banner ratio. */
 @media (max-width: 1280px) and (min-width: 1041px) {
   .model-hero__inner {
     grid-template-columns: minmax(250px, 36%) 1fr;
@@ -864,7 +869,7 @@
     --shell: calc(100vw - 40px);
   }
 
-  /* 仍是雙欄，只是文字欄讓出一點寬度給車圖。 */
+  /* still two columns; the copy column gives up a little width to the vehicle */
   .model-hero__inner {
     grid-template-columns: minmax(230px, 38%) 1fr;
     min-height: clamp(340px, 34vw, 420px);
@@ -879,7 +884,7 @@
   }
 }
 
-/* 到這裡文字欄已經窄到放不下兩組數字，才轉成上圖下字。 */
+/* only here is the copy column too narrow for two figures side by side, so stack image over copy */
 @media (max-width: 860px) {
   .model-hero__head {
     position: static;
@@ -945,13 +950,13 @@
 }
 
 /* ===========================================================================
-   12. Landing-page 級板塊（2026-09-18 追加）
-   參考 huntingtonbeachford-dealer-city.css / orange-county.html 的做法：
-   城市頁不只是路線頁，而是「優惠 → 車系 → 位置地圖 → 為什麼選我們 → 服務 →
-   金融 → FAQ → CTA」的全漏斗長頁。以下是 §1–11 沒有的組件。
+   12. Landing-page blocks (added 2026-09-18)
+   Following huntingtonbeachford-dealer-city.css / orange-county.html: a city page is not just a
+   directions page but a full-funnel long page - offers > lineup > map > why us > service >
+   financing > FAQ > CTA. These are the components sections 1-11 do not have.
    ======================================================================== */
 
-/* ---- 資質徽章列 ---- */
+/* ---- Credential badge row ---- */
 .dc-trust {
   margin: 0 0 clamp(20px, 3vw, 28px);
   padding: 0;
@@ -971,7 +976,7 @@
   text-transform: uppercase;
 }
 
-/* ---- 深色帶（服務區用） ---- */
+/* ---- Dark band (service section) ---- */
 .dc-section--navy {
   background: var(--black);
   color: var(--white);
@@ -984,9 +989,9 @@
 .dc-section--navy .why-card__list strong,
 .dc-section--navy .why-card__title { color: var(--white); }
 
-/* ---- 背景照片帶（Getting Here 用）----
-   inline style 設 background-image，換城市時不必動樣式表。
-   iOS 忽略 background-attachment:fixed，所以手機端退回普通捲動。 */
+/* ---- Photo band (Getting Here) ----
+   background-image is set inline so a different city needs no stylesheet change.
+   iOS ignores background-attachment:fixed, so phones fall back to normal scrolling. */
 .dc-photoband {
   position: relative;
   background-color: var(--black);
@@ -1016,7 +1021,7 @@
   border-radius: 6px;
 }
 
-/* ---- 地圖 ---- */
+/* ---- Map ---- */
 .dc-map {
   margin-top: clamp(20px, 3vw, 28px);
   border-radius: 6px;
@@ -1037,11 +1042,11 @@
   text-align: center;
 }
 
-/* ---- 照片磁磚（Why us 用）----
-   說明文字留在 DOM 裡（可被爬取），hover / 鍵盤 focus 時顯示。 */
+/* ---- Photo tiles (Why us) ----
+   Descriptions stay in the DOM (crawlable) and appear on hover / keyboard focus. */
 .dc-tiles {
   display: grid;
-  /* 一行固定兩張（2026-09-24 改）；auto-fill 在 1280 的 shell 會塞成三欄 */
+  /* fixed two per row (changed 2026-09-24); auto-fill packed three into a 1280 shell */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(16px, 2vw, 24px);
 }
@@ -1050,9 +1055,9 @@
   .dc-tiles { grid-template-columns: 1fr; }
 }
 
-/* 用 .dealer-city-page 前綴提高特異性：磁砖是 <a>，§2 的
-   .dealer-city-page a{color:inherit} (0,1,1) 否則會贏過 .dc-tile (0,1,0)，
-   標題白字會被打回 --ink，深藍底上看不見。2026-09-18 實測。 */
+/* The .dealer-city-page prefix raises specificity: the tile is an <a>, and section 2's
+   .dealer-city-page a{color:inherit} (0,1,1) would otherwise beat .dc-tile (0,1,0) and knock the
+   white title back to --ink, invisible on navy. Verified 2026-09-18. */
 .dealer-city-page .dc-tile {
   position: relative;
   display: block;
@@ -1064,8 +1069,8 @@
   text-decoration: none;
 }
 
-/* height:auto 是必要的 —— <img height="556"> 的 presentational hint 會壓過
-   aspect-ratio，不寫就變成 556px 高的柱子。2026-09-18 實測。 */
+/* height:auto is required - the presentational hint from <img height="556"> beats aspect-ratio and
+   would otherwise produce a 556px-tall column. Verified 2026-09-18. */
 .dc-tile img {
   display: block;
   width: 100%;
@@ -1106,8 +1111,9 @@
 
 .dc-tile:hover .dc-tile__go { transform: translateX(4px); }
 
-/* 描述：平常隱形；hover / 鍵盤焦點時，深藍半透明 overlay 蓋住圖片區，
-   文字浮在 overlay 上（不再是往下展開）。overlay 只蓋圖片區，標題條不動。 */
+/* Description: hidden by default; on hover / keyboard focus a translucent navy overlay covers the
+   image area and the text floats on it (no longer expands below). The overlay covers only the
+   image; the title bar stays put. */
 .dc-tile__desc {
   position: absolute;
   inset: 0;
@@ -1115,7 +1121,7 @@
   display: flex;
   align-items: flex-end;
   padding: 22px 20px;
-  /* 圖片高 = 寬 x 9/16；把標題條那段留出來，用 bottom 撐開 */
+  /* image height = width x 9/16; leave room for the title bar via bottom */
   bottom: calc(1.3em * 1 + 28px);
   font-size: 14.5px;
   line-height: 1.55;
@@ -1125,8 +1131,8 @@
   transition: opacity 0.3s ease;
 }
 
-/* 標題可能折兩行，overlay 底邊對不準標題條會露一線；乾脆把 overlay
-   底邊直接貼在標題條上方：標題條自己是 z-index:2 的不透明底，蓋過去即可。 */
+/* The title may wrap to two lines and the overlay edge would not line up with the bar, so the
+   overlay simply runs to the bottom: the bar is an opaque z-index:2 layer and covers it. */
 .dc-tile__desc { bottom: 0; padding-bottom: calc(1.3em + 28px + 26px); }
 
 .dc-tile:hover .dc-tile__desc,
@@ -1134,7 +1140,7 @@
   opacity: 1;
 }
 
-/* 觸控裝置沒有 hover：不玩 overlay，描述直接排在標題條下面 */
+/* touch devices have no hover: skip the overlay, show the description under the title bar */
 @media (hover: none) {
   .dc-tile__desc {
     position: static;
@@ -1148,7 +1154,7 @@
   .dc-tile:hover img { transform: none; }
 }
 
-/* ---- 服務圖示清單 ---- */
+/* ---- Service icon list ---- */
 .dc-svc__list {
   margin: 0;
   padding: 0;
@@ -1175,7 +1181,7 @@
   background: #9cc3ff;
 }
 
-/* ---- 通用卡片格（金融區用） ---- */
+/* ---- Generic card grid (financing) ---- */
 .dc-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
@@ -1201,7 +1207,7 @@
 .dc-card a { color: var(--subaru-blue); font-weight: 600; text-decoration: none; }
 .dc-card a:hover { text-decoration: underline; }
 
-/* ---- 收尾 CTA ---- */
+/* ---- Closing CTA ---- */
 .dc-cta {
   background: var(--subaru-blue);
   color: var(--white);
@@ -1240,12 +1246,12 @@
   .dc-svc__list { grid-template-columns: 1fr; }
 }
 
-/* §13（hero specials 滑軌）已移除：hero 回到單條 offer 版式，八條 specials
-   改放 intro 之後的 .specials-grid。編號保留不補位。2026-09-18 */
+/* Section 13 (hero specials rail) was removed: the hero went back to a single offer and the eight
+   specials moved to .specials-grid after the intro. Numbering kept as-is. 2026-09-18 */
 
 /* ---------------------------------------------------------------------------
-   14. Intro 兩欄（文案 + 地圖），2026-09-18
-   地圖從 Getting Here 移到這裡：一頁只留一張地圖，Getting Here 專責路線清單。
+   14. Intro two-column (copy + map), 2026-09-18
+   The map moved here from Getting Here: one map per page, Getting Here keeps the route list.
    ------------------------------------------------------------------------ */
 .dc-intro {
   display: grid;
@@ -1257,7 +1263,7 @@
 .dc-intro__copy { min-width: 0; }
 .dc-intro__map  { min-width: 0; }
 
-/* 兩欄時地圖已有自己的欄位，不需要再推開上方間距 */
+/* in two columns the map has its own column and needs no top spacing */
 .dc-intro__map .dc-map { margin-top: 0; }
 
 .dc-intro__map .dc-map iframe {
@@ -1269,13 +1275,14 @@
 }
 
 /* ---------------------------------------------------------------------------
-   15. 車系展示（2026-09-18 改版）
-   參考 subaru.com 的車系輪播版式：白底、無框、車型名在圖「上方」、大圖居中、
-   留白充足。原本的卡片式（深色圖底 + 邊框 + 名稱在下）已移除。
+   15. Lineup display (reworked 2026-09-18)
+   Modelled on the subaru.com lineup carousel: white, no frame, model name above the image,
+   large centred image, generous whitespace. The old card style (dark image ground + border +
+   name below) was removed.
 
-   截圖上的左右箭頭是 subaru.com 用 JS 做的「上一個 / 下一個」。純 CSS 無法
-   表達「相對於目前位置」，硬做只能連到第一張或最後一張，意義不大；六款車
-   用自動換行的格線就排得完，所以不做假箭頭。
+   The prev / next arrows in the screenshot are subaru.com JS. Pure CSS cannot express
+   "relative to the current position", so fake arrows could only jump to the first or last
+   item; six models fit an auto-wrapping grid anyway, so no arrows here.
    ------------------------------------------------------------------------ */
 .model-lineup {
   display: grid;
@@ -1356,12 +1363,12 @@
 .dealer-city-page .lineup-card__links a:hover { text-decoration: underline; }
 
 /* ---------------------------------------------------------------------------
-   16. 特色卡（圖在上、文在下、標題 H2），2026-09-18
-   參考 subaru.com 首頁那組「Love Promise Retailer of the Year / Limited-time
-   offers」卡片：白卡、上方景觀圖、下方粗體標題 + 說明 + 藍色文字連結。
-   取代原本 .why-card / .route-section__copy 的純文字兩欄。
+   16. Feature cards (image on top, copy below, H2 title), 2026-09-18
+   Modelled on the subaru.com homepage cards ("Love Promise Retailer of the Year" /
+   "Limited-time offers"): white card, landscape image on top, bold title + copy + blue text
+   link below. Replaces the old text-only .why-card / .route-section__copy columns.
 
-   __media 是選用的 —— 還沒拿到合適照片的卡片可以先不放圖，版式依然成立。
+   __media is optional - a card without a suitable photo yet can omit it and the layout holds.
    ------------------------------------------------------------------------ */
 .dc-features {
   display: grid;
@@ -1440,7 +1447,7 @@
 
 .dealer-city-page .dc-feature__links a:hover { text-decoration: underline; }
 
-/* 深色帶裡的特色卡（服務區）走反色 */
+/* feature cards inside the dark band (service) are inverted */
 .dc-section--navy .dc-feature {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.16);
@@ -1452,25 +1459,25 @@
 .dc-section--navy .dc-feature__media { background: rgba(255, 255, 255, 0.1); }
 
 /* ---------------------------------------------------------------------------
-   17. 車系輪播（原生滾動，2026-09-24 改寫）
+   17. Lineup carousel (native scrolling, rewritten 2026-09-24)
 
-   上一版是隱藏 radio + <label for> 驅動 translateX。按鈕能用，但軌道是
-   transform，滑鼠、觸控板、觸控螢幕都拖不動 —— 使用者反映的就是這件事。
-   改成真正的滾動容器：overflow-x:auto，滑動、shift+滾輪、觸控拖曳、鍵盤方向鍵
-   全部回來，而且每個瀏覽器都支援。
+   The previous version used hidden radios + <label for> driving translateX. Buttons worked,
+   but the track was a transform, so mouse, trackpad and touch could not drag it - exactly what
+   the user reported. It is now a real scroll container: overflow-x:auto, so swipe, shift+wheel,
+   touch drag and arrow keys all work in every browser.
 
-   箭頭用 CSS Overflow 5 的 ::scroll-button()，圓點用 ::scroll-marker：
-   純 CSS、無需 JS（CKEditor 4 會濾掉 <script>），且瀏覽器自己管理
-   頁首/頁尾的 :disabled 與目前頁的 :target-current。
-   Chrome / Edge 135+ 有；Safari / Firefox 還沒有，那邊落回「一條細滾動條
-   + 直接滑動」（所以 @supports 不成立時我們反而要把滾動條顯示出來）。
+   Arrows use CSS Overflow 5 ::scroll-button(), dots use ::scroll-marker: pure CSS, no JS
+   (CKEditor 4 strips <script>), and the browser manages :disabled at the ends and
+   :target-current for the active item. Chrome / Edge 135+ support them; Safari / Firefox do
+   not yet and fall back to a thin scrollbar + direct swiping (which is why the scrollbar is
+   shown when @supports fails).
 
-   為什麼不是錨點連結：實測過 <a href="#page-2">，三種 scroll-snap 模式下橫向
-   都不動，而且錨點會把整頁往下對齊（量到 480px 跳動）。
+   Not anchor links: tested <a href="#page-2"> - no horizontal movement in any of the three
+   scroll-snap modes, and the anchor also realigned the whole page (a 480px jump).
    ------------------------------------------------------------------------ */
 .lineup-rail {
   position: relative;
-  /* 兩側留出箭頭的位置；窗口窄到放不下時收到 0。 */
+  /* room for the arrows on both sides; collapses to 0 when the window is too narrow */
   padding-inline: clamp(0px, 3vw, 52px);
 }
 
@@ -1489,8 +1496,8 @@
   outline-offset: 4px;
 }
 
-/* 原本的 track / page 包層保留（HTML 不動），但不再參與排版，
-   讓所有 .lineup-card 直接成為滾動容器的 flex 項目。 */
+/* the original track / page wrappers stay (HTML unchanged) but no longer take part in layout;
+   every .lineup-card becomes a direct flex item of the scroll container */
 .lineup-rail__track,
 .lineup-page {
   display: contents;
@@ -1502,11 +1509,11 @@
   scroll-snap-align: start;
 }
 
-/* ---- 箭頭（Chrome / Edge 135+）---- */
+/* ---- Arrows (Chrome / Edge 135+) ---- */
 @supports selector(::scroll-button(*)) {
   .lineup-rail__viewport {
     scrollbar-width: none;
-    /* 圓點列放在軌道下方 */
+    /* dot row below the track */
     scroll-marker-group: after;
   }
 
@@ -1536,13 +1543,13 @@
     color: var(--ink);
   }
 
-  /* 滾到頭/尾時瀏覽器自動上 :disabled，不用我們管狀態 */
+  /* the browser sets :disabled at the start / end; no state to manage */
   .lineup-rail__viewport::scroll-button(*):disabled {
     opacity: 0.32;
     cursor: default;
   }
 
-  /* content 的第二段是給輔助技術用的替代文字 */
+  /* the second part of content is the alternative text for assistive tech */
   .lineup-rail__viewport::scroll-button(left) {
     content: "\2039" / "Previous models";
     position-area: center left;
@@ -1553,7 +1560,7 @@
     position-area: center right;
   }
 
-  /* ---- 圓點 ---- */
+  /* ---- Dots ---- */
   .lineup-rail__viewport::scroll-marker-group {
     display: flex;
     justify-content: center;
@@ -1576,7 +1583,7 @@
   }
 }
 
-/* ---- Safari / Firefox：沒有原生箭頭，就把滾動條留著當滑動的提示 ---- */
+/* ---- Safari / Firefox: no native arrows, keep the scrollbar as the swipe hint ---- */
 @supports not selector(::scroll-button(*)) {
   .lineup-rail { padding-inline: 0; }
 
@@ -1588,7 +1595,7 @@
 }
 
 @media (max-width: 900px) {
-  /* 手機端：一次露一張多一點，箭頭收掉，直接滑 */
+  /* phones: show one card and a bit, hide the arrows, just swipe */
   .lineup-rail { padding-inline: 0; }
   .lineup-rail .lineup-card {
     flex: 0 0 min(78%, 320px);
@@ -1602,11 +1609,11 @@
 }
 
 /* ---------------------------------------------------------------------------
-   18. 左右對開大圖帶（.dc-split，2026-09-24）
-   深色文字面板配滿版照片，桌機各佔一半、切齊視窗邊緣，所以這個 section
-   自己不套 .dc-section（不要外層留白），內距走 .dc-split__copy。
-   照片用 <img> 而不是 background-image：右半邊要吃 alt 文字，而且
-   loading="lazy" 才有效。手機端改成上下堆疊，照片在上。
+   18. Split band (.dc-split, 2026-09-24)
+   Dark copy panel + full-bleed photo, each half of the desktop width flush to the viewport
+   edge, so this section does not use .dc-section (no outer padding); padding lives on
+   .dc-split__copy. The photo is an <img>, not a background-image: the right half should carry
+   alt text and loading="lazy" only works on <img>. Phones stack, photo on top.
    --------------------------------------------------------------------------- */
 .dc-split {
   display: grid;
@@ -1655,7 +1662,7 @@
   line-height: 1.6;
 }
 
-/* 服務項目清單：面板夠寬時走兩欄，免得一條長柱把版面拉高 */
+/* service list: two columns when the panel is wide enough, so one long column does not stretch the band */
 .dc-split__list {
   margin: 0 0 22px;
   padding-left: 20px;
@@ -1680,7 +1687,7 @@
   gap: 12px;
 }
 
-/* 深底上的按鈕：主要鈕轉白底藍字，外框鈕走白框 */
+/* buttons on the dark ground: primary becomes white with navy text, outline gets a white border */
 .dealer-city-page .dc-split .model-button--primary,
 .dealer-city-page .dc-split .model-button--primary:hover {
   background: var(--white) !important;
@@ -1702,7 +1709,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   19. 置中的區塊結尾按鈕列（.dc-section__actions--center，2026-09-24）
+   19. Centred section-closing button row (.dc-section__actions--center, 2026-09-24)
    --------------------------------------------------------------------------- */
 .dc-section__actions--center {
   display: flex;
@@ -1713,9 +1720,10 @@
 }
 
 /* ---------------------------------------------------------------------------
-   20. 盒裝 FAQ 手風琴（.model-faq__list--boxed，2026-09-24）
-   Subaru.com 的做法：整組包一個外框，每題之間用細線分隔，問句不加粗、
-   左右留寬內距，右邊一個藍色細加號。只是修飾類別，沒套的頁面維持原樣。
+   20. Boxed FAQ accordion (.model-faq__list--boxed, 2026-09-24)
+   subaru.com's treatment: one outer frame, hairline between questions, regular-weight
+   question, wide side padding, thin blue plus on the right. Modifier only; pages without
+   it keep the old look.
    --------------------------------------------------------------------------- */
 .model-faq__list--boxed {
   max-width: 900px;
@@ -1753,10 +1761,10 @@
 }
 
 /* ---------------------------------------------------------------------------
-   21. intro 地圖拉滿欄高（.dc-intro--tall-map，2026-09-24）
-   burlingame 的左欄多了路線清單，地圖若維持固定高度右邊會空一大塊，
-   所以這個修飾類別讓地圖欄跟著左欄拉伸、iframe 吃掉剩下的高度。
-   手機端單欄時退回一般高度。
+   21. Intro map stretched to column height (.dc-intro--tall-map, 2026-09-24)
+   Burlingame's left column gained a route list; a fixed-height map would leave a gap on the
+   right, so this modifier lets the map column stretch with the copy and the iframe fill the
+   remaining height. Single column on phones returns to the normal height.
    --------------------------------------------------------------------------- */
 @media (min-width: 901px) {
   .dc-intro--tall-map { align-items: stretch; }
@@ -1777,12 +1785,14 @@
 }
 
 /* ---------------------------------------------------------------------------
-   20. 「理由」大卡網格（.dc-reasons，2026-09-24）
-   做法學 Fairfield Subaru davis-subaru.html 的 .feature-grid：等寬無間隙、hairline
-   格線、每張卡很高、只露大標題與左下一顆圓形「›」；hover / 鍵盤焦點時藍色漸層從底部
-   刷上來、標題變白上移、說明淡入、圓徽隱去。整組沒有任何 hover 時，第一張預設處於
-   激活態，讓版面不會一整片空白。觸控裝置沒有 hover：說明直接顯示，不玩動畫。
-   Burlingame 的 Financing 區用它（四張 → 桌機四欄）。
+   20. "Reasons" feature grid (.dc-reasons, 2026-09-24)
+   After Fairfield Subaru davis-subaru.html .feature-grid: equal-width cells with no gap,
+   hairline grid lines, tall cards showing only a large title and a round chevron badge
+   bottom-left; on hover / keyboard focus a blue gradient wipes up from the bottom, the title
+   turns white and lifts, the description fades in and the badge hides. When nothing in the
+   grid is hovered the first card is active so the row is never blank. Touch devices show the
+   descriptions inline with no animation. Burlingame's financing section uses it (4 cards ->
+   4 desktop columns).
    --------------------------------------------------------------------------- */
 .dc-reasons {
   display: grid;
@@ -1795,7 +1805,7 @@
 
 .dealer-city-page .dc-reason {
   position: relative;
-  isolation: isolate;                 /* ::before 用 z-index:-1，要有自己的疊層 */
+  isolation: isolate;                 /* ::before uses z-index:-1, so the card needs its own stacking context */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1808,7 +1818,7 @@
   color: var(--ink);
 }
 
-/* 從底部刷上來的藍色漸層 */
+/* blue gradient wiping up from the bottom */
 .dc-reason::before {
   content: "";
   position: absolute;
@@ -1841,8 +1851,8 @@
   transition: opacity 0.28s ease 0.08s, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s;
 }
 
-/* 左下圓形「›」徽章：連結文字留給讀屏，視覺上只剩箭頭 */
-/* 前綴 .dc-reason 把特異度提到 (0,2,0)：徽章也是 <p>，否則會吃到上面 .dc-reason p 的 opacity:0 */
+/* round chevron badge bottom-left: link text stays for screen readers, visually only the arrow */
+/* the .dc-reason prefix raises specificity to (0,2,0): the badge is also a <p> and would otherwise pick up .dc-reason p opacity:0 */
 .dc-reason .dc-reason__badge {
   position: absolute;
   left: clamp(22px, 2.4vw, 36px);
@@ -1873,7 +1883,7 @@
   transform: translateY(-2px);
 }
 
-/* ---- 激活態：hover / 焦點，或整組沒人 hover 時的第一張 ---- */
+/* ---- Active state: hover / focus, or the first card when nothing in the grid is hovered ---- */
 .dc-reason:hover::before,
 .dc-reason:focus-within::before,
 .dc-reasons:not(:hover):not(:focus-within) .dc-reason:first-child::before {
@@ -1902,7 +1912,7 @@
   transform: translateY(8px);
 }
 
-/* 整張卡可點：一個覆蓋整張卡的透明連結（aria-hidden，讀屏走徽章那個連結） */
+/* whole card clickable: a transparent link covering the card (aria-hidden; screen readers use the badge link) */
 .dc-reason__hit {
   position: absolute;
   inset: 0;
@@ -1919,7 +1929,7 @@
   .dealer-city-page .dc-reason { min-height: 0; padding-bottom: 34px; }
 }
 
-/* 觸控裝置：說明常駐，不做刷色與位移 */
+/* touch devices: description always visible, no wipe or motion */
 @media (hover: none) {
   .dc-reason p { opacity: 1; transform: none; color: var(--muted); }
   .dealer-city-page .dc-reason { padding-bottom: clamp(34px, 3.4vw, 56px); }
@@ -1935,10 +1945,11 @@
 }
 
 /* ---------------------------------------------------------------------------
-   21. Google 評價區（.dc-reviews，2026-09-30）
-   左文字、右一張「Google 評價徽章」卡。徽章純 CSS：星星用漸層依 --rating 填色，
-   沒有任何第三方 embed / script（CKEditor 會濾掉）。數字是快照，換季要手動更新
-   HTML 裡的 4.6 / 4,994 與 --rating。
+   21. Google reviews section (.dc-reviews, 2026-09-30)
+   Copy on the left, a "Google reviews badge" card on the right. Pure CSS badge: stars are
+   filled by a gradient driven by --rating; no third-party embed / script (CKEditor strips
+   them). The figures are a snapshot - update 4.6 / 4,994 in the HTML and --rating here
+   each season.
    --------------------------------------------------------------------------- */
 .dc-reviews {
   display: grid;
@@ -1973,9 +1984,9 @@
   color: var(--subaru-blue);
 }
 
-/* ---- 徽章卡 ---- */
+/* ---- Badge card ---- */
 .dealer-city-page .g-badge {
-  --rating: 4.6;                 /* 星等：改分數時連這裡一起改 */
+  --rating: 4.6;                 /* star rating: change this together with the score in the HTML */
   display: block;
   padding: clamp(22px, 2.6vw, 32px) clamp(22px, 2.6vw, 30px);
   background: var(--paper);
@@ -2000,8 +2011,8 @@
   margin-bottom: 14px;
 }
 
-/* Google 的 G 標：SVG 放在同一個 Cloudflare 站（/google-g.svg），用 <img> 引，
-   不 inline <svg>（CKEditor 會濾掉）。 */
+/* Google "G" logo: SVG served from the same Cloudflare site (/google-g.svg) via <img>,
+   not inline <svg> (CKEditor strips it). */
 .g-badge__g {
   display: block;
   width: 34px;
@@ -2038,7 +2049,7 @@
   letter-spacing: -0.02em;
 }
 
-/* 五顆星：底層灰、上層黃，黃色寬度 = rating / 5 */
+/* five stars: grey underneath, yellow on top, yellow width = rating / 5 */
 .g-badge__stars {
   position: relative;
   display: inline-block;
@@ -2085,8 +2096,8 @@
 }
 
 /* ---------------------------------------------------------------------------
-   22. 誘因框（.dc-callout，2026-09-30）
-   一行三格：大數字 | 說明 | 按鈕。Burlingame 的 EV 區拿它放 MyFirstEV 的 $3,500。
+   22. Incentive callout (.dc-callout, 2026-09-30)
+   One row, three cells: big figure | copy | button. Kept for reuse (Burlingame no longer uses it).
    --------------------------------------------------------------------------- */
 .dealer-city-page .dc-callout {
   display: grid;
@@ -2141,7 +2152,7 @@
   .dealer-city-page .dc-callout { grid-template-columns: 1fr; gap: 14px; }
 }
 
-/* 區塊尾註（EV 區的油電說明這類小字） */
+/* section footnote (small print such as the hybrid note in the EV section) */
 .dealer-city-page .dc-section__note {
   margin: clamp(20px, 3vw, 28px) 0 0;
   max-width: 70ch;
@@ -2153,9 +2164,10 @@
 .dealer-city-page .dc-section__note a:hover { text-decoration: underline; }
 
 /* ---------------------------------------------------------------------------
-   23. Hero 的「車行賣點」版（2026-09-30，Burlingame）
-   數字位置放 Google 評分而不是租賃月付：4.6 + 星星 + 則數，整組是連到 Google 的連結。
-   星星技法同 .g-badge__stars（灰底、黃色寬度 = --rating/5）。下面一排賣點 chip。
+   23. "Dealer facts" hero variant (2026-09-30, Burlingame)
+   The figure slot holds the Google rating instead of a lease payment: 4.6 + stars + review
+   count, the whole group linking to Google. Star technique as .g-badge__stars (grey base,
+   yellow width = --rating/5). A row of selling-point chips below.
    --------------------------------------------------------------------------- */
 .dealer-city-page .model-hero__rating {
   --rating: 4.6;
@@ -2209,7 +2221,7 @@
   color: var(--hero-label);
 }
 
-/* 賣點 chip */
+/* selling-point chips */
 .model-hero__points {
   margin: 0 0 clamp(20px, 3vw, 28px);
   padding: 0;
@@ -2230,8 +2242,9 @@
   white-space: nowrap;
 }
 
-/* 卡片圖的「場景版」：SOA scene7 場景當背景（inline background-image），去背車圖壓在
-   中央偏下，同優惠卡的做法。Burlingame 二手區的 CPO / Used 兩張卡用。 */
+/* "Scene" variant of the card image: SOA scene7 background (inline background-image) with the
+   transparent vehicle PNG centred low over it, same construction as the offer cards. Used on
+   Burlingame's CPO / used-Subaru cards. */
 .dealer-city-page .dc-feature__media--scene {
   display: flex;
   align-items: flex-end;
@@ -2252,9 +2265,10 @@
 }
 
 /* ---------------------------------------------------------------------------
-   24. Hero 照片背景版（.model-hero--photo，2026-09-30，Burlingame）
-   右側不放車圖，整個 hero 鋪一張實景照（inline background-image），左側壓一層
-   由深到透的漸層讓文案可讀。__inner 只剩文案欄，寬度限在 560px。
+   24. Photo-background hero (.model-hero--photo, 2026-09-30, Burlingame)
+   No vehicle image on the right; the whole hero carries a photo (inline background-image)
+   with a dark-to-clear gradient on the left for legibility. __inner is just the copy column,
+   capped at 560px.
    --------------------------------------------------------------------------- */
 .dealer-city-page .model-hero--photo {
   background-position: center 45%;
@@ -2289,7 +2303,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   25. 通用兩欄：文字 + 圖（.dc-two，2026-09-30）。Burlingame 的 Grateful Dogs 段用。
+   25. Generic two-column: copy + image (.dc-two, 2026-09-30). Burlingame's Grateful Dogs section.
    --------------------------------------------------------------------------- */
 .dc-two {
   display: grid;
@@ -2315,10 +2329,11 @@
 }
 
 /* ---------------------------------------------------------------------------
-   26. 優惠卡單行滑軌（.specials-grid--rail，2026-09-30，Burlingame）
-   八張卡排成一行，超出視窗的藏在右邊，原生橫向捲動（滑鼠 / 觸控板 / 觸控 / 方向鍵）
-   + scroll-snap 逐卡對齊。箭頭與圓點同 §17 的做法（::scroll-button / ::scroll-marker，
-   Chrome / Edge 135+；其他瀏覽器顯示細捲軸）。桌機一次露 4 張，平板 3 / 2，手機 1.15。
+   26. Single-row offer rail (.specials-grid--rail, 2026-09-30, Burlingame)
+   Eight cards in one row; the overflow hides on the right and scrolls natively (mouse /
+   trackpad / touch / arrow keys) with scroll-snap per card. Arrows and dots as in section 17
+   (::scroll-button / ::scroll-marker, Chrome / Edge 135+; other browsers show a thin
+   scrollbar). Desktop shows 4 cards, tablets 3 / 2, phones 1.15.
    --------------------------------------------------------------------------- */
 .specials-rail {
   position: relative;
@@ -2335,7 +2350,7 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   anchor-name: --specials-rail;
-  padding-bottom: 6px;                 /* 卡片陰影不被裁 */
+  padding-bottom: 6px;                 /* keep card shadows from being clipped */
 }
 
 .dealer-city-page .specials-grid--rail:focus-visible {
