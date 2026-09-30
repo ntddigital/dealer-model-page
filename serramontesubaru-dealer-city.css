@@ -845,7 +845,7 @@
 .dealer-city-page .model-button--outline,
 .dealer-city-page .model-button--outline:hover {
   background: transparent !important;
-  color: var(--subaru-blue) !important;
+  color: var(--ink) !important;
 }
 
 /* ---------------------------------------------------------------------------
