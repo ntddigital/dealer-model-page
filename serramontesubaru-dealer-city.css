@@ -72,11 +72,11 @@
   --paper: #ffffff;
   --white: #fff;
   --black: #051840;
-  --gray-100: #f8f5f7;
+  --gray-100: #fafafa;           /* 2026-09-30：對齊 serramontesubaru.com 淺色板塊底色（原 #f8f5f7 偏粉） */
   --gray-200: #e3e7ee;
   --gray-400: #b3b5b5;
   --gray-600: #393937;
-  --radius-button: 4px;
+  --radius-button: 0;            /* 2026-09-30：客戶站按鈕全是直角 */
   --shell: min(1280px, calc(100vw - 64px));
   --font-stack:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -806,8 +806,8 @@
 
 .model-button--outline {
   background: transparent;
-  border-color: currentColor;
-  color: var(--subaru-blue);
+  border-color: var(--ink);       /* 客戶站的描邊鈕：深色細框 + 深色字 */
+  color: var(--ink);
 }
 
 .model-button:focus-visible {
@@ -2286,5 +2286,31 @@
     background: linear-gradient(180deg, rgba(29, 36, 45, 0.55) 0%, rgba(29, 36, 45, 0.9) 45%, rgba(29, 36, 45, 0.96) 100%);
   }
   .dealer-city-page .model-hero--photo > .model-hero__inner { min-height: 0; padding-top: clamp(120px, 34vw, 200px); }
+}
+
+/* ---------------------------------------------------------------------------
+   25. 通用兩欄：文字 + 圖（.dc-two，2026-09-30）。Burlingame 的 Grateful Dogs 段用。
+   --------------------------------------------------------------------------- */
+.dc-two {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+.dc-two__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.dc-two--media-left .dc-two__media { order: -1; }
+
+@media (max-width: 860px) {
+  .dc-two { grid-template-columns: 1fr; }
+  .dc-two--media-left .dc-two__media { order: 0; }
 }
 
