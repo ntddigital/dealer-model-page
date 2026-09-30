@@ -110,6 +110,33 @@
   padding: 0;
 }
 
+/* The dealer theme underlines every <a> (with enough weight to beat our plain rules), which
+   painted underlines across whole card / tile / badge links. Default to no underline inside
+   our root, then re-enable it only for inline text links in running copy and on hover for
+   the styled link lists. 2026-09-30 */
+.dealer-city-page a,
+.dealer-city-page a:hover,
+.dealer-city-page a * {
+  text-decoration: none !important;
+}
+
+.dealer-city-page :is(p, li, dd, td) > a:not([class]),
+.dealer-city-page :is(p, li, dd, td) > a:not([class]):hover,
+.dealer-city-page .faq-item__answer a,
+.dealer-city-page .model-hero__specials-terms a,
+.dealer-city-page .dc-section__intro a {
+  text-decoration: underline !important;
+}
+
+.dealer-city-page .dc-feature__links a:hover,
+.dealer-city-page .lineup-card__links a:hover,
+.dealer-city-page .dc-card a:hover,
+.dealer-city-page .dc-section__note a:hover,
+.dealer-city-page .dc-callout__body a:hover,
+.dealer-city-page .dc-reviews__points a:hover {
+  text-decoration: underline !important;
+}
+
 .dealer-city-page .dc-shell {
   width: var(--shell);
   margin: 0 auto;
