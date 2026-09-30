@@ -2251,3 +2251,40 @@
   filter: drop-shadow(0 14px 12px rgba(0, 0, 0, 0.3));
 }
 
+/* ---------------------------------------------------------------------------
+   24. Hero 照片背景版（.model-hero--photo，2026-09-30，Burlingame）
+   右側不放車圖，整個 hero 鋪一張實景照（inline background-image），左側壓一層
+   由深到透的漸層讓文案可讀。__inner 只剩文案欄，寬度限在 560px。
+   --------------------------------------------------------------------------- */
+.dealer-city-page .model-hero--photo {
+  background-position: center 45%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.model-hero--photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(29, 36, 45, 0.96) 0%,
+    rgba(29, 36, 45, 0.88) 34%,
+    rgba(29, 36, 45, 0.5) 62%,
+    rgba(29, 36, 45, 0.18) 100%);
+}
+
+.dealer-city-page .model-hero--photo > .model-hero__inner {
+  position: relative;
+  grid-template-columns: minmax(0, 560px);
+  min-height: clamp(440px, 36vw, 580px);
+}
+
+.model-hero--photo .model-hero__specials-terms { max-width: 46ch; }
+
+@media (max-width: 860px) {
+  .model-hero--photo::before {
+    background: linear-gradient(180deg, rgba(29, 36, 45, 0.55) 0%, rgba(29, 36, 45, 0.9) 45%, rgba(29, 36, 45, 0.96) 100%);
+  }
+  .dealer-city-page .model-hero--photo > .model-hero__inner { min-height: 0; padding-top: clamp(120px, 34vw, 200px); }
+}
+
