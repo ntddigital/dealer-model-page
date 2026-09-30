@@ -1934,3 +1934,224 @@
   .dc-reason::before, .dc-reason__title, .dc-reason p, .dc-reason__badge { transition: none; }
 }
 
+/* ---------------------------------------------------------------------------
+   21. Google 評價區（.dc-reviews，2026-09-30）
+   左文字、右一張「Google 評價徽章」卡。徽章純 CSS：星星用漸層依 --rating 填色，
+   沒有任何第三方 embed / script（CKEditor 會濾掉）。數字是快照，換季要手動更新
+   HTML 裡的 4.6 / 4,994 與 --rating。
+   --------------------------------------------------------------------------- */
+.dc-reviews {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+.dc-reviews__copy .dc-section__intro { margin-bottom: 18px; }
+
+.dc-reviews__points {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.dc-reviews__points li {
+  padding-left: 26px;
+  position: relative;
+}
+
+.dc-reviews__points li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--subaru-blue);
+}
+
+/* ---- 徽章卡 ---- */
+.dealer-city-page .g-badge {
+  --rating: 4.6;                 /* 星等：改分數時連這裡一起改 */
+  display: block;
+  padding: clamp(22px, 2.6vw, 32px) clamp(22px, 2.6vw, 30px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(5, 24, 64, 0.08);
+  color: var(--ink);
+  text-decoration: none;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.dealer-city-page .g-badge:hover {
+  box-shadow: 0 16px 40px rgba(5, 24, 64, 0.14);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.g-badge__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Google 四色 G：純 CSS 的錐形漸層圓點，避免放商標圖檔 */
+.g-badge__g {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: conic-gradient(#4285f4 0 25%, #34a853 25% 50%, #fbbc05 50% 75%, #ea4335 75% 100%);
+  -webkit-mask: radial-gradient(circle, transparent 42%, #000 44%);
+  mask: radial-gradient(circle, transparent 42%, #000 44%);
+}
+
+.g-badge__name {
+  display: block;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.g-badge__sub {
+  display: block;
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.g-badge__rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.g-badge__score {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* 五顆星：底層灰、上層黃，黃色寬度 = rating / 5 */
+.g-badge__stars {
+  position: relative;
+  display: inline-block;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #d9dde3;
+}
+
+.g-badge__stars::before { content: "\2605\2605\2605\2605\2605"; }
+
+.g-badge__stars::after {
+  content: "\2605\2605\2605\2605\2605";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--rating) / 5 * 100%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fbbc05;
+}
+
+.g-badge__count {
+  display: block;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--subaru-blue);
+}
+
+.g-badge__count span { color: var(--muted); font-weight: 400; }
+
+.g-badge__foot {
+  display: block;
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .dc-reviews { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------------
+   22. 誘因框（.dc-callout，2026-09-30）
+   一行三格：大數字 | 說明 | 按鈕。Burlingame 的 EV 區拿它放 MyFirstEV 的 $3,500。
+   --------------------------------------------------------------------------- */
+.dealer-city-page .dc-callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(18px, 3vw, 40px);
+  margin: 0 0 clamp(26px, 3.4vw, 40px);
+  padding: clamp(20px, 2.6vw, 30px) clamp(20px, 3vw, 36px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--subaru-blue);
+  border-radius: 8px;
+}
+
+.dc-callout__figure {
+  margin: 0;
+  font-size: clamp(38px, 4.6vw, 58px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--subaru-blue);
+  white-space: nowrap;
+}
+
+.dc-callout__figure small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.dc-callout__title {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.dc-callout__body {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.dc-callout__body a { color: var(--subaru-blue); font-weight: 600; text-decoration: none; }
+.dc-callout__body a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .dealer-city-page .dc-callout { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* 區塊尾註（EV 區的油電說明這類小字） */
+.dealer-city-page .dc-section__note {
+  margin: clamp(20px, 3vw, 28px) 0 0;
+  max-width: 70ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.dealer-city-page .dc-section__note a { color: var(--subaru-blue); font-weight: 600; text-decoration: none; }
+.dealer-city-page .dc-section__note a:hover { text-decoration: underline; }
+
