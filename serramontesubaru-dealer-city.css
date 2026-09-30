@@ -2000,15 +2000,13 @@
   margin-bottom: 14px;
 }
 
-/* Google 四色 G：純 CSS 的錐形漸層圓點，避免放商標圖檔 */
+/* Google 的 G 標：SVG 放在同一個 Cloudflare 站（/google-g.svg），用 <img> 引，
+   不 inline <svg>（CKEditor 會濾掉）。 */
 .g-badge__g {
+  display: block;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
   flex: 0 0 auto;
-  background: conic-gradient(#4285f4 0 25%, #34a853 25% 50%, #fbbc05 50% 75%, #ea4335 75% 100%);
-  -webkit-mask: radial-gradient(circle, transparent 42%, #000 44%);
-  mask: radial-gradient(circle, transparent 42%, #000 44%);
 }
 
 .g-badge__name {
@@ -2099,7 +2097,6 @@
   padding: clamp(20px, 2.6vw, 30px) clamp(20px, 3vw, 36px);
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left: 6px solid var(--subaru-blue);
   border-radius: 8px;
 }
 
@@ -2154,4 +2151,103 @@
 }
 .dealer-city-page .dc-section__note a { color: var(--subaru-blue); font-weight: 600; text-decoration: none; }
 .dealer-city-page .dc-section__note a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------------------
+   23. Hero 的「車行賣點」版（2026-09-30，Burlingame）
+   數字位置放 Google 評分而不是租賃月付：4.6 + 星星 + 則數，整組是連到 Google 的連結。
+   星星技法同 .g-badge__stars（灰底、黃色寬度 = --rating/5）。下面一排賣點 chip。
+   --------------------------------------------------------------------------- */
+.dealer-city-page .model-hero__rating {
+  --rating: 4.6;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 clamp(14px, 2vw, 20px);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.dealer-city-page .model-hero__rating:hover { text-decoration: none; }
+.dealer-city-page .model-hero__rating:hover .model-hero__rating-count { text-decoration: underline; }
+
+.model-hero__rating-score {
+  font-size: clamp(44px, 5.6vw, 70px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.model-hero__rating-stars {
+  position: relative;
+  display: block;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.model-hero__rating-stars::before { content: "\2605\2605\2605\2605\2605"; }
+
+.model-hero__rating-stars::after {
+  content: "\2605\2605\2605\2605\2605";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--rating) / 5 * 100%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fbbc05;
+}
+
+.model-hero__rating-count {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(12px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hero-label);
+}
+
+/* 賣點 chip */
+.model-hero__points {
+  margin: 0 0 clamp(20px, 3vw, 28px);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.model-hero__points li {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+/* 卡片圖的「場景版」：SOA scene7 場景當背景（inline background-image），去背車圖壓在
+   中央偏下，同優惠卡的做法。Burlingame 二手區的 CPO / Used 兩張卡用。 */
+.dealer-city-page .dc-feature__media--scene {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: #dfe3e8;
+  background-position: center 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dealer-city-page .dc-feature__media--scene img {
+  width: 84%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  margin-bottom: 4%;
+  filter: drop-shadow(0 14px 12px rgba(0, 0, 0, 0.3));
+}
 
