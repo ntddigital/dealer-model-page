@@ -2504,3 +2504,16 @@
   color: inherit;
 }
 
+/* Used-model links as H3s (keyword in the heading, same look as the plain list before) */
+.dealer-city-page .dc-feature__list h3 {
+  display: inline;
+  margin: 0;
+  font: inherit;
+  font-weight: 400;
+  color: inherit;
+}
+
+.dealer-city-page .dc-feature__list h3 > a {
+  text-decoration: underline !important;
+}
+
