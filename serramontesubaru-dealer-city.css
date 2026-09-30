@@ -2475,3 +2475,19 @@
   .dealer-city-page .specials-grid--rail { scroll-behavior: auto; }
 }
 
+/* "Scene" variant of the Why-us tile: scene7 background on the <a> (inline background-image)
+   with a transparent vehicle PNG contained over it. Same construction as the offer cards. */
+.dealer-city-page .dc-tile--scene {
+  background-color: #dfe3e8;
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+
+.dealer-city-page .dc-tile--scene img {
+  object-fit: contain;
+  padding: 7% 9% 3%;
+  box-sizing: border-box;
+  filter: drop-shadow(0 14px 12px rgba(0, 0, 0, 0.3));
+}
+
