@@ -2314,3 +2314,109 @@
   .dc-two--media-left .dc-two__media { order: 0; }
 }
 
+/* ---------------------------------------------------------------------------
+   26. 優惠卡單行滑軌（.specials-grid--rail，2026-09-30，Burlingame）
+   八張卡排成一行，超出視窗的藏在右邊，原生橫向捲動（滑鼠 / 觸控板 / 觸控 / 方向鍵）
+   + scroll-snap 逐卡對齊。箭頭與圓點同 §17 的做法（::scroll-button / ::scroll-marker，
+   Chrome / Edge 135+；其他瀏覽器顯示細捲軸）。桌機一次露 4 張，平板 3 / 2，手機 1.15。
+   --------------------------------------------------------------------------- */
+.specials-rail {
+  position: relative;
+  padding-inline: clamp(0px, 3vw, 52px);
+}
+
+.dealer-city-page .specials-grid--rail {
+  --sp-gap: clamp(14px, 1.6vw, 20px);
+  --sp-cols: 4;
+  display: flex;
+  gap: var(--sp-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  anchor-name: --specials-rail;
+  padding-bottom: 6px;                 /* 卡片陰影不被裁 */
+}
+
+.dealer-city-page .specials-grid--rail:focus-visible {
+  outline: 3px solid var(--subaru-blue);
+  outline-offset: 4px;
+}
+
+.dealer-city-page .specials-grid--rail > .special-card {
+  flex: 0 0 calc((100% - (var(--sp-cols) - 1) * var(--sp-gap)) / var(--sp-cols));
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 1100px) { .dealer-city-page .specials-grid--rail { --sp-cols: 3; } }
+@media (max-width: 760px)  { .dealer-city-page .specials-grid--rail { --sp-cols: 2; } }
+@media (max-width: 520px)  {
+  .dealer-city-page .specials-grid--rail { --sp-cols: 1.15; }
+  .specials-rail { padding-inline: 0; }
+}
+
+@supports selector(::scroll-button(*)) {
+  .dealer-city-page .specials-grid--rail {
+    scrollbar-width: none;
+    scroll-marker-group: after;
+  }
+  .dealer-city-page .specials-grid--rail::-webkit-scrollbar { display: none; }
+
+  .specials-grid--rail::scroll-button(*) {
+    position: fixed;
+    position-anchor: --specials-rail;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--gray-400);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--gray-600);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .specials-grid--rail::scroll-button(*):hover { border-color: var(--ink); color: var(--ink); }
+  .specials-grid--rail::scroll-button(*):disabled { opacity: 0.32; cursor: default; }
+  .specials-grid--rail::scroll-button(left)  { content: "\2039" / "Previous offers"; position-area: center left; }
+  .specials-grid--rail::scroll-button(right) { content: "\203A" / "Next offers";     position-area: center right; }
+
+  .specials-grid--rail::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    padding-top: 16px;
+  }
+  .specials-grid--rail > .special-card::scroll-marker {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--gray-400);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .specials-grid--rail > .special-card::scroll-marker:target-current {
+    background: var(--subaru-blue);
+    border-color: var(--subaru-blue);
+  }
+  @media (max-width: 760px) { .specials-grid--rail::scroll-button(*) { display: none; } }
+}
+
+@supports not selector(::scroll-button(*)) {
+  .specials-rail { padding-inline: 0; }
+  .dealer-city-page .specials-grid--rail {
+    padding-bottom: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-400) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dealer-city-page .specials-grid--rail { scroll-behavior: auto; }
+}
+
