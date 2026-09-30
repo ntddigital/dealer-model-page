@@ -2001,7 +2001,13 @@
 .dealer-city-page .g-badge:hover {
   box-shadow: 0 16px 40px rgba(5, 24, 64, 0.14);
   transform: translateY(-2px);
-  text-decoration: none;
+}
+
+.dealer-city-page .g-badge,
+.dealer-city-page .g-badge:hover,
+.dealer-city-page .g-badge * {
+  text-decoration: none !important;   /* dealer theme underlines every <a> */
+  border-bottom: 0 !important;
 }
 
 .g-badge__head {
@@ -2179,7 +2185,12 @@
   text-decoration: none;
 }
 
-.dealer-city-page .model-hero__rating:hover { text-decoration: none; }
+.dealer-city-page .model-hero__rating,
+.dealer-city-page .model-hero__rating:hover,
+.dealer-city-page .model-hero__rating * {
+  text-decoration: none !important;   /* the dealer theme underlines every <a>; keep the rating clean */
+  border-bottom: 0 !important;
+}
 .dealer-city-page .model-hero__rating:hover .model-hero__rating-count { text-decoration: underline; }
 
 .model-hero__rating-score {
@@ -2280,11 +2291,13 @@
   content: "";
   position: absolute;
   inset: 0;
+  /* 2026-09-30: lighter than the first cut - the photo was reading too dim. The dark side only
+     needs to hold the copy column; the right half shows the photo almost untouched. */
   background: linear-gradient(90deg,
-    rgba(29, 36, 45, 0.96) 0%,
-    rgba(29, 36, 45, 0.88) 34%,
-    rgba(29, 36, 45, 0.5) 62%,
-    rgba(29, 36, 45, 0.18) 100%);
+    rgba(29, 36, 45, 0.86) 0%,
+    rgba(29, 36, 45, 0.74) 30%,
+    rgba(29, 36, 45, 0.28) 56%,
+    rgba(29, 36, 45, 0.0) 80%);
 }
 
 .dealer-city-page .model-hero--photo > .model-hero__inner {
@@ -2297,7 +2310,7 @@
 
 @media (max-width: 860px) {
   .model-hero--photo::before {
-    background: linear-gradient(180deg, rgba(29, 36, 45, 0.55) 0%, rgba(29, 36, 45, 0.9) 45%, rgba(29, 36, 45, 0.96) 100%);
+    background: linear-gradient(180deg, rgba(29, 36, 45, 0.25) 0%, rgba(29, 36, 45, 0.82) 42%, rgba(29, 36, 45, 0.92) 100%);
   }
   .dealer-city-page .model-hero--photo > .model-hero__inner { min-height: 0; padding-top: clamp(120px, 34vw, 200px); }
 }
