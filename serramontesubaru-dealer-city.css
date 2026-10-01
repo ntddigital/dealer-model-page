@@ -1835,7 +1835,7 @@
   isolation: isolate;                 /* ::before uses z-index:-1, so the card needs its own stacking context */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;        /* 2026-10-01: titles line up across the row; centering moved them by paragraph length */
   min-height: clamp(360px, 30vw, 460px);
   padding: clamp(34px, 3.4vw, 56px) clamp(22px, 2.4vw, 36px) clamp(96px, 8vw, 118px);
   background: var(--paper);
@@ -1902,6 +1902,9 @@
   font-size: 0;
   text-decoration: none;
 }
+
+/* 2026-10-01: the round arrow is a bare <a> inside a <p>, so the inline-link underline rule hit it */
+.dealer-city-page .dc-reason .dc-reason__badge a { text-decoration: none !important; }
 
 .dc-reason__badge a::before {
   content: "\203A";
