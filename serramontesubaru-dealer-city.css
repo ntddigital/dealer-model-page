@@ -649,10 +649,10 @@
 .special-card__details {
   margin: 0 0 16px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: auto auto;
-  grid-auto-flow: column;
-  column-gap: 12px;
+  /* 2026-10-01: four rows (residual, stock, VIN, mileage) as label left / value right at every width */
+  grid-template-columns: auto 1fr;
+  grid-auto-flow: row;
+  column-gap: 14px;
   row-gap: 4px;
   font-size: 12.5px;
 }
@@ -668,12 +668,8 @@
 .special-card__details dd {
   margin: 0;
   color: var(--ink);
-}
-
-/* 2026-10-01: stock number and VIN never split mid-code ("TDD-" / "13"); each part is one line */
-.special-card__details .special-card__line {
-  display: block;
-  white-space: nowrap;
+  text-align: right;
+  white-space: nowrap;                /* stock numbers and VINs never split at the hyphen */
 }
 
 .special-card__actions {
@@ -946,11 +942,6 @@
     --shell: calc(100vw - 32px);
   }
 
-  .special-card__details {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-flow: row;
-  }
-
   .model-hero__actions .model-button,
   .special-card__actions .model-button {
     width: 100%;
@@ -968,10 +959,6 @@
 
   .model-hero__specials-offer + .model-hero__specials-offer {
     padding-left: 14px;
-  }
-
-  .special-card__details {
-    grid-template-columns: 1fr;
   }
 }
 
