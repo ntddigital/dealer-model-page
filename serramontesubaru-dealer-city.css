@@ -670,6 +670,12 @@
   color: var(--ink);
 }
 
+/* 2026-10-01: stock number and VIN never split mid-code ("TDD-" / "13"); each part is one line */
+.special-card__details .special-card__line {
+  display: block;
+  white-space: nowrap;
+}
+
 .special-card__actions {
   margin: auto 0 0;
 }
