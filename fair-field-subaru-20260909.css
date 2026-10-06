@@ -1668,6 +1668,20 @@ details.faq-item[open] .faq-a { max-height: 720px; padding-bottom: 24px; }
   background: rgba(255, 255, 255, 0.045);
 }
 /* Same small-caps label as .eyebrow, one scale step down for card level. */
+/* 2026-10-06:經銷商把 offer 車名展開成完整動力規格(CARS Act 車輛識別),
+   例如 "2026 Subaru Forester AWD" -> "... Standard Model All Wheel Drive
+   Continuously Variable Transmission"。整串放進 H3 會讓標題佔三行,而且
+   全頁 H1-H3 的字數有兩成變成重複的動力規格樣板。H3 只留 trim,完整字串
+   原文放這條副標,卡片仍逐字帶著經銷商的命名。值全部沿用本表既有的:
+   字級同 .spec-alt(13px)、顏色同 .spec-ids 一族,沒有新色票。 */
+.spec-vehicle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.62);
+  overflow-wrap: anywhere;
+}
+
 .spec-new {
   margin: 0 0 4px;
   font-size: 12px;
