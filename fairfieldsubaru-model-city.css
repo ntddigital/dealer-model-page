@@ -2168,3 +2168,67 @@
   transform: none !important;
   transition: none !important;
 }
+
+/* 2026-10-12 — shorter hero image for the EV lease deals page
+   (/ev-lease-deals-fairfield-ca). Opt-in modifier so the 80 model x city
+   heroes keep their 520–600px media. Heights reuse the scale already in this file
+   (clamp() like the base rule; 480px is the 1040px-breakpoint value). The mobile
+   value leaves room for the stacked location card and the lease card. */
+.model-hero__media--short {
+  min-height: clamp(400px, 40vw, 460px);
+}
+
+@media (max-width: 680px) {
+  .model-hero__media--short {
+    min-height: 480px;
+  }
+}
+
+/* 2026-10-12 — trim cut-outs inside why-cards (EV lease deals page,
+   /ev-lease-deals-fairfield-ca). The base .why-card__media is a 4:3 cover crop
+   meant for photos; Subaru's {code}_default_pass trim images are wide cut-outs on
+   white, so cover clipped the nose and tail. Opt-in modifier: show the whole car,
+   on the white the image already has. Colour is the existing --paper token. */
+.why-card__media--contain {
+  background: var(--paper, #fff);
+}
+
+.why-card__media--contain img {
+  object-fit: contain;
+}
+
+/* 2026-10-12 — why-card "Source:" links: small plain white text.
+   Live, the dealer theme's `a { color }` loads after this file and won the
+   cascade, so on every page that uses .why-us the source links rendered
+   rgb(33,37,41) — dark grey on the navy card, effectively invisible. Same fix as
+   the buttons above: .model-page scope + !important. Style per the user: small,
+   white, not bold, no caps, no blue rule — a plain underlined citation. */
+.model-page .why-card__link,
+.model-page .why-card__link:visited,
+.model-page .why-card__link:hover,
+.model-page .why-card__link:focus-visible {
+  color: var(--paper, #fff) !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: underline !important;
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2026-10-13 — inventory heading on the model x city pages. The CMS inventory
+   panel (Section 2, a platform iframe) has no indexable heading, so the hero
+   fragment now ends with a .model-trims header carrying the panel's H2
+   ("New Subaru {Model} Inventory Near {City}, CA"). Same component as the
+   trims section; this modifier only trims the bottom padding so the heading
+   sits on the panel instead of 96px above it. */
+.model-trims--inventory {
+  padding-bottom: 24px;
+}
+
+@media (max-width: 680px) {
+  .model-trims--inventory {
+    padding-bottom: 16px;
+  }
+}
