@@ -646,6 +646,15 @@
   color: var(--ink);
 }
 
+/* 2026-10-01 CARS Act: the vehicle's total price sits directly under the monthly payment, same weight as the
+   due-at-signing line, so it is clear and conspicuous next to the lease terms. */
+.dealer-city-page .special-card__total {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+.dealer-city-page .special-card__total strong { font-weight: 700; }
+
 .special-card__details {
   margin: 0 0 16px;
   display: grid;
